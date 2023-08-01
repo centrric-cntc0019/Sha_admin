@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../02_application/category/category_bloc.dart';
 import '../home/home_screen.dart';
 import '../../05_core/utils/themes.dart';
+import '../../02_application/product/product_bloc.dart';
+import '../../02_application/category/category_bloc.dart';
 
 class MainScreen extends StatefulWidget {
   final int? passedIndex;
@@ -30,6 +31,7 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     // Initialise blocs
     context.read<CategoryBloc>().add(const CategoryEvent.initialEvent());
+    context.read<ProductBloc>().add(const ProductEvent.init());
     super.initState();
   }
 

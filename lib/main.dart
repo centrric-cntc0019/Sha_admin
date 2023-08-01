@@ -12,6 +12,7 @@ import '05_core/services/shared_pref.dart';
 import '02_application/auth/auth_bloc.dart';
 import '01_presentation/main/main_screen.dart';
 import '01_presentation/auth/login_screen.dart';
+import '02_application/product/product_bloc.dart';
 import '02_application/category/category_bloc.dart';
 
 //   V E R S I O N = 3.10.5
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
               getIt<AuthBloc>()..add(const AuthEvent.authenticate()),
         ),
         BlocProvider(create: (ctx) => getIt<CategoryBloc>()),
+        BlocProvider(create: (ctx) => getIt<ProductBloc>()),
         // BlocProvider(create: (ctx) => getIt<ProfileBloc>()),
         // BlocProvider(create: (ctx) => getIt<QuotesBloc>()),
       ],

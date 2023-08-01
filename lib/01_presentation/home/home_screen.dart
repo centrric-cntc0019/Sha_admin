@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sha_admin/01_presentation/home/widgets/category_shimmer.dart';
 
+import '../../02_application/product/product_bloc.dart';
+import '../../05_core/route/route_name.dart';
+import '../widgets/error_widget.dart';
 import '../widgets/wa_text.dart';
 import '../widgets/wa_carousel.dart';
 import 'widgets/category_grid_item.dart';
@@ -93,17 +96,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                   state.result.loading
                                       ? const CategoryShimmer()
                                       : state.result.error != null
-                                          ? const WAText(text: "Error")
-                                          // CustomErrorWidget(
-                                          //     mainFailure:
-                                          //         state.categoryListFailure,
-                                          //     onTap: () {
-                                          //       // context
-                                          //       //     .read<CategoryBloc>()
-                                          //       //     .add(const CategoryEvent
-                                          //       //         .getCategory());
-                                          //     },
-                                          //   )
+                                          ? CustomErrorWidget(
+                                              mainFailure: state.result.error,
+                                              onTap: () {
+                                                context
+                                                    .read<CategoryBloc>()
+                                                    .add(const CategoryEvent
+                                                        .getCategory());
+                                              },
+                                            )
                                           : GridView.builder(
                                               padding: EdgeInsets.zero,
                                               shrinkWrap: true,
@@ -132,30 +133,29 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           .toString() ??
                                                       "",
                                                   onTap: () {
-                                                    /// Get products under category
-                                                    // context
-                                                    //     .read<CategoryBloc>()
-                                                    //     .add(
-                                                    //       CategoryEvent.getProductListByCategory(
-                                                    //           categoryId: state
-                                                    //                   .categoryList?[
-                                                    //                       index]
-                                                    //                   .id
-                                                    //                   .toString() ??
-                                                    //               ""),
-                                                    //     );
+                                                    //  Get products under category
+                                                    context
+                                                        .read<ProductBloc>()
+                                                        .add(
+                                                          ProductEvent.getProductListByCategory(
+                                                              categoryId: baseModel
+                                                                      ?.data?[
+                                                                          index]
+                                                                      .id ??
+                                                                  ""),
+                                                        );
 
-                                                    // Navigator.of(context)
-                                                    //     .pushNamed(
-                                                    //   RouteNames
-                                                    //       .productListScreen,
-                                                    //   arguments: {
-                                                    //     'category_name': state
-                                                    //         .categoryList?[
-                                                    //             index]
-                                                    //         .categoryName
-                                                    //   },
-                                                    // );
+                                                    Navigator.of(context)
+                                                        .pushNamed(
+                                                      RouteNames
+                                                          .productListScreen,
+                                                      arguments: {
+                                                        'category_name':
+                                                            baseModel
+                                                                ?.data?[index]
+                                                                .categoryName
+                                                      },
+                                                    );
                                                   },
                                                 );
                                               },
