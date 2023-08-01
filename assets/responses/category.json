@@ -1,0 +1,34 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "category_image": "https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2FuZHl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
+            "category_name": "Candy",
+            "offer": 15
+        },
+        {
+            "id": 2,
+            "category_image": "https://media.istockphoto.com/id/855455706/photo/stock-photo-of-collage-of-diwali-food-or-indian-festival-food-like-anarsa-bakarvadi-chakli-sev.jpg?s=2048x2048&w=is&k=20&c=Jd1cJbQcIvb14tesJHHwhIw3a657snvxOYM08uWE4gI=",
+            "category_name": "Indian Snacks",
+            "offer": 24
+        },
+        {
+            "id": 3,
+            "category_image": "https://media.istockphoto.com/id/650018962/photo/selection-of-cocktails.webp?b=1&s=170667a&w=0&k=20&c=4SLJC9GGYfB5iy0BaoDhmwFGX55vOPfqOAyISw_yT6k=",
+            "category_name": "Drinks",
+            "offer": 10
+        },
+        {
+            "id": 4,
+            "category_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1LzsbTrE_kVRvfG2btSXWTs4P3BkUI_L90PiuNCwe0w&s",
+            "category_name": "American products",
+            "offer": 25
+        },
+        {
+            "id": 5,
+            "category_image": "https://images.unsplash.com/photo-1577639411516-75b4bdc726ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YnVpc2N1aXRzfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+            "category_name": "Snacks & Biscuits",
+            "offer": 25
+        }
+    ]
+}
