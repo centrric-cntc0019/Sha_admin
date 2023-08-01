@@ -3,7 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../05_core/utils/themes.dart';
 
-void scoutySuccessToast(String message) {
+void successToast(String message) {
   Fluttertoast.showToast(
       msg: message,
       toastLength: Toast.LENGTH_SHORT,
@@ -14,7 +14,7 @@ void scoutySuccessToast(String message) {
       fontSize: 16.0);
 }
 
-void scoutyFailureToast(String message) {
+void failureToast(String message) {
   Fluttertoast.showToast(
       msg: message,
       toastLength: Toast.LENGTH_LONG,

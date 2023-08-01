@@ -37,7 +37,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           await _iAuthRepo.generateOtp(email: event.email);
       data.fold(
         (l) {
-          scoutyFailureToast("Something went wrong");
+          failureToast("Something went wrong");
           emit(state.copyWith(error: true, isLoading: false));
         },
         (r) => emit(state.copyWith(email: event.email, isLoading: false)),
@@ -53,7 +53,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
       data.fold(
         (l) {
-          scoutyFailureToast("Enter valid otp");
+          failureToast("Enter valid otp");
           emit(state.copyWith(error: true, isLoading: false));
         },
         (data) {

@@ -118,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     email: loginEmailCtr.text),
                               );
                             } else {
-                              scoutyFailureToast("Enter valid email");
+                              failureToast("Enter valid email");
                             }
                           },
                           textColor: cWhite,

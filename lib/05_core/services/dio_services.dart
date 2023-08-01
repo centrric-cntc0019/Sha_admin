@@ -5,12 +5,12 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:shah_distributers/01_presentation/widgets/toast.dart';
-import 'package:shah_distributers/03_domain/di/injection.dart';
-import 'package:shah_distributers/05_core/services/shared_pref.dart';
+import 'package:sha_admin/05_core/services/shared_pref.dart';
 
-import '../../03_domain/auth/models/login_model.dart';
+import '../../01_presentation/widgets/toast.dart';
 import '../failure/main_failure.dart';
+import '../../03_domain/di/injection.dart';
+import '../../03_domain/auth/models/login_model.dart';
 
 @LazySingleton()
 class DioServices {
@@ -80,7 +80,7 @@ class DioServices {
         return Right(response);
       } else {
         try {
-          scoutyFailureToast("${response.data["app_data"]}");
+          failureToast("${response.data["app_data"]}");
         } catch (e) {
           log(
             e.toString(),
