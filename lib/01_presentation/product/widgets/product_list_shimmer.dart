@@ -1,7 +1,6 @@
 import 'package:shimmer/shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sha_admin/01_presentation/product/widgets/product.dart';
 import 'package:sha_admin/01_presentation/product/widgets/product_list_carousel.dart';
 
 import '../../../05_core/utils/constant.dart';
@@ -62,15 +61,15 @@ class ProductListShimmer extends StatelessWidget {
                                 ],
                               ),
                               sized0hx05,
-                              // const Row(
-                              //   children: [
-                              //     Spacer(),
-                              //     IncDecItem(
-                              //       index: 1,
-                              //       incDecType: IncDecType.fromprodList,
-                              //     ),
-                              //   ],
-                              // )
+                              Row(
+                                children: [
+                                  const Spacer(),
+                                  ShimmerTextWidget(
+                                    height: 27.h,
+                                    width: 100.h,
+                                  ),
+                                ],
+                              )
                             ],
                           ),
                         ),
