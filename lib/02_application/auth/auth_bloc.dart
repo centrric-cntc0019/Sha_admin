@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
-import '../../01_presentation/widgets/toast.dart';
 import '../../03_domain/di/injection.dart';
 import '../../03_domain/auth/i_auth_repo.dart';
 import '../../05_core/failure/main_failure.dart';

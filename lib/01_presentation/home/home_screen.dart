@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: RefreshIndicator(
         onRefresh: () async {
-          // context.read<CategoryBloc>().add(const CategoryEvent.getCategory());
+          context.read<CategoryBloc>().add(const CategoryEvent.getCategory());
         },
         child: CustomScrollView(
           // controller: _scrollController,
