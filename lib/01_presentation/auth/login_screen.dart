@@ -19,8 +19,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController loginUsernameCtr = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController passwordCtr = TextEditingController();
+  final TextEditingController loginUsernameCtr = TextEditingController();
 
   @override
   void dispose() {
@@ -92,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     sized0hx10,
                     WaTextField(
-                      ctr: loginUsernameCtr,
+                      ctr: passwordCtr,
                       hintText: "Enter password",
                       isUnderLineBorder: true,
                       validator: (value) {
@@ -112,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       listener: (context, state) {
                         if (state.isAuthenticated == true) {
-                          Navigator.pushNamed(context, RouteNames.otpPage);
+                          Navigator.pushNamed(context, RouteNames.homePage);
                         }
                       },
                       builder: (context, state) {
@@ -127,8 +128,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               if (loginUsernameCtr.text.isNotEmpty) {
                                 authBloc.add(
                                   AuthEvent.login(
-                                    username: loginUsernameCtr.text,
-                                    pswd: "",
+                                    pswd: passwordCtr.text.trim(),
+                                    username: loginUsernameCtr.text.trim(),
                                   ),
                                 );
                               }

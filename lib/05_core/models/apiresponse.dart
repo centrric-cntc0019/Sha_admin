@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'apiresponse.freezed.dart';
+import '../failure/main_failure.dart';
 
-enum ErrorType { noNetWork, timeOut, serverError }
+part 'apiresponse.freezed.dart';
 
 @freezed
 class ApiResponse<T> with _$ApiResponse {
@@ -10,7 +10,7 @@ class ApiResponse<T> with _$ApiResponse {
     T? data,
     int? statusCode,
     String? message,
-    ErrorType? error,
+    MainFailure? error,
     @Default(1) int pageNo,
     @Default(false) bool loading,
     @Default(true) bool pagination,

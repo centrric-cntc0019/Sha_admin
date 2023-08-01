@@ -30,7 +30,6 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     // Initialise blocs
     context.read<CategoryBloc>().add(const CategoryEvent.initialEvent());
-
     super.initState();
   }
 
@@ -38,7 +37,6 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     if (widget.passedIndex != null) {
       _selectedIndex = widget.passedIndex!;
-      // widget.passedIndex = null;
     }
     return Scaffold(
       body: _list[_selectedIndex],

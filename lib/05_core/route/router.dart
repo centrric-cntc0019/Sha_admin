@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sha_admin/05_core/route/route_name.dart';
 
+import '../../01_presentation/main/main_screen.dart';
 import '../../01_presentation/auth/login_screen.dart';
 
 class AppRouter {
@@ -11,6 +12,10 @@ class AppRouter {
       case RouteNames.loginPage:
         return MaterialPageRoute(
           builder: (context) => const LoginScreen(),
+        );
+      case RouteNames.homePage:
+        return MaterialPageRoute(
+          builder: (context) => const MainScreen(),
         );
       default:
         return MaterialPageRoute(

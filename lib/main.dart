@@ -10,7 +10,11 @@ import '05_core/utils/themes.dart';
 import '03_domain/di/injection.dart';
 import '05_core/services/shared_pref.dart';
 import '02_application/auth/auth_bloc.dart';
+import '01_presentation/main/main_screen.dart';
 import '01_presentation/auth/login_screen.dart';
+import '02_application/category/category_bloc.dart';
+
+//   V E R S I O N = 3.10.5
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +36,7 @@ class MyApp extends StatelessWidget {
           create: (ctx) =>
               getIt<AuthBloc>()..add(const AuthEvent.authenticate()),
         ),
-        // BlocProvider(create: (ctx) => getIt<CategoryBloc>()),
+        BlocProvider(create: (ctx) => getIt<CategoryBloc>()),
         // BlocProvider(create: (ctx) => getIt<ProfileBloc>()),
         // BlocProvider(create: (ctx) => getIt<QuotesBloc>()),
       ],
@@ -50,15 +54,9 @@ class MyApp extends StatelessWidget {
                   title: 'Shah Admin',
                   theme: AppTheme.themeData,
                   debugShowCheckedModeBanner: false,
-                  home:
-                      // state.isAuthenticated!
-                      //     ? MainScreen()
-                      //     :
-                      const LoginScreen(),
-                  // initialRoute: RouteNames.signupScreen,
-                  // initialRoute: state.isAuthenticated!
-                  //     ? RouteNames.homePage
-                  //     : RouteNames.loginPage,
+                  home: state.isAuthenticated!
+                      ? const MainScreen()
+                      : const LoginScreen(),
                   onGenerateRoute: AppRouter.generateRoute,
                 );
               }

@@ -19,7 +19,7 @@ mixin _$ApiResponse<T> {
   T? get data => throw _privateConstructorUsedError;
   int? get statusCode => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
-  ErrorType? get error => throw _privateConstructorUsedError;
+  MainFailure? get error => throw _privateConstructorUsedError;
   int get pageNo => throw _privateConstructorUsedError;
   bool get loading => throw _privateConstructorUsedError;
   bool get pagination => throw _privateConstructorUsedError;
@@ -41,12 +41,14 @@ abstract class $ApiResponseCopyWith<T, $Res> {
       {T? data,
       int? statusCode,
       String? message,
-      ErrorType? error,
+      MainFailure? error,
       int pageNo,
       bool loading,
       bool pagination,
       bool searchLoading,
       bool paginationLoading});
+
+  $MainFailureCopyWith<$Res>? get error;
 }
 
 /// @nodoc
@@ -88,7 +90,7 @@ class _$ApiResponseCopyWithImpl<T, $Res, $Val extends ApiResponse<T>>
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as ErrorType?,
+              as MainFailure?,
       pageNo: null == pageNo
           ? _value.pageNo
           : pageNo // ignore: cast_nullable_to_non_nullable
@@ -111,6 +113,18 @@ class _$ApiResponseCopyWithImpl<T, $Res, $Val extends ApiResponse<T>>
               as bool,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MainFailureCopyWith<$Res>? get error {
+    if (_value.error == null) {
+      return null;
+    }
+
+    return $MainFailureCopyWith<$Res>(_value.error!, (value) {
+      return _then(_value.copyWith(error: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -125,12 +139,15 @@ abstract class _$$_ApiResponseCopyWith<T, $Res>
       {T? data,
       int? statusCode,
       String? message,
-      ErrorType? error,
+      MainFailure? error,
       int pageNo,
       bool loading,
       bool pagination,
       bool searchLoading,
       bool paginationLoading});
+
+  @override
+  $MainFailureCopyWith<$Res>? get error;
 }
 
 /// @nodoc
@@ -170,7 +187,7 @@ class __$$_ApiResponseCopyWithImpl<T, $Res>
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as ErrorType?,
+              as MainFailure?,
       pageNo: null == pageNo
           ? _value.pageNo
           : pageNo // ignore: cast_nullable_to_non_nullable
@@ -216,7 +233,7 @@ class _$_ApiResponse<T> implements _ApiResponse<T> {
   @override
   final String? message;
   @override
-  final ErrorType? error;
+  final MainFailure? error;
   @override
   @JsonKey()
   final int pageNo;
@@ -283,7 +300,7 @@ abstract class _ApiResponse<T> implements ApiResponse<T> {
       {final T? data,
       final int? statusCode,
       final String? message,
-      final ErrorType? error,
+      final MainFailure? error,
       final int pageNo,
       final bool loading,
       final bool pagination,
@@ -297,7 +314,7 @@ abstract class _ApiResponse<T> implements ApiResponse<T> {
   @override
   String? get message;
   @override
-  ErrorType? get error;
+  MainFailure? get error;
   @override
   int get pageNo;
   @override

@@ -18,9 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AuthState {
   bool? get isLogout => throw _privateConstructorUsedError;
   bool get error => throw _privateConstructorUsedError;
+  bool? get isAuthenticated => throw _privateConstructorUsedError;
   LoginModel? get logindata => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
-  bool get isAuthenticated => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AuthStateCopyWith<AuthState> get copyWith =>
@@ -35,9 +35,9 @@ abstract class $AuthStateCopyWith<$Res> {
   $Res call(
       {bool? isLogout,
       bool error,
+      bool? isAuthenticated,
       LoginModel? logindata,
-      bool isLoading,
-      bool isAuthenticated});
+      bool isLoading});
 
   $LoginModelCopyWith<$Res>? get logindata;
 }
@@ -57,9 +57,9 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
   $Res call({
     Object? isLogout = freezed,
     Object? error = null,
+    Object? isAuthenticated = freezed,
     Object? logindata = freezed,
     Object? isLoading = null,
-    Object? isAuthenticated = null,
   }) {
     return _then(_value.copyWith(
       isLogout: freezed == isLogout
@@ -70,6 +70,10 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as bool,
+      isAuthenticated: freezed == isAuthenticated
+          ? _value.isAuthenticated
+          : isAuthenticated // ignore: cast_nullable_to_non_nullable
+              as bool?,
       logindata: freezed == logindata
           ? _value.logindata
           : logindata // ignore: cast_nullable_to_non_nullable
@@ -77,10 +81,6 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isAuthenticated: null == isAuthenticated
-          ? _value.isAuthenticated
-          : isAuthenticated // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -108,9 +108,9 @@ abstract class _$$_InitialCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
   $Res call(
       {bool? isLogout,
       bool error,
+      bool? isAuthenticated,
       LoginModel? logindata,
-      bool isLoading,
-      bool isAuthenticated});
+      bool isLoading});
 
   @override
   $LoginModelCopyWith<$Res>? get logindata;
@@ -128,9 +128,9 @@ class __$$_InitialCopyWithImpl<$Res>
   $Res call({
     Object? isLogout = freezed,
     Object? error = null,
+    Object? isAuthenticated = freezed,
     Object? logindata = freezed,
     Object? isLoading = null,
-    Object? isAuthenticated = null,
   }) {
     return _then(_$_Initial(
       isLogout: freezed == isLogout
@@ -141,6 +141,10 @@ class __$$_InitialCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as bool,
+      isAuthenticated: freezed == isAuthenticated
+          ? _value.isAuthenticated
+          : isAuthenticated // ignore: cast_nullable_to_non_nullable
+              as bool?,
       logindata: freezed == logindata
           ? _value.logindata
           : logindata // ignore: cast_nullable_to_non_nullable
@@ -148,10 +152,6 @@ class __$$_InitialCopyWithImpl<$Res>
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isAuthenticated: null == isAuthenticated
-          ? _value.isAuthenticated
-          : isAuthenticated // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -163,25 +163,24 @@ class _$_Initial implements _Initial {
   const _$_Initial(
       {this.isLogout,
       required this.error,
+      this.isAuthenticated,
       this.logindata,
-      required this.isLoading,
-      this.isAuthenticated = false});
+      required this.isLoading});
 
   @override
   final bool? isLogout;
   @override
   final bool error;
   @override
+  final bool? isAuthenticated;
+  @override
   final LoginModel? logindata;
   @override
   final bool isLoading;
-  @override
-  @JsonKey()
-  final bool isAuthenticated;
 
   @override
   String toString() {
-    return 'AuthState(isLogout: $isLogout, error: $error, logindata: $logindata, isLoading: $isLoading, isAuthenticated: $isAuthenticated)';
+    return 'AuthState(isLogout: $isLogout, error: $error, isAuthenticated: $isAuthenticated, logindata: $logindata, isLoading: $isLoading)';
   }
 
   @override
@@ -192,17 +191,17 @@ class _$_Initial implements _Initial {
             (identical(other.isLogout, isLogout) ||
                 other.isLogout == isLogout) &&
             (identical(other.error, error) || other.error == error) &&
+            (identical(other.isAuthenticated, isAuthenticated) ||
+                other.isAuthenticated == isAuthenticated) &&
             (identical(other.logindata, logindata) ||
                 other.logindata == logindata) &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
-            (identical(other.isAuthenticated, isAuthenticated) ||
-                other.isAuthenticated == isAuthenticated));
+                other.isLoading == isLoading));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, isLogout, error, logindata, isLoading, isAuthenticated);
+      runtimeType, isLogout, error, isAuthenticated, logindata, isLoading);
 
   @JsonKey(ignore: true)
   @override
@@ -215,20 +214,20 @@ abstract class _Initial implements AuthState {
   const factory _Initial(
       {final bool? isLogout,
       required final bool error,
+      final bool? isAuthenticated,
       final LoginModel? logindata,
-      required final bool isLoading,
-      final bool isAuthenticated}) = _$_Initial;
+      required final bool isLoading}) = _$_Initial;
 
   @override
   bool? get isLogout;
   @override
   bool get error;
   @override
+  bool? get isAuthenticated;
+  @override
   LoginModel? get logindata;
   @override
   bool get isLoading;
-  @override
-  bool get isAuthenticated;
   @override
   @JsonKey(ignore: true)
   _$$_InitialCopyWith<_$_Initial> get copyWith =>

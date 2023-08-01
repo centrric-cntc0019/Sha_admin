@@ -67,8 +67,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       return previous.result != current.result;
                     },
                     builder: (context, state) {
-                      CategoryBaseModel baseModel =
-                          state.result.data as CategoryBaseModel;
+                      CategoryBaseModel? baseModel =
+                          state.result.data as CategoryBaseModel?;
                       return Padding(
                         padding: EdgeInsets.symmetric(horizontal: 15.w),
                         child: Column(
@@ -109,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               shrinkWrap: true,
                                               physics: const ScrollPhysics(),
                                               itemCount:
-                                                  baseModel.data?.length ?? 0,
+                                                  baseModel?.data?.length ?? 0,
                                               gridDelegate:
                                                   const SliverGridDelegateWithFixedCrossAxisCount(
                                                 crossAxisCount: 3,
@@ -120,15 +120,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   (BuildContext context,
                                                       int index) {
                                                 return CategoryGridItem(
-                                                  image: baseModel
-                                                          .data?[index].image ??
+                                                  image: baseModel?.data?[index]
+                                                          .image ??
                                                       "",
                                                   categoryName: baseModel
-                                                          .data?[index]
+                                                          ?.data?[index]
                                                           .categoryName ??
                                                       "",
                                                   offer: baseModel
-                                                          .data?[index].offer
+                                                          ?.data?[index].offer
                                                           .toString() ??
                                                       "",
                                                   onTap: () {
