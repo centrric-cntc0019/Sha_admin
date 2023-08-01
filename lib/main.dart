@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
             builder: (BuildContext context, Widget? child) {
               if (state.isAuthenticated != null) {
                 return MaterialApp(
-                  title: 'Shah Distributers',
+                  title: 'Shah Admin',
                   theme: AppTheme.themeData,
                   debugShowCheckedModeBanner: false,
                   home:

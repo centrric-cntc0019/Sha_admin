@@ -30,34 +30,27 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       FlutterNativeSplash.remove();
     });
 
-    // Generate Otp here
-    on<_GenerateOtp>((event, emit) async {
+    // Signin
+    on<_Login>((event, emit) async {
       emit(state.copyWith(isLoading: true));
-      Either<MainFailure, dynamic> data =
-          await _iAuthRepo.generateOtp(email: event.email);
-      data.fold(
-        (l) {
-          failureToast("Something went wrong");
-          emit(state.copyWith(error: true, isLoading: false));
-        },
-        (r) => emit(state.copyWith(email: event.email, isLoading: false)),
-      );
-    });
-    // Validate otp here
-
-    on<_ValidateOtp>((event, emit) async {
-      emit(state.copyWith(isLoading: true));
-      Either<MainFailure, LoginModel> data = await _iAuthRepo.validateOtp(
-        otp: event.otp,
-        email: state.email ?? "",
+      Either<MainFailure, LoginModel> data = await _iAuthRepo.login(
+        pswd: event.pswd,
+        username: event.username,
       );
       data.fold(
         (l) {
-          failureToast("Enter valid otp");
-          emit(state.copyWith(error: true, isLoading: false));
+          emit(state.copyWith(
+            error: true,
+            isLoading: false,
+            isAuthenticated: false,
+          ));
         },
         (data) {
-          emit(state.copyWith(isLoading: false, logindata: data));
+          emit(state.copyWith(
+            isLoading: false,
+            logindata: data,
+            isAuthenticated: true,
+          ));
         },
       );
     });
@@ -67,8 +60,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       getIt<CacheHelper>().clearData();
       await Future.delayed(const Duration(seconds: 2));
       emit(state.copyWith(
-        isLoading: false,
         isLogout: true,
+        isLoading: false,
+        isAuthenticated: false,
       ));
     });
     // Reset Bloc

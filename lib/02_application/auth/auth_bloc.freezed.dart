@@ -16,12 +16,11 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AuthState {
-  String? get email => throw _privateConstructorUsedError;
   bool? get isLogout => throw _privateConstructorUsedError;
   bool get error => throw _privateConstructorUsedError;
   LoginModel? get logindata => throw _privateConstructorUsedError;
-  bool? get isAuthenticated => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get isAuthenticated => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AuthStateCopyWith<AuthState> get copyWith =>
@@ -34,12 +33,11 @@ abstract class $AuthStateCopyWith<$Res> {
       _$AuthStateCopyWithImpl<$Res, AuthState>;
   @useResult
   $Res call(
-      {String? email,
-      bool? isLogout,
+      {bool? isLogout,
       bool error,
       LoginModel? logindata,
-      bool? isAuthenticated,
-      bool isLoading});
+      bool isLoading,
+      bool isAuthenticated});
 
   $LoginModelCopyWith<$Res>? get logindata;
 }
@@ -57,18 +55,13 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = freezed,
     Object? isLogout = freezed,
     Object? error = null,
     Object? logindata = freezed,
-    Object? isAuthenticated = freezed,
     Object? isLoading = null,
+    Object? isAuthenticated = null,
   }) {
     return _then(_value.copyWith(
-      email: freezed == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String?,
       isLogout: freezed == isLogout
           ? _value.isLogout
           : isLogout // ignore: cast_nullable_to_non_nullable
@@ -81,13 +74,13 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
           ? _value.logindata
           : logindata // ignore: cast_nullable_to_non_nullable
               as LoginModel?,
-      isAuthenticated: freezed == isAuthenticated
-          ? _value.isAuthenticated
-          : isAuthenticated // ignore: cast_nullable_to_non_nullable
-              as bool?,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isAuthenticated: null == isAuthenticated
+          ? _value.isAuthenticated
+          : isAuthenticated // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -113,12 +106,11 @@ abstract class _$$_InitialCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String? email,
-      bool? isLogout,
+      {bool? isLogout,
       bool error,
       LoginModel? logindata,
-      bool? isAuthenticated,
-      bool isLoading});
+      bool isLoading,
+      bool isAuthenticated});
 
   @override
   $LoginModelCopyWith<$Res>? get logindata;
@@ -134,18 +126,13 @@ class __$$_InitialCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = freezed,
     Object? isLogout = freezed,
     Object? error = null,
     Object? logindata = freezed,
-    Object? isAuthenticated = freezed,
     Object? isLoading = null,
+    Object? isAuthenticated = null,
   }) {
     return _then(_$_Initial(
-      email: freezed == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String?,
       isLogout: freezed == isLogout
           ? _value.isLogout
           : isLogout // ignore: cast_nullable_to_non_nullable
@@ -158,13 +145,13 @@ class __$$_InitialCopyWithImpl<$Res>
           ? _value.logindata
           : logindata // ignore: cast_nullable_to_non_nullable
               as LoginModel?,
-      isAuthenticated: freezed == isAuthenticated
-          ? _value.isAuthenticated
-          : isAuthenticated // ignore: cast_nullable_to_non_nullable
-              as bool?,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isAuthenticated: null == isAuthenticated
+          ? _value.isAuthenticated
+          : isAuthenticated // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -174,15 +161,12 @@ class __$$_InitialCopyWithImpl<$Res>
 
 class _$_Initial implements _Initial {
   const _$_Initial(
-      {this.email,
-      this.isLogout,
+      {this.isLogout,
       required this.error,
       this.logindata,
-      this.isAuthenticated,
-      required this.isLoading});
+      required this.isLoading,
+      this.isAuthenticated = false});
 
-  @override
-  final String? email;
   @override
   final bool? isLogout;
   @override
@@ -190,13 +174,14 @@ class _$_Initial implements _Initial {
   @override
   final LoginModel? logindata;
   @override
-  final bool? isAuthenticated;
-  @override
   final bool isLoading;
+  @override
+  @JsonKey()
+  final bool isAuthenticated;
 
   @override
   String toString() {
-    return 'AuthState(email: $email, isLogout: $isLogout, error: $error, logindata: $logindata, isAuthenticated: $isAuthenticated, isLoading: $isLoading)';
+    return 'AuthState(isLogout: $isLogout, error: $error, logindata: $logindata, isLoading: $isLoading, isAuthenticated: $isAuthenticated)';
   }
 
   @override
@@ -204,21 +189,20 @@ class _$_Initial implements _Initial {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Initial &&
-            (identical(other.email, email) || other.email == email) &&
             (identical(other.isLogout, isLogout) ||
                 other.isLogout == isLogout) &&
             (identical(other.error, error) || other.error == error) &&
             (identical(other.logindata, logindata) ||
                 other.logindata == logindata) &&
-            (identical(other.isAuthenticated, isAuthenticated) ||
-                other.isAuthenticated == isAuthenticated) &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            (identical(other.isAuthenticated, isAuthenticated) ||
+                other.isAuthenticated == isAuthenticated));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email, isLogout, error,
-      logindata, isAuthenticated, isLoading);
+  int get hashCode => Object.hash(
+      runtimeType, isLogout, error, logindata, isLoading, isAuthenticated);
 
   @JsonKey(ignore: true)
   @override
@@ -229,15 +213,12 @@ class _$_Initial implements _Initial {
 
 abstract class _Initial implements AuthState {
   const factory _Initial(
-      {final String? email,
-      final bool? isLogout,
+      {final bool? isLogout,
       required final bool error,
       final LoginModel? logindata,
-      final bool? isAuthenticated,
-      required final bool isLoading}) = _$_Initial;
+      required final bool isLoading,
+      final bool isAuthenticated}) = _$_Initial;
 
-  @override
-  String? get email;
   @override
   bool? get isLogout;
   @override
@@ -245,9 +226,9 @@ abstract class _Initial implements AuthState {
   @override
   LoginModel? get logindata;
   @override
-  bool? get isAuthenticated;
-  @override
   bool get isLoading;
+  @override
+  bool get isAuthenticated;
   @override
   @JsonKey(ignore: true)
   _$$_InitialCopyWith<_$_Initial> get copyWith =>
@@ -259,8 +240,7 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() authenticate,
-    required TResult Function(String email) generateOtp,
-    required TResult Function(String otp) validateOtp,
+    required TResult Function(String username, String pswd) login,
     required TResult Function() logout,
     required TResult Function() reset,
   }) =>
@@ -268,8 +248,7 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? authenticate,
-    TResult? Function(String email)? generateOtp,
-    TResult? Function(String otp)? validateOtp,
+    TResult? Function(String username, String pswd)? login,
     TResult? Function()? logout,
     TResult? Function()? reset,
   }) =>
@@ -277,8 +256,7 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? authenticate,
-    TResult Function(String email)? generateOtp,
-    TResult Function(String otp)? validateOtp,
+    TResult Function(String username, String pswd)? login,
     TResult Function()? logout,
     TResult Function()? reset,
     required TResult orElse(),
@@ -287,8 +265,7 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Authenticate value) authenticate,
-    required TResult Function(_GenerateOtp value) generateOtp,
-    required TResult Function(_ValidateOtp value) validateOtp,
+    required TResult Function(_Login value) login,
     required TResult Function(_Logout value) logout,
     required TResult Function(_Reset value) reset,
   }) =>
@@ -296,8 +273,7 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Authenticate value)? authenticate,
-    TResult? Function(_GenerateOtp value)? generateOtp,
-    TResult? Function(_ValidateOtp value)? validateOtp,
+    TResult? Function(_Login value)? login,
     TResult? Function(_Logout value)? logout,
     TResult? Function(_Reset value)? reset,
   }) =>
@@ -305,8 +281,7 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Authenticate value)? authenticate,
-    TResult Function(_GenerateOtp value)? generateOtp,
-    TResult Function(_ValidateOtp value)? validateOtp,
+    TResult Function(_Login value)? login,
     TResult Function(_Logout value)? logout,
     TResult Function(_Reset value)? reset,
     required TResult orElse(),
@@ -370,8 +345,7 @@ class _$_Authenticate implements _Authenticate {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() authenticate,
-    required TResult Function(String email) generateOtp,
-    required TResult Function(String otp) validateOtp,
+    required TResult Function(String username, String pswd) login,
     required TResult Function() logout,
     required TResult Function() reset,
   }) {
@@ -382,8 +356,7 @@ class _$_Authenticate implements _Authenticate {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? authenticate,
-    TResult? Function(String email)? generateOtp,
-    TResult? Function(String otp)? validateOtp,
+    TResult? Function(String username, String pswd)? login,
     TResult? Function()? logout,
     TResult? Function()? reset,
   }) {
@@ -394,8 +367,7 @@ class _$_Authenticate implements _Authenticate {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? authenticate,
-    TResult Function(String email)? generateOtp,
-    TResult Function(String otp)? validateOtp,
+    TResult Function(String username, String pswd)? login,
     TResult Function()? logout,
     TResult Function()? reset,
     required TResult orElse(),
@@ -410,8 +382,7 @@ class _$_Authenticate implements _Authenticate {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Authenticate value) authenticate,
-    required TResult Function(_GenerateOtp value) generateOtp,
-    required TResult Function(_ValidateOtp value) validateOtp,
+    required TResult Function(_Login value) login,
     required TResult Function(_Logout value) logout,
     required TResult Function(_Reset value) reset,
   }) {
@@ -422,8 +393,7 @@ class _$_Authenticate implements _Authenticate {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Authenticate value)? authenticate,
-    TResult? Function(_GenerateOtp value)? generateOtp,
-    TResult? Function(_ValidateOtp value)? validateOtp,
+    TResult? Function(_Login value)? login,
     TResult? Function(_Logout value)? logout,
     TResult? Function(_Reset value)? reset,
   }) {
@@ -434,8 +404,7 @@ class _$_Authenticate implements _Authenticate {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Authenticate value)? authenticate,
-    TResult Function(_GenerateOtp value)? generateOtp,
-    TResult Function(_ValidateOtp value)? validateOtp,
+    TResult Function(_Login value)? login,
     TResult Function(_Logout value)? logout,
     TResult Function(_Reset value)? reset,
     required TResult orElse(),
@@ -452,31 +421,34 @@ abstract class _Authenticate implements AuthEvent {
 }
 
 /// @nodoc
-abstract class _$$_GenerateOtpCopyWith<$Res> {
-  factory _$$_GenerateOtpCopyWith(
-          _$_GenerateOtp value, $Res Function(_$_GenerateOtp) then) =
-      __$$_GenerateOtpCopyWithImpl<$Res>;
+abstract class _$$_LoginCopyWith<$Res> {
+  factory _$$_LoginCopyWith(_$_Login value, $Res Function(_$_Login) then) =
+      __$$_LoginCopyWithImpl<$Res>;
   @useResult
-  $Res call({String email});
+  $Res call({String username, String pswd});
 }
 
 /// @nodoc
-class __$$_GenerateOtpCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$_GenerateOtp>
-    implements _$$_GenerateOtpCopyWith<$Res> {
-  __$$_GenerateOtpCopyWithImpl(
-      _$_GenerateOtp _value, $Res Function(_$_GenerateOtp) _then)
+class __$$_LoginCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$_Login>
+    implements _$$_LoginCopyWith<$Res> {
+  __$$_LoginCopyWithImpl(_$_Login _value, $Res Function(_$_Login) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = null,
+    Object? username = null,
+    Object? pswd = null,
   }) {
-    return _then(_$_GenerateOtp(
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
+    return _then(_$_Login(
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String,
+      pswd: null == pswd
+          ? _value.pswd
+          : pswd // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -484,70 +456,71 @@ class __$$_GenerateOtpCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GenerateOtp implements _GenerateOtp {
-  const _$_GenerateOtp({required this.email});
+class _$_Login implements _Login {
+  const _$_Login({required this.username, required this.pswd});
 
   @override
-  final String email;
+  final String username;
+  @override
+  final String pswd;
 
   @override
   String toString() {
-    return 'AuthEvent.generateOtp(email: $email)';
+    return 'AuthEvent.login(username: $username, pswd: $pswd)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GenerateOtp &&
-            (identical(other.email, email) || other.email == email));
+            other is _$_Login &&
+            (identical(other.username, username) ||
+                other.username == username) &&
+            (identical(other.pswd, pswd) || other.pswd == pswd));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email);
+  int get hashCode => Object.hash(runtimeType, username, pswd);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GenerateOtpCopyWith<_$_GenerateOtp> get copyWith =>
-      __$$_GenerateOtpCopyWithImpl<_$_GenerateOtp>(this, _$identity);
+  _$$_LoginCopyWith<_$_Login> get copyWith =>
+      __$$_LoginCopyWithImpl<_$_Login>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() authenticate,
-    required TResult Function(String email) generateOtp,
-    required TResult Function(String otp) validateOtp,
+    required TResult Function(String username, String pswd) login,
     required TResult Function() logout,
     required TResult Function() reset,
   }) {
-    return generateOtp(email);
+    return login(username, pswd);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? authenticate,
-    TResult? Function(String email)? generateOtp,
-    TResult? Function(String otp)? validateOtp,
+    TResult? Function(String username, String pswd)? login,
     TResult? Function()? logout,
     TResult? Function()? reset,
   }) {
-    return generateOtp?.call(email);
+    return login?.call(username, pswd);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? authenticate,
-    TResult Function(String email)? generateOtp,
-    TResult Function(String otp)? validateOtp,
+    TResult Function(String username, String pswd)? login,
     TResult Function()? logout,
     TResult Function()? reset,
     required TResult orElse(),
   }) {
-    if (generateOtp != null) {
-      return generateOtp(email);
+    if (login != null) {
+      return login(username, pswd);
     }
     return orElse();
   }
@@ -556,200 +529,48 @@ class _$_GenerateOtp implements _GenerateOtp {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Authenticate value) authenticate,
-    required TResult Function(_GenerateOtp value) generateOtp,
-    required TResult Function(_ValidateOtp value) validateOtp,
+    required TResult Function(_Login value) login,
     required TResult Function(_Logout value) logout,
     required TResult Function(_Reset value) reset,
   }) {
-    return generateOtp(this);
+    return login(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Authenticate value)? authenticate,
-    TResult? Function(_GenerateOtp value)? generateOtp,
-    TResult? Function(_ValidateOtp value)? validateOtp,
+    TResult? Function(_Login value)? login,
     TResult? Function(_Logout value)? logout,
     TResult? Function(_Reset value)? reset,
   }) {
-    return generateOtp?.call(this);
+    return login?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Authenticate value)? authenticate,
-    TResult Function(_GenerateOtp value)? generateOtp,
-    TResult Function(_ValidateOtp value)? validateOtp,
+    TResult Function(_Login value)? login,
     TResult Function(_Logout value)? logout,
     TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) {
-    if (generateOtp != null) {
-      return generateOtp(this);
+    if (login != null) {
+      return login(this);
     }
     return orElse();
   }
 }
 
-abstract class _GenerateOtp implements AuthEvent {
-  const factory _GenerateOtp({required final String email}) = _$_GenerateOtp;
+abstract class _Login implements AuthEvent {
+  const factory _Login(
+      {required final String username, required final String pswd}) = _$_Login;
 
-  String get email;
+  String get username;
+  String get pswd;
   @JsonKey(ignore: true)
-  _$$_GenerateOtpCopyWith<_$_GenerateOtp> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_ValidateOtpCopyWith<$Res> {
-  factory _$$_ValidateOtpCopyWith(
-          _$_ValidateOtp value, $Res Function(_$_ValidateOtp) then) =
-      __$$_ValidateOtpCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String otp});
-}
-
-/// @nodoc
-class __$$_ValidateOtpCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$_ValidateOtp>
-    implements _$$_ValidateOtpCopyWith<$Res> {
-  __$$_ValidateOtpCopyWithImpl(
-      _$_ValidateOtp _value, $Res Function(_$_ValidateOtp) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? otp = null,
-  }) {
-    return _then(_$_ValidateOtp(
-      otp: null == otp
-          ? _value.otp
-          : otp // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_ValidateOtp implements _ValidateOtp {
-  const _$_ValidateOtp({required this.otp});
-
-  @override
-  final String otp;
-
-  @override
-  String toString() {
-    return 'AuthEvent.validateOtp(otp: $otp)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_ValidateOtp &&
-            (identical(other.otp, otp) || other.otp == otp));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, otp);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_ValidateOtpCopyWith<_$_ValidateOtp> get copyWith =>
-      __$$_ValidateOtpCopyWithImpl<_$_ValidateOtp>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() authenticate,
-    required TResult Function(String email) generateOtp,
-    required TResult Function(String otp) validateOtp,
-    required TResult Function() logout,
-    required TResult Function() reset,
-  }) {
-    return validateOtp(otp);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? authenticate,
-    TResult? Function(String email)? generateOtp,
-    TResult? Function(String otp)? validateOtp,
-    TResult? Function()? logout,
-    TResult? Function()? reset,
-  }) {
-    return validateOtp?.call(otp);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? authenticate,
-    TResult Function(String email)? generateOtp,
-    TResult Function(String otp)? validateOtp,
-    TResult Function()? logout,
-    TResult Function()? reset,
-    required TResult orElse(),
-  }) {
-    if (validateOtp != null) {
-      return validateOtp(otp);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Authenticate value) authenticate,
-    required TResult Function(_GenerateOtp value) generateOtp,
-    required TResult Function(_ValidateOtp value) validateOtp,
-    required TResult Function(_Logout value) logout,
-    required TResult Function(_Reset value) reset,
-  }) {
-    return validateOtp(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Authenticate value)? authenticate,
-    TResult? Function(_GenerateOtp value)? generateOtp,
-    TResult? Function(_ValidateOtp value)? validateOtp,
-    TResult? Function(_Logout value)? logout,
-    TResult? Function(_Reset value)? reset,
-  }) {
-    return validateOtp?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Authenticate value)? authenticate,
-    TResult Function(_GenerateOtp value)? generateOtp,
-    TResult Function(_ValidateOtp value)? validateOtp,
-    TResult Function(_Logout value)? logout,
-    TResult Function(_Reset value)? reset,
-    required TResult orElse(),
-  }) {
-    if (validateOtp != null) {
-      return validateOtp(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _ValidateOtp implements AuthEvent {
-  const factory _ValidateOtp({required final String otp}) = _$_ValidateOtp;
-
-  String get otp;
-  @JsonKey(ignore: true)
-  _$$_ValidateOtpCopyWith<_$_ValidateOtp> get copyWith =>
+  _$$_LoginCopyWith<_$_Login> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -790,8 +611,7 @@ class _$_Logout implements _Logout {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() authenticate,
-    required TResult Function(String email) generateOtp,
-    required TResult Function(String otp) validateOtp,
+    required TResult Function(String username, String pswd) login,
     required TResult Function() logout,
     required TResult Function() reset,
   }) {
@@ -802,8 +622,7 @@ class _$_Logout implements _Logout {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? authenticate,
-    TResult? Function(String email)? generateOtp,
-    TResult? Function(String otp)? validateOtp,
+    TResult? Function(String username, String pswd)? login,
     TResult? Function()? logout,
     TResult? Function()? reset,
   }) {
@@ -814,8 +633,7 @@ class _$_Logout implements _Logout {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? authenticate,
-    TResult Function(String email)? generateOtp,
-    TResult Function(String otp)? validateOtp,
+    TResult Function(String username, String pswd)? login,
     TResult Function()? logout,
     TResult Function()? reset,
     required TResult orElse(),
@@ -830,8 +648,7 @@ class _$_Logout implements _Logout {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Authenticate value) authenticate,
-    required TResult Function(_GenerateOtp value) generateOtp,
-    required TResult Function(_ValidateOtp value) validateOtp,
+    required TResult Function(_Login value) login,
     required TResult Function(_Logout value) logout,
     required TResult Function(_Reset value) reset,
   }) {
@@ -842,8 +659,7 @@ class _$_Logout implements _Logout {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Authenticate value)? authenticate,
-    TResult? Function(_GenerateOtp value)? generateOtp,
-    TResult? Function(_ValidateOtp value)? validateOtp,
+    TResult? Function(_Login value)? login,
     TResult? Function(_Logout value)? logout,
     TResult? Function(_Reset value)? reset,
   }) {
@@ -854,8 +670,7 @@ class _$_Logout implements _Logout {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Authenticate value)? authenticate,
-    TResult Function(_GenerateOtp value)? generateOtp,
-    TResult Function(_ValidateOtp value)? validateOtp,
+    TResult Function(_Login value)? login,
     TResult Function(_Logout value)? logout,
     TResult Function(_Reset value)? reset,
     required TResult orElse(),
@@ -908,8 +723,7 @@ class _$_Reset implements _Reset {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() authenticate,
-    required TResult Function(String email) generateOtp,
-    required TResult Function(String otp) validateOtp,
+    required TResult Function(String username, String pswd) login,
     required TResult Function() logout,
     required TResult Function() reset,
   }) {
@@ -920,8 +734,7 @@ class _$_Reset implements _Reset {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? authenticate,
-    TResult? Function(String email)? generateOtp,
-    TResult? Function(String otp)? validateOtp,
+    TResult? Function(String username, String pswd)? login,
     TResult? Function()? logout,
     TResult? Function()? reset,
   }) {
@@ -932,8 +745,7 @@ class _$_Reset implements _Reset {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? authenticate,
-    TResult Function(String email)? generateOtp,
-    TResult Function(String otp)? validateOtp,
+    TResult Function(String username, String pswd)? login,
     TResult Function()? logout,
     TResult Function()? reset,
     required TResult orElse(),
@@ -948,8 +760,7 @@ class _$_Reset implements _Reset {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Authenticate value) authenticate,
-    required TResult Function(_GenerateOtp value) generateOtp,
-    required TResult Function(_ValidateOtp value) validateOtp,
+    required TResult Function(_Login value) login,
     required TResult Function(_Logout value) logout,
     required TResult Function(_Reset value) reset,
   }) {
@@ -960,8 +771,7 @@ class _$_Reset implements _Reset {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Authenticate value)? authenticate,
-    TResult? Function(_GenerateOtp value)? generateOtp,
-    TResult? Function(_ValidateOtp value)? validateOtp,
+    TResult? Function(_Login value)? login,
     TResult? Function(_Logout value)? logout,
     TResult? Function(_Reset value)? reset,
   }) {
@@ -972,8 +782,7 @@ class _$_Reset implements _Reset {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Authenticate value)? authenticate,
-    TResult Function(_GenerateOtp value)? generateOtp,
-    TResult Function(_ValidateOtp value)? validateOtp,
+    TResult Function(_Login value)? login,
     TResult Function(_Logout value)? logout,
     TResult Function(_Reset value)? reset,
     required TResult orElse(),

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
@@ -14,27 +12,16 @@ import '../../03_domain/auth/models/login_model.dart';
 @LazySingleton(as: IAuthRepo)
 class AuthRepository implements IAuthRepo {
   @override
-  Future<Either<MainFailure, dynamic>> generateOtp(
-      {required String email}) async {
-    final response = await getIt<DioServices>().request(
-      url: ApiEndPoints.sendOtpEndPoint,
-      method: "POST",
-      data: {"email": email},
-    );
-    return response.fold((l) => Left(l), (response) => const Right("Success"));
-  }
-
-  @override
-  Future<Either<MainFailure, LoginModel>> validateOtp({
-    required String otp,
-    required String email,
+  Future<Either<MainFailure, LoginModel>> login({
+    required String pswd,
+    required String username,
   }) async {
     final response = await getIt<DioServices>().request(
-      url: ApiEndPoints.verifyOtpEndPoint,
+      url: ApiEndPoints.loginEndPoint,
       method: "POST",
       data: {
-        "otp": otp,
-        "email": email,
+        "password": pswd,
+        "username": username,
       },
     );
     return response.fold(

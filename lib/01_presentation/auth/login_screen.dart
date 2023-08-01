@@ -19,13 +19,13 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController loginEmailCtr = TextEditingController();
+  final TextEditingController loginUsernameCtr = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
     super.dispose();
-    loginEmailCtr.dispose();
+    loginUsernameCtr.dispose();
   }
 
   @override
@@ -78,16 +78,28 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     sized0hx40,
                     WaTextField(
-                      ctr: loginEmailCtr,
-                      hintText: "Enter email",
+                      ctr: loginUsernameCtr,
+                      hintText: "Enter username",
                       isUnderLineBorder: true,
                       validator: (value) {
-                        final bool emailValid = RegExp(
-                                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                            .hasMatch(value ?? "");
-
-                        if (!emailValid) {
-                          return "please enter a valid email";
+                        if (value?.isEmpty ?? true) {
+                          return "Please enter username";
+                        } else if (value != null && value.length < 4) {
+                          return "Please enter a valid username";
+                        }
+                        return null;
+                      },
+                    ),
+                    sized0hx10,
+                    WaTextField(
+                      ctr: loginUsernameCtr,
+                      hintText: "Enter password",
+                      isUnderLineBorder: true,
+                      validator: (value) {
+                        if (value?.isEmpty ?? true) {
+                          return "Please enter password";
+                        } else if (value != null && value.length < 4) {
+                          return "Please enter a valid password";
                         }
                         return null;
                       },
@@ -95,11 +107,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     sized0hx30,
                     BlocConsumer<AuthBloc, AuthState>(
                       listenWhen: (previous, current) {
-                        return current.email != null &&
-                            previous.email != current.email;
+                        return previous.isAuthenticated !=
+                            current.isAuthenticated;
                       },
                       listener: (context, state) {
-                        if (state.email != null) {
+                        if (state.isAuthenticated == true) {
                           Navigator.pushNamed(context, RouteNames.otpPage);
                         }
                       },
@@ -107,46 +119,30 @@ class _LoginScreenState extends State<LoginScreen> {
                         return WAButton(
                           buttonColor: Theme.of(context).colorScheme.secondary,
                           onPressed: () {
-                            final authBloc = context.read<AuthBloc>();
-                            // Reset bloc if not empty
-                            if (authBloc.state.email?.isNotEmpty ?? false) {
+                            if (_formKey.currentState?.validate() ?? false) {
+                              final authBloc = context.read<AuthBloc>();
+                              // Reset blod
                               authBloc.add(const AuthEvent.reset());
-                            }
-                            if (loginEmailCtr.text.isNotEmpty) {
-                              authBloc.add(
-                                AuthEvent.generateOtp(
-                                    email: loginEmailCtr.text),
-                              );
-                            } else {
-                              failureToast("Enter valid email");
+
+                              if (loginUsernameCtr.text.isNotEmpty) {
+                                authBloc.add(
+                                  AuthEvent.login(
+                                    username: loginUsernameCtr.text,
+                                    pswd: "",
+                                  ),
+                                );
+                              }
                             }
                           },
+                          fontSize: 16,
                           textColor: cWhite,
                           buttonText: "Continue",
                           loading: state.isLoading,
                           fontWeight: FontWeight.w600,
-                          fontSize: 16,
                         );
                       },
                     ),
                     sized0hx20,
-                    RichText(
-                      text: const TextSpan(
-                        text: "By continuing, you agree to our ",
-                        style: TextStyle(color: Colors.black, fontSize: 10),
-                        children: [
-                          TextSpan(
-                            text: "Terms and Conditions",
-                            style: TextStyle(color: Colors.blue, fontSize: 10),
-                          ),
-                          TextSpan(text: " and "),
-                          TextSpan(
-                            text: "Privacy Policy",
-                            style: TextStyle(color: Colors.blue, fontSize: 10),
-                          )
-                        ],
-                      ),
-                    )
                   ],
                 ),
               ),
