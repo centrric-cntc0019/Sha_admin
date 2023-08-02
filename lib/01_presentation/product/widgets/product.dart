@@ -134,29 +134,23 @@ class ProductEditBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PopupMenuButton(
-      itemBuilder: (context) {
-        return [
-          const PopupMenuItem<int>(
-            value: 0,
-            child: Text("Edit"),
-          )
-        ];
+    return IconButton(
+      onPressed: () {
+        showModalBottomSheet<void>(
+          context: context,
+          isScrollControlled: true,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          builder: (BuildContext context) {
+            return ProductUpdateSheet(product: product);
+          },
+        );
       },
-      onSelected: (value) {
-        if (value == 0) {
-          showModalBottomSheet<void>(
-            context: context,
-            isScrollControlled: true,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.0),
-            ),
-            builder: (BuildContext context) {
-              return ProductUpdateSheet(product: product);
-            },
-          );
-        }
-      },
+      icon: const Icon(
+        Icons.edit_note,
+        size: 25.0,
+      ),
     );
   }
 }
