@@ -30,6 +30,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
             if (list != null &&
                 baseModel?.pagination?.totalRecords != null &&
                 list.length < baseModel!.pagination!.totalRecords! &&
+                state.result.pagination == true &&
                 !(state.result.paginationLoading)) {
               int pageNo = baseModel.pagination!.page!;
 
@@ -100,11 +101,17 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
             emit(state.copyWith(
               categoryId: event.categoryId,
               result: state.result.copyWith(
-                data: baseModel,
                 error: null,
                 loading: false,
-                pagination: false,
+                data: baseModel,
                 searchLoading: false,
+                paginationLoading: false,
+                pagination: (baseModel?.productList != null &&
+                        result.pagination?.totalRecords != null &&
+                        baseModel!.productList!.length <
+                            result.pagination!.totalRecords!)
+                    ? true
+                    : false,
               ),
             ));
           }
@@ -116,8 +123,14 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
                 error: null,
                 data: result,
                 loading: false,
-                pagination: false,
                 searchLoading: false,
+                paginationLoading: false,
+                pagination: (result.productList != null &&
+                        result.pagination?.totalRecords != null &&
+                        result.productList!.length <
+                            result.pagination!.totalRecords!)
+                    ? true
+                    : false,
               ),
             ));
           }

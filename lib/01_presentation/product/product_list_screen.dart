@@ -82,6 +82,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                                   );
                             },
                             child: CustomScrollView(
+                              physics: const AlwaysScrollableScrollPhysics(),
                               controller:
                                   context.read<ProductBloc>().productScrollCtr,
                               slivers: [
