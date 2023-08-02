@@ -217,6 +217,8 @@ ProductData _$ProductDataFromJson(Map<String, dynamic> json) {
 mixin _$ProductData {
   @JsonKey(name: 'PurchaseDetails')
   PurchaseDetails? get purchaseDetails => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ProductCategory')
+  ProductCategory? get productCategory => throw _privateConstructorUsedError;
   @JsonKey(name: 'SalesDetails')
   SalesDetails? get salesDetails => throw _privateConstructorUsedError;
   String? get uuid => throw _privateConstructorUsedError;
@@ -252,6 +254,7 @@ abstract class $ProductDataCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'PurchaseDetails') PurchaseDetails? purchaseDetails,
+      @JsonKey(name: 'ProductCategory') ProductCategory? productCategory,
       @JsonKey(name: 'SalesDetails') SalesDetails? salesDetails,
       String? uuid,
       @JsonKey(name: 'ProductImage') String? productImage,
@@ -265,6 +268,7 @@ abstract class $ProductDataCopyWith<$Res> {
       int productCount});
 
   $PurchaseDetailsCopyWith<$Res>? get purchaseDetails;
+  $ProductCategoryCopyWith<$Res>? get productCategory;
   $SalesDetailsCopyWith<$Res>? get salesDetails;
 }
 
@@ -282,6 +286,7 @@ class _$ProductDataCopyWithImpl<$Res, $Val extends ProductData>
   @override
   $Res call({
     Object? purchaseDetails = freezed,
+    Object? productCategory = freezed,
     Object? salesDetails = freezed,
     Object? uuid = freezed,
     Object? productImage = freezed,
@@ -299,6 +304,10 @@ class _$ProductDataCopyWithImpl<$Res, $Val extends ProductData>
           ? _value.purchaseDetails
           : purchaseDetails // ignore: cast_nullable_to_non_nullable
               as PurchaseDetails?,
+      productCategory: freezed == productCategory
+          ? _value.productCategory
+          : productCategory // ignore: cast_nullable_to_non_nullable
+              as ProductCategory?,
       salesDetails: freezed == salesDetails
           ? _value.salesDetails
           : salesDetails // ignore: cast_nullable_to_non_nullable
@@ -360,6 +369,18 @@ class _$ProductDataCopyWithImpl<$Res, $Val extends ProductData>
 
   @override
   @pragma('vm:prefer-inline')
+  $ProductCategoryCopyWith<$Res>? get productCategory {
+    if (_value.productCategory == null) {
+      return null;
+    }
+
+    return $ProductCategoryCopyWith<$Res>(_value.productCategory!, (value) {
+      return _then(_value.copyWith(productCategory: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $SalesDetailsCopyWith<$Res>? get salesDetails {
     if (_value.salesDetails == null) {
       return null;
@@ -381,6 +402,7 @@ abstract class _$$_ProductDataCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'PurchaseDetails') PurchaseDetails? purchaseDetails,
+      @JsonKey(name: 'ProductCategory') ProductCategory? productCategory,
       @JsonKey(name: 'SalesDetails') SalesDetails? salesDetails,
       String? uuid,
       @JsonKey(name: 'ProductImage') String? productImage,
@@ -395,6 +417,8 @@ abstract class _$$_ProductDataCopyWith<$Res>
 
   @override
   $PurchaseDetailsCopyWith<$Res>? get purchaseDetails;
+  @override
+  $ProductCategoryCopyWith<$Res>? get productCategory;
   @override
   $SalesDetailsCopyWith<$Res>? get salesDetails;
 }
@@ -411,6 +435,7 @@ class __$$_ProductDataCopyWithImpl<$Res>
   @override
   $Res call({
     Object? purchaseDetails = freezed,
+    Object? productCategory = freezed,
     Object? salesDetails = freezed,
     Object? uuid = freezed,
     Object? productImage = freezed,
@@ -428,6 +453,10 @@ class __$$_ProductDataCopyWithImpl<$Res>
           ? _value.purchaseDetails
           : purchaseDetails // ignore: cast_nullable_to_non_nullable
               as PurchaseDetails?,
+      productCategory: freezed == productCategory
+          ? _value.productCategory
+          : productCategory // ignore: cast_nullable_to_non_nullable
+              as ProductCategory?,
       salesDetails: freezed == salesDetails
           ? _value.salesDetails
           : salesDetails // ignore: cast_nullable_to_non_nullable
@@ -481,6 +510,7 @@ class __$$_ProductDataCopyWithImpl<$Res>
 class _$_ProductData implements _ProductData {
   _$_ProductData(
       {@JsonKey(name: 'PurchaseDetails') this.purchaseDetails,
+      @JsonKey(name: 'ProductCategory') this.productCategory,
       @JsonKey(name: 'SalesDetails') this.salesDetails,
       this.uuid,
       @JsonKey(name: 'ProductImage') this.productImage,
@@ -499,6 +529,9 @@ class _$_ProductData implements _ProductData {
   @override
   @JsonKey(name: 'PurchaseDetails')
   final PurchaseDetails? purchaseDetails;
+  @override
+  @JsonKey(name: 'ProductCategory')
+  final ProductCategory? productCategory;
   @override
   @JsonKey(name: 'SalesDetails')
   final SalesDetails? salesDetails;
@@ -534,7 +567,7 @@ class _$_ProductData implements _ProductData {
 
   @override
   String toString() {
-    return 'ProductData(purchaseDetails: $purchaseDetails, salesDetails: $salesDetails, uuid: $uuid, productImage: $productImage, description: $description, purchaseDescription: $purchaseDescription, name: $name, isSold: $isSold, isPurchased: $isPurchased, quantityOnHand: $quantityOnHand, productImageThumb: $productImageThumb, productCount: $productCount)';
+    return 'ProductData(purchaseDetails: $purchaseDetails, productCategory: $productCategory, salesDetails: $salesDetails, uuid: $uuid, productImage: $productImage, description: $description, purchaseDescription: $purchaseDescription, name: $name, isSold: $isSold, isPurchased: $isPurchased, quantityOnHand: $quantityOnHand, productImageThumb: $productImageThumb, productCount: $productCount)';
   }
 
   @override
@@ -544,6 +577,8 @@ class _$_ProductData implements _ProductData {
             other is _$_ProductData &&
             (identical(other.purchaseDetails, purchaseDetails) ||
                 other.purchaseDetails == purchaseDetails) &&
+            (identical(other.productCategory, productCategory) ||
+                other.productCategory == productCategory) &&
             (identical(other.salesDetails, salesDetails) ||
                 other.salesDetails == salesDetails) &&
             (identical(other.uuid, uuid) || other.uuid == uuid) &&
@@ -570,6 +605,7 @@ class _$_ProductData implements _ProductData {
   int get hashCode => Object.hash(
       runtimeType,
       purchaseDetails,
+      productCategory,
       salesDetails,
       uuid,
       productImage,
@@ -599,6 +635,7 @@ class _$_ProductData implements _ProductData {
 abstract class _ProductData implements ProductData {
   factory _ProductData(
       {@JsonKey(name: 'PurchaseDetails') final PurchaseDetails? purchaseDetails,
+      @JsonKey(name: 'ProductCategory') final ProductCategory? productCategory,
       @JsonKey(name: 'SalesDetails') final SalesDetails? salesDetails,
       final String? uuid,
       @JsonKey(name: 'ProductImage') final String? productImage,
@@ -617,6 +654,9 @@ abstract class _ProductData implements ProductData {
   @override
   @JsonKey(name: 'PurchaseDetails')
   PurchaseDetails? get purchaseDetails;
+  @override
+  @JsonKey(name: 'ProductCategory')
+  ProductCategory? get productCategory;
   @override
   @JsonKey(name: 'SalesDetails')
   SalesDetails? get salesDetails;
@@ -840,6 +880,196 @@ abstract class _PurchaseDetails implements PurchaseDetails {
   @override
   @JsonKey(ignore: true)
   _$$_PurchaseDetailsCopyWith<_$_PurchaseDetails> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ProductCategory _$ProductCategoryFromJson(Map<String, dynamic> json) {
+  return _ProductCategory.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ProductCategory {
+  String? get uuid => throw _privateConstructorUsedError;
+  @JsonKey(name: 'category_name')
+  String? get categoryName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'category_image')
+  String? get categorImage => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ProductCategoryCopyWith<ProductCategory> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ProductCategoryCopyWith<$Res> {
+  factory $ProductCategoryCopyWith(
+          ProductCategory value, $Res Function(ProductCategory) then) =
+      _$ProductCategoryCopyWithImpl<$Res, ProductCategory>;
+  @useResult
+  $Res call(
+      {String? uuid,
+      @JsonKey(name: 'category_name') String? categoryName,
+      @JsonKey(name: 'category_image') String? categorImage});
+}
+
+/// @nodoc
+class _$ProductCategoryCopyWithImpl<$Res, $Val extends ProductCategory>
+    implements $ProductCategoryCopyWith<$Res> {
+  _$ProductCategoryCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? uuid = freezed,
+    Object? categoryName = freezed,
+    Object? categorImage = freezed,
+  }) {
+    return _then(_value.copyWith(
+      uuid: freezed == uuid
+          ? _value.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String?,
+      categoryName: freezed == categoryName
+          ? _value.categoryName
+          : categoryName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      categorImage: freezed == categorImage
+          ? _value.categorImage
+          : categorImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_ProductCategoryCopyWith<$Res>
+    implements $ProductCategoryCopyWith<$Res> {
+  factory _$$_ProductCategoryCopyWith(
+          _$_ProductCategory value, $Res Function(_$_ProductCategory) then) =
+      __$$_ProductCategoryCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String? uuid,
+      @JsonKey(name: 'category_name') String? categoryName,
+      @JsonKey(name: 'category_image') String? categorImage});
+}
+
+/// @nodoc
+class __$$_ProductCategoryCopyWithImpl<$Res>
+    extends _$ProductCategoryCopyWithImpl<$Res, _$_ProductCategory>
+    implements _$$_ProductCategoryCopyWith<$Res> {
+  __$$_ProductCategoryCopyWithImpl(
+      _$_ProductCategory _value, $Res Function(_$_ProductCategory) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? uuid = freezed,
+    Object? categoryName = freezed,
+    Object? categorImage = freezed,
+  }) {
+    return _then(_$_ProductCategory(
+      uuid: freezed == uuid
+          ? _value.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String?,
+      categoryName: freezed == categoryName
+          ? _value.categoryName
+          : categoryName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      categorImage: freezed == categorImage
+          ? _value.categorImage
+          : categorImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_ProductCategory implements _ProductCategory {
+  _$_ProductCategory(
+      {this.uuid,
+      @JsonKey(name: 'category_name') this.categoryName,
+      @JsonKey(name: 'category_image') this.categorImage});
+
+  factory _$_ProductCategory.fromJson(Map<String, dynamic> json) =>
+      _$$_ProductCategoryFromJson(json);
+
+  @override
+  final String? uuid;
+  @override
+  @JsonKey(name: 'category_name')
+  final String? categoryName;
+  @override
+  @JsonKey(name: 'category_image')
+  final String? categorImage;
+
+  @override
+  String toString() {
+    return 'ProductCategory(uuid: $uuid, categoryName: $categoryName, categorImage: $categorImage)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ProductCategory &&
+            (identical(other.uuid, uuid) || other.uuid == uuid) &&
+            (identical(other.categoryName, categoryName) ||
+                other.categoryName == categoryName) &&
+            (identical(other.categorImage, categorImage) ||
+                other.categorImage == categorImage));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, uuid, categoryName, categorImage);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ProductCategoryCopyWith<_$_ProductCategory> get copyWith =>
+      __$$_ProductCategoryCopyWithImpl<_$_ProductCategory>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ProductCategoryToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ProductCategory implements ProductCategory {
+  factory _ProductCategory(
+          {final String? uuid,
+          @JsonKey(name: 'category_name') final String? categoryName,
+          @JsonKey(name: 'category_image') final String? categorImage}) =
+      _$_ProductCategory;
+
+  factory _ProductCategory.fromJson(Map<String, dynamic> json) =
+      _$_ProductCategory.fromJson;
+
+  @override
+  String? get uuid;
+  @override
+  @JsonKey(name: 'category_name')
+  String? get categoryName;
+  @override
+  @JsonKey(name: 'category_image')
+  String? get categorImage;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ProductCategoryCopyWith<_$_ProductCategory> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

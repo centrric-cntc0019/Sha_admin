@@ -82,6 +82,34 @@ class ProductItem extends StatelessWidget {
                     ],
                   ),
                   sized0hx05,
+                  if (fromAllProduct) ...[
+                    if (data?.productCategory?.categoryName != null) ...[
+                      Row(
+                        children: [
+                          WAText(
+                            fontSize: 15.sp,
+                            text: "Category : ",
+                          ),
+                          WAText(
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.w700,
+                            fontColor: Theme.of(context).primaryColor,
+                            text:
+                                "${data?.productCategory?.categoryName ?? ""}",
+                          ),
+                          sized0wx05,
+                        ],
+                      )
+                    ] else ...[
+                      WAText(
+                        fontSize: 12.sp,
+                        fontColor: Colors.red,
+                        fontWeight: FontWeight.w300,
+                        text: "Category missing",
+                      ),
+                    ],
+                    sized0hx05
+                  ],
                 ],
               ),
             ),
