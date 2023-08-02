@@ -35,19 +35,18 @@ class PickImageWidget extends StatelessWidget {
                       fit: BoxFit.cover,
                     )
                   : const Icon(
-                      Icons.add,
+                      Icons.image_outlined,
                       size: 30.0,
                     ),
         ),
-        if (productImage != null || netWorkImage != null)
-          Positioned(
-            bottom: -10,
-            right: -10,
-            child: CircleAvatar(
-              backgroundColor: Theme.of(context).colorScheme.secondary,
-              child: const Icon(Icons.add),
-            ),
+        Positioned(
+          bottom: -10,
+          right: -10,
+          child: CircleAvatar(
+            backgroundColor: Theme.of(context).colorScheme.secondary,
+            child: const Icon(Icons.add),
           ),
+        ),
       ],
     );
   }
