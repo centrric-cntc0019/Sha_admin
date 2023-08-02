@@ -7,7 +7,11 @@ import '../../../05_core/utils/constant.dart';
 import '../../widgets/shimmer_text_widget.dart';
 
 class ProductListShimmer extends StatelessWidget {
-  const ProductListShimmer({super.key});
+  final bool fromAllProduct;
+  const ProductListShimmer({
+    super.key,
+    this.fromAllProduct = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +22,7 @@ class ProductListShimmer extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const ProductListCarousel(),
+          if (fromAllProduct) const ProductListCarousel(),
           sized0hx10,
           const ShimmerTextWidget(),
           sized0hx10,
@@ -26,7 +30,7 @@ class ProductListShimmer extends StatelessWidget {
             child: ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: 4,
+              itemCount: fromAllProduct ? 8 : 4,
               separatorBuilder: (context, index) {
                 return const Divider();
               },
@@ -61,15 +65,17 @@ class ProductListShimmer extends StatelessWidget {
                                 ],
                               ),
                               sized0hx05,
-                              Row(
-                                children: [
-                                  const Spacer(),
-                                  ShimmerTextWidget(
-                                    height: 27.h,
-                                    width: 100.h,
-                                  ),
-                                ],
-                              )
+                              if (fromAllProduct) ...[
+                                Row(
+                                  children: [
+                                    const Spacer(),
+                                    ShimmerTextWidget(
+                                      height: 27.h,
+                                      width: 100.h,
+                                    ),
+                                  ],
+                                )
+                              ]
                             ],
                           ),
                         ),

@@ -65,21 +65,25 @@ class ProductItem extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  WAText(
-                    text: data?.name ?? "",
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16.sp,
-                  ),
-                  sized0hx05,
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       WAText(
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.w700,
-                        text: "\$${data?.salesDetails?.unitPrice}",
+                        text: data?.name ?? "",
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16.sp,
                       ),
-                      sized0wx05,
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.more_vert),
+                      )
                     ],
+                  ),
+                  sized0hx05,
+                  WAText(
+                    fontSize: 15.sp,
+                    fontWeight: FontWeight.w700,
+                    text: "\$${data?.salesDetails?.unitPrice}",
                   ),
                   sized0hx05,
                   if (fromAllProduct) ...[
