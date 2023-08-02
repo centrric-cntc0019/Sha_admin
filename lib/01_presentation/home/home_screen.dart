@@ -197,7 +197,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: "Add Category",
                 ctr: addCatCtr,
                 formKey: _formKey,
-                onTap: () {},
+                onTap: () {
+                  context
+                      .read<CategoryBloc>()
+                      .add(const CategoryEvent.addCategory());
+                },
               );
             },
           );

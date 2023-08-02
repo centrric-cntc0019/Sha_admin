@@ -41,8 +41,20 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
         );
       },
     );
+
+    // picker image from gallery
     on<_PickCategoryImage>((event, emit) {
       emit(state.copyWith(categoryImage: event.image));
+    });
+
+    on<_AddCategory>((event, emit) async {
+      emit(state.copyWith(
+          resultAddCategory: state.resultAddCategory.copyWith(loading: true)));
+
+      await Future.delayed(const Duration(seconds: 5));
+
+      emit(state.copyWith(
+          resultAddCategory: state.resultAddCategory.copyWith(loading: false)));
     });
   }
 }

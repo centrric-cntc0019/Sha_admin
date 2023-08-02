@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sha_admin/03_domain/di/injection.dart';
+import 'package:sha_admin/05_core/utils/themes.dart';
 
 import '../../../02_application/category/category_bloc.dart';
 import '../../../05_core/services/image_picker.dart';
@@ -74,7 +75,7 @@ class CategoryAddOrEditWidget extends StatelessWidget {
                             clipBehavior: Clip.hardEdge,
                             decoration: BoxDecoration(
                               color: Colors.grey.shade300,
-                              borderRadius: BorderRadius.circular(10.0),
+                              borderRadius: BorderRadius.circular(30.0),
                             ),
                             child: state.categoryImage != null
                                 ? Image.file(
@@ -106,7 +107,7 @@ class CategoryAddOrEditWidget extends StatelessWidget {
             WaTextField(
               ctr: ctr,
               horizontalContentPadding: 20.0,
-              borderColor: Colors.black,
+              borderColor: cDarkGrey,
               hintText: "Enter category name",
               validator: (value) {
                 if (value?.isEmpty ?? true) {
@@ -116,13 +117,18 @@ class CategoryAddOrEditWidget extends StatelessWidget {
               },
             ),
             sized0hx40,
-            WAButton(
-              onPressed: () {
-                if (formKey.currentState?.validate() ?? false) {
-                  onTap;
-                }
+            BlocBuilder<CategoryBloc, CategoryState>(
+              builder: (context, state) {
+                return WAButton(
+                  loading: state.resultAddCategory.loading,
+                  onPressed: () {
+                    if (formKey.currentState?.validate() ?? false) {
+                      onTap();
+                    }
+                  },
+                  buttonText: "Add",
+                );
               },
-              buttonText: "Add",
             ),
             sized0hx20,
           ],

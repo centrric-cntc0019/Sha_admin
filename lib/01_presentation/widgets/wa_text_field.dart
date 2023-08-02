@@ -72,19 +72,22 @@ class WaTextField extends StatelessWidget {
         labelText: label,
         isDense: isDense,
         hintText: hintText,
-
         // contentPadding: const EdgeInsets.only(top: 0.0, bottom: 0.0),
         enabledBorder: isUnderLineBorder == true
             ? const UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.black12))
             : OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
                 borderSide: BorderSide(
-                    width: 1, color: borderColor ?? Colors.greenAccent),
+                  width: 1,
+                  color: borderColor ?? Colors.greenAccent,
+                ),
               ),
         focusedBorder: isUnderLineBorder == true
             ? const UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.black12))
             : OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
                 borderSide: BorderSide(
                     width: 1, color: borderColor ?? Colors.greenAccent),
               ),
@@ -92,14 +95,16 @@ class WaTextField extends StatelessWidget {
             ? const UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.red))
             : OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
                 borderSide:
                     BorderSide(width: 1, color: borderColor ?? Colors.red),
               ),
         focusedErrorBorder: isUnderLineBorder == true
             ? const UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.red))
-            : const OutlineInputBorder(
-                borderSide: BorderSide(width: 1, color: Colors.red),
+            : OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: const BorderSide(width: 1, color: Colors.red),
               ),
       ),
     );
