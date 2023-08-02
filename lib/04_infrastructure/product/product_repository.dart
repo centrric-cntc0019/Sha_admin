@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart' as dio;
 import 'package:injectable/injectable.dart';
 import 'package:sha_admin/05_core/failure/main_failure.dart';
+import 'package:sha_admin/05_core/services/image_picker.dart';
 import 'package:sha_admin/03_domain/products/models/product/product_base_model.dart';
 
 import '../../03_domain/di/injection.dart';
@@ -51,5 +53,36 @@ class ProductRepository implements IProductRepo {
     return response.fold((l) => Left(l), (data) {
       return Right(ProductBaseModel.fromJson(data.data));
     });
+  }
+
+  @override
+  Future<Either<MainFailure, ProductData>> editProduct({
+    String? categoryUuid,
+    required String productUuid,
+    ImagePickerModel? productImage,
+  }) async {
+    String url = "${ApiEndPoints.productListEndPoint}update-item/$productUuid/";
+
+    var data = {
+      if (categoryUuid != null) "category_uuid": categoryUuid,
+      if (productImage != null)
+        "product_image": await dio.MultipartFile.fromFile(
+          productImage.imagePath!,
+          filename: productImage.imageFileName,
+        )
+    };
+
+    dio.FormData formData = dio.FormData.fromMap(data);
+    final response = await getIt<DioServices>().request(
+      url: url,
+      method: 'PUT',
+      data: formData,
+      authenticated: true,
+    );
+
+    return response.fold(
+      (l) => Left(l),
+      (res) => Right(ProductData.fromJson(res.data["data"])),
+    );
   }
 }

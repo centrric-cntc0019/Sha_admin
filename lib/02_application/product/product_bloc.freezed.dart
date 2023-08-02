@@ -290,7 +290,7 @@ mixin _$ProductEvent {
     required TResult Function(int? pageNo, String? searchKey) getAllProductList,
     required TResult Function() searchBarVisibility,
     required TResult Function(
-            String? categoryUuid, ImagePickerModel? productImage)
+            String? categoryUuid, String productUuid, BuildContext context)
         editProduct,
     required TResult Function(ImagePickerModel image) pickProductImage,
   }) =>
@@ -302,7 +302,8 @@ mixin _$ProductEvent {
         getProductListByCategory,
     TResult? Function(int? pageNo, String? searchKey)? getAllProductList,
     TResult? Function()? searchBarVisibility,
-    TResult? Function(String? categoryUuid, ImagePickerModel? productImage)?
+    TResult? Function(
+            String? categoryUuid, String productUuid, BuildContext context)?
         editProduct,
     TResult? Function(ImagePickerModel image)? pickProductImage,
   }) =>
@@ -314,7 +315,8 @@ mixin _$ProductEvent {
         getProductListByCategory,
     TResult Function(int? pageNo, String? searchKey)? getAllProductList,
     TResult Function()? searchBarVisibility,
-    TResult Function(String? categoryUuid, ImagePickerModel? productImage)?
+    TResult Function(
+            String? categoryUuid, String productUuid, BuildContext context)?
         editProduct,
     TResult Function(ImagePickerModel image)? pickProductImage,
     required TResult orElse(),
@@ -415,7 +417,7 @@ class _$_Init implements _Init {
     required TResult Function(int? pageNo, String? searchKey) getAllProductList,
     required TResult Function() searchBarVisibility,
     required TResult Function(
-            String? categoryUuid, ImagePickerModel? productImage)
+            String? categoryUuid, String productUuid, BuildContext context)
         editProduct,
     required TResult Function(ImagePickerModel image) pickProductImage,
   }) {
@@ -430,7 +432,8 @@ class _$_Init implements _Init {
         getProductListByCategory,
     TResult? Function(int? pageNo, String? searchKey)? getAllProductList,
     TResult? Function()? searchBarVisibility,
-    TResult? Function(String? categoryUuid, ImagePickerModel? productImage)?
+    TResult? Function(
+            String? categoryUuid, String productUuid, BuildContext context)?
         editProduct,
     TResult? Function(ImagePickerModel image)? pickProductImage,
   }) {
@@ -445,7 +448,8 @@ class _$_Init implements _Init {
         getProductListByCategory,
     TResult Function(int? pageNo, String? searchKey)? getAllProductList,
     TResult Function()? searchBarVisibility,
-    TResult Function(String? categoryUuid, ImagePickerModel? productImage)?
+    TResult Function(
+            String? categoryUuid, String productUuid, BuildContext context)?
         editProduct,
     TResult Function(ImagePickerModel image)? pickProductImage,
     required TResult orElse(),
@@ -597,7 +601,7 @@ class _$_GetProductListByCategory implements _GetProductListByCategory {
     required TResult Function(int? pageNo, String? searchKey) getAllProductList,
     required TResult Function() searchBarVisibility,
     required TResult Function(
-            String? categoryUuid, ImagePickerModel? productImage)
+            String? categoryUuid, String productUuid, BuildContext context)
         editProduct,
     required TResult Function(ImagePickerModel image) pickProductImage,
   }) {
@@ -612,7 +616,8 @@ class _$_GetProductListByCategory implements _GetProductListByCategory {
         getProductListByCategory,
     TResult? Function(int? pageNo, String? searchKey)? getAllProductList,
     TResult? Function()? searchBarVisibility,
-    TResult? Function(String? categoryUuid, ImagePickerModel? productImage)?
+    TResult? Function(
+            String? categoryUuid, String productUuid, BuildContext context)?
         editProduct,
     TResult? Function(ImagePickerModel image)? pickProductImage,
   }) {
@@ -627,7 +632,8 @@ class _$_GetProductListByCategory implements _GetProductListByCategory {
         getProductListByCategory,
     TResult Function(int? pageNo, String? searchKey)? getAllProductList,
     TResult Function()? searchBarVisibility,
-    TResult Function(String? categoryUuid, ImagePickerModel? productImage)?
+    TResult Function(
+            String? categoryUuid, String productUuid, BuildContext context)?
         editProduct,
     TResult Function(ImagePickerModel image)? pickProductImage,
     required TResult orElse(),
@@ -778,7 +784,7 @@ class _$_GetAllProductList implements _GetAllProductList {
     required TResult Function(int? pageNo, String? searchKey) getAllProductList,
     required TResult Function() searchBarVisibility,
     required TResult Function(
-            String? categoryUuid, ImagePickerModel? productImage)
+            String? categoryUuid, String productUuid, BuildContext context)
         editProduct,
     required TResult Function(ImagePickerModel image) pickProductImage,
   }) {
@@ -793,7 +799,8 @@ class _$_GetAllProductList implements _GetAllProductList {
         getProductListByCategory,
     TResult? Function(int? pageNo, String? searchKey)? getAllProductList,
     TResult? Function()? searchBarVisibility,
-    TResult? Function(String? categoryUuid, ImagePickerModel? productImage)?
+    TResult? Function(
+            String? categoryUuid, String productUuid, BuildContext context)?
         editProduct,
     TResult? Function(ImagePickerModel image)? pickProductImage,
   }) {
@@ -808,7 +815,8 @@ class _$_GetAllProductList implements _GetAllProductList {
         getProductListByCategory,
     TResult Function(int? pageNo, String? searchKey)? getAllProductList,
     TResult Function()? searchBarVisibility,
-    TResult Function(String? categoryUuid, ImagePickerModel? productImage)?
+    TResult Function(
+            String? categoryUuid, String productUuid, BuildContext context)?
         editProduct,
     TResult Function(ImagePickerModel image)? pickProductImage,
     required TResult orElse(),
@@ -920,7 +928,7 @@ class _$_SearchBarVisibility implements _SearchBarVisibility {
     required TResult Function(int? pageNo, String? searchKey) getAllProductList,
     required TResult Function() searchBarVisibility,
     required TResult Function(
-            String? categoryUuid, ImagePickerModel? productImage)
+            String? categoryUuid, String productUuid, BuildContext context)
         editProduct,
     required TResult Function(ImagePickerModel image) pickProductImage,
   }) {
@@ -935,7 +943,8 @@ class _$_SearchBarVisibility implements _SearchBarVisibility {
         getProductListByCategory,
     TResult? Function(int? pageNo, String? searchKey)? getAllProductList,
     TResult? Function()? searchBarVisibility,
-    TResult? Function(String? categoryUuid, ImagePickerModel? productImage)?
+    TResult? Function(
+            String? categoryUuid, String productUuid, BuildContext context)?
         editProduct,
     TResult? Function(ImagePickerModel image)? pickProductImage,
   }) {
@@ -950,7 +959,8 @@ class _$_SearchBarVisibility implements _SearchBarVisibility {
         getProductListByCategory,
     TResult Function(int? pageNo, String? searchKey)? getAllProductList,
     TResult Function()? searchBarVisibility,
-    TResult Function(String? categoryUuid, ImagePickerModel? productImage)?
+    TResult Function(
+            String? categoryUuid, String productUuid, BuildContext context)?
         editProduct,
     TResult Function(ImagePickerModel image)? pickProductImage,
     required TResult orElse(),
@@ -1017,7 +1027,7 @@ abstract class _$$_EditProductCopyWith<$Res> {
           _$_EditProduct value, $Res Function(_$_EditProduct) then) =
       __$$_EditProductCopyWithImpl<$Res>;
   @useResult
-  $Res call({String? categoryUuid, ImagePickerModel? productImage});
+  $Res call({String? categoryUuid, String productUuid, BuildContext context});
 }
 
 /// @nodoc
@@ -1032,17 +1042,22 @@ class __$$_EditProductCopyWithImpl<$Res>
   @override
   $Res call({
     Object? categoryUuid = freezed,
-    Object? productImage = freezed,
+    Object? productUuid = null,
+    Object? context = null,
   }) {
     return _then(_$_EditProduct(
       categoryUuid: freezed == categoryUuid
           ? _value.categoryUuid
           : categoryUuid // ignore: cast_nullable_to_non_nullable
               as String?,
-      productImage: freezed == productImage
-          ? _value.productImage
-          : productImage // ignore: cast_nullable_to_non_nullable
-              as ImagePickerModel?,
+      productUuid: null == productUuid
+          ? _value.productUuid
+          : productUuid // ignore: cast_nullable_to_non_nullable
+              as String,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
     ));
   }
 }
@@ -1050,16 +1065,19 @@ class __$$_EditProductCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_EditProduct implements _EditProduct {
-  const _$_EditProduct({this.categoryUuid, this.productImage});
+  const _$_EditProduct(
+      {this.categoryUuid, required this.productUuid, required this.context});
 
   @override
   final String? categoryUuid;
   @override
-  final ImagePickerModel? productImage;
+  final String productUuid;
+  @override
+  final BuildContext context;
 
   @override
   String toString() {
-    return 'ProductEvent.editProduct(categoryUuid: $categoryUuid, productImage: $productImage)';
+    return 'ProductEvent.editProduct(categoryUuid: $categoryUuid, productUuid: $productUuid, context: $context)';
   }
 
   @override
@@ -1069,12 +1087,14 @@ class _$_EditProduct implements _EditProduct {
             other is _$_EditProduct &&
             (identical(other.categoryUuid, categoryUuid) ||
                 other.categoryUuid == categoryUuid) &&
-            (identical(other.productImage, productImage) ||
-                other.productImage == productImage));
+            (identical(other.productUuid, productUuid) ||
+                other.productUuid == productUuid) &&
+            (identical(other.context, context) || other.context == context));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, categoryUuid, productImage);
+  int get hashCode =>
+      Object.hash(runtimeType, categoryUuid, productUuid, context);
 
   @JsonKey(ignore: true)
   @override
@@ -1091,11 +1111,11 @@ class _$_EditProduct implements _EditProduct {
     required TResult Function(int? pageNo, String? searchKey) getAllProductList,
     required TResult Function() searchBarVisibility,
     required TResult Function(
-            String? categoryUuid, ImagePickerModel? productImage)
+            String? categoryUuid, String productUuid, BuildContext context)
         editProduct,
     required TResult Function(ImagePickerModel image) pickProductImage,
   }) {
-    return editProduct(categoryUuid, productImage);
+    return editProduct(categoryUuid, productUuid, context);
   }
 
   @override
@@ -1106,11 +1126,12 @@ class _$_EditProduct implements _EditProduct {
         getProductListByCategory,
     TResult? Function(int? pageNo, String? searchKey)? getAllProductList,
     TResult? Function()? searchBarVisibility,
-    TResult? Function(String? categoryUuid, ImagePickerModel? productImage)?
+    TResult? Function(
+            String? categoryUuid, String productUuid, BuildContext context)?
         editProduct,
     TResult? Function(ImagePickerModel image)? pickProductImage,
   }) {
-    return editProduct?.call(categoryUuid, productImage);
+    return editProduct?.call(categoryUuid, productUuid, context);
   }
 
   @override
@@ -1121,13 +1142,14 @@ class _$_EditProduct implements _EditProduct {
         getProductListByCategory,
     TResult Function(int? pageNo, String? searchKey)? getAllProductList,
     TResult Function()? searchBarVisibility,
-    TResult Function(String? categoryUuid, ImagePickerModel? productImage)?
+    TResult Function(
+            String? categoryUuid, String productUuid, BuildContext context)?
         editProduct,
     TResult Function(ImagePickerModel image)? pickProductImage,
     required TResult orElse(),
   }) {
     if (editProduct != null) {
-      return editProduct(categoryUuid, productImage);
+      return editProduct(categoryUuid, productUuid, context);
     }
     return orElse();
   }
@@ -1181,10 +1203,12 @@ class _$_EditProduct implements _EditProduct {
 abstract class _EditProduct implements ProductEvent {
   const factory _EditProduct(
       {final String? categoryUuid,
-      final ImagePickerModel? productImage}) = _$_EditProduct;
+      required final String productUuid,
+      required final BuildContext context}) = _$_EditProduct;
 
   String? get categoryUuid;
-  ImagePickerModel? get productImage;
+  String get productUuid;
+  BuildContext get context;
   @JsonKey(ignore: true)
   _$$_EditProductCopyWith<_$_EditProduct> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1260,7 +1284,7 @@ class _$_PickProductImage implements _PickProductImage {
     required TResult Function(int? pageNo, String? searchKey) getAllProductList,
     required TResult Function() searchBarVisibility,
     required TResult Function(
-            String? categoryUuid, ImagePickerModel? productImage)
+            String? categoryUuid, String productUuid, BuildContext context)
         editProduct,
     required TResult Function(ImagePickerModel image) pickProductImage,
   }) {
@@ -1275,7 +1299,8 @@ class _$_PickProductImage implements _PickProductImage {
         getProductListByCategory,
     TResult? Function(int? pageNo, String? searchKey)? getAllProductList,
     TResult? Function()? searchBarVisibility,
-    TResult? Function(String? categoryUuid, ImagePickerModel? productImage)?
+    TResult? Function(
+            String? categoryUuid, String productUuid, BuildContext context)?
         editProduct,
     TResult? Function(ImagePickerModel image)? pickProductImage,
   }) {
@@ -1290,7 +1315,8 @@ class _$_PickProductImage implements _PickProductImage {
         getProductListByCategory,
     TResult Function(int? pageNo, String? searchKey)? getAllProductList,
     TResult Function()? searchBarVisibility,
-    TResult Function(String? categoryUuid, ImagePickerModel? productImage)?
+    TResult Function(
+            String? categoryUuid, String productUuid, BuildContext context)?
         editProduct,
     TResult Function(ImagePickerModel image)? pickProductImage,
     required TResult orElse(),

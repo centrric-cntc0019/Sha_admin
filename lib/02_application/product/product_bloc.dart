@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sha_admin/03_domain/products/i_product_repo.dart';
 
+import '../../01_presentation/widgets/toast.dart';
 import '../../05_core/models/apiresponse.dart';
 import '../../03_domain/products/models/product/product_base_model.dart';
 import '../../05_core/services/image_picker.dart';
@@ -259,6 +260,41 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     // picker image from gallery
     on<_PickProductImage>((event, emit) {
       emit(state.copyWith(productImage: event.image));
+    });
+    // Edit product image and category
+    on<_EditProduct>((event, emit) async {
+      emit(state.copyWith(
+        editProductRes: state.editProductRes.copyWith(loading: true),
+      ));
+      final dataOrFailure = await iProductRepo.editProduct(
+        productUuid: event.productUuid,
+        categoryUuid: event.categoryUuid,
+        productImage: state.productImage,
+      );
+      dataOrFailure.fold((l) {
+        emit(state.copyWith(
+          productImage: null,
+          editProductRes: state.editProductRes.copyWith(loading: false),
+        ));
+        failureToast("Something went wrong");
+      }, (res) {
+        // Update the list item
+        ProductBaseModel? baseModel =
+            state.allProducts.data as ProductBaseModel?;
+        List<ProductData>? list = baseModel?.productList?.toList();
+        baseModel = baseModel?.copyWith(productList: list);
+        int? index = list?.indexWhere((element) => element.uuid == res.uuid);
+        if (index != null && index != -1) {
+          list![index] = res;
+        }
+        emit(state.copyWith(
+          productImage: null,
+          allProducts: state.allProducts.copyWith(data: baseModel),
+          editProductRes: state.editProductRes.copyWith(loading: false),
+        ));
+        Navigator.pop(event.context);
+        successToast("Product updated");
+      });
     });
   }
 }

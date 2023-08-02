@@ -108,17 +108,23 @@ class _ProductUpdateSheetState extends State<ProductUpdateSheet> {
             },
           ),
           sized0hx40,
-          BlocBuilder<ProductBloc, ProductState>(
-            buildWhen: (previous, current) =>
-                previous.editProductRes.loading !=
-                current.editProductRes.loading,
-            builder: (context, state) {
-              return WAButton(
-                onPressed: () {},
-                buttonText: "Update",
-                loading: state.editProductRes.loading,
-              );
+          WAButton(
+            onPressed: () {
+              if (selectedCategory != null ||
+                  productBloc.state.productImage != null) {
+                productBloc.add(
+                  ProductEvent.editProduct(
+                    context: context,
+                    productUuid: widget.product.uuid!,
+                    categoryUuid: selectedCategory?.id,
+                  ),
+                );
+              }
             },
+            buttonText: "Update",
+            loading: context.select(
+              (ProductBloc bloc) => bloc.state.editProductRes.loading == true,
+            ),
           ),
           sized0hx20,
         ],
