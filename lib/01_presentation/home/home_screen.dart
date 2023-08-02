@@ -1,15 +1,18 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sha_admin/01_presentation/home/widgets/category_shimmer.dart';
+import 'package:sha_admin/01_presentation/home/widgets/category_add_or_edit_widget.dart';
 
-import '../../02_application/product/product_bloc.dart';
-import '../../05_core/route/route_name.dart';
-import '../widgets/error_widget.dart';
 import '../widgets/wa_text.dart';
 import '../widgets/wa_carousel.dart';
+import '../widgets/error_widget.dart';
 import 'widgets/category_grid_item.dart';
 import '../../05_core/utils/constant.dart';
+import '../../05_core/route/route_name.dart';
+import '../../02_application/product/product_bloc.dart';
 import '../../02_application/category/category_bloc.dart';
 import '../../03_domain/category/models/category_list/category_base_model.dart';
 
@@ -173,6 +176,24 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showModalBottomSheet<void>(
+            context: context,
+            isScrollControlled: true,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0),
+            ),
+            builder: (BuildContext context) {
+              return CategoryAddOrEditWidget(
+                title: "Add Category",
+                ctr: TextEditingController(),
+              );
+            },
+          );
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }

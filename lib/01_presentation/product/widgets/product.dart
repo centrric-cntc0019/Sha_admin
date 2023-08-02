@@ -49,7 +49,7 @@ class ProductItem extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Image.network(
-                      data?.productImage ?? "",
+                      data?.productImageThumb ?? data?.productImage ?? "",
                       height: 100,
                       width: 100,
                       fit: BoxFit.cover,

@@ -24,6 +24,7 @@ class AppRouter {
             headText: settings.arguments as Map,
           ),
         );
+
       default:
         return MaterialPageRoute(
           builder: (context) => const LoginScreen(),
