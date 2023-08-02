@@ -13,4 +13,10 @@ class ProductEvent with _$ProductEvent {
     String? searchKey,
   }) = _GetAllProductList;
   const factory ProductEvent.searchBarVisibility() = _SearchBarVisibility;
+  const factory ProductEvent.editProduct({
+    String? categoryUuid,
+    ImagePickerModel? productImage,
+  }) = _EditProduct;
+  const factory ProductEvent.pickProductImage(
+      {required ImagePickerModel image}) = _PickProductImage;
 }

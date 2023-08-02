@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: non_constant_identifier_names
-
 part of 'product_base_model.dart';
 
 // **************************************************************************
@@ -30,6 +28,10 @@ _$_ProductData _$$_ProductDataFromJson(Map<String, dynamic> json) =>
           ? null
           : PurchaseDetails.fromJson(
               json['PurchaseDetails'] as Map<String, dynamic>),
+      productCategory: json['ProductCategory'] == null
+          ? null
+          : ProductCategory.fromJson(
+              json['ProductCategory'] as Map<String, dynamic>),
       salesDetails: json['SalesDetails'] == null
           ? null
           : SalesDetails.fromJson(json['SalesDetails'] as Map<String, dynamic>),
@@ -48,6 +50,7 @@ _$_ProductData _$$_ProductDataFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_ProductDataToJson(_$_ProductData instance) =>
     <String, dynamic>{
       'PurchaseDetails': instance.purchaseDetails,
+      'ProductCategory': instance.productCategory,
       'SalesDetails': instance.salesDetails,
       'uuid': instance.uuid,
       'ProductImage': instance.productImage,
@@ -73,6 +76,20 @@ Map<String, dynamic> _$$_PurchaseDetailsToJson(_$_PurchaseDetails instance) =>
       'UnitPrice': instance.unitPrice,
       'uuid': instance.uuid,
       'AccountCode': instance.accountCode,
+    };
+
+_$_ProductCategory _$$_ProductCategoryFromJson(Map<String, dynamic> json) =>
+    _$_ProductCategory(
+      uuid: json['uuid'] as String?,
+      categoryName: json['category_name'] as String?,
+      categorImage: json['category_image'] as String?,
+    );
+
+Map<String, dynamic> _$$_ProductCategoryToJson(_$_ProductCategory instance) =>
+    <String, dynamic>{
+      'uuid': instance.uuid,
+      'category_name': instance.categoryName,
+      'category_image': instance.categorImage,
     };
 
 _$_SalesDetails _$$_SalesDetailsFromJson(Map<String, dynamic> json) =>

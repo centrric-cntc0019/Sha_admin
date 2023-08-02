@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sha_admin/02_application/product/product_bloc.dart';
+import 'package:sha_admin/01_presentation/product/widgets/product_update_sheet.dart';
 
 import '../../widgets/wa_text.dart';
 import '../../../05_core/utils/constant.dart';
+import '../../../03_domain/products/models/product/product_base_model.dart';
 
 enum IncDecType { fromprodList, fromCart }
 
@@ -65,29 +67,96 @@ class ProductItem extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  WAText(
-                    text: data?.name ?? "",
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16.sp,
-                  ),
-                  sized0hx05,
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      WAText(
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.w700,
-                        text: "\$${data?.salesDetails?.unitPrice}",
+                      Expanded(
+                        child: WAText(
+                          text: data?.name ?? "",
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16.sp,
+                        ),
                       ),
-                      sized0wx05,
+                      ProductEditBtn(product: data),
                     ],
                   ),
                   sized0hx05,
+                  WAText(
+                    fontSize: 15.sp,
+                    fontWeight: FontWeight.w700,
+                    text: "\$${data?.salesDetails?.unitPrice}",
+                  ),
+                  sized0hx05,
+                  if (fromAllProduct) ...[
+                    if (data?.productCategory?.categoryName != null) ...[
+                      Row(
+                        children: [
+                          WAText(
+                            fontSize: 15.sp,
+                            text: "Category : ",
+                          ),
+                          WAText(
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.w700,
+                            fontColor: Theme.of(context).primaryColor,
+                            text:
+                                "${data?.productCategory?.categoryName ?? ""}",
+                          ),
+                          sized0wx05,
+                        ],
+                      )
+                    ] else ...[
+                      WAText(
+                        fontSize: 12.sp,
+                        fontColor: Colors.red,
+                        fontWeight: FontWeight.w300,
+                        text: "Category missing",
+                      ),
+                    ],
+                    sized0hx05
+                  ],
                 ],
               ),
             ),
           )
         ],
       ),
+    );
+  }
+}
+
+class ProductEditBtn extends StatelessWidget {
+  final ProductData product;
+  const ProductEditBtn({
+    super.key,
+    required this.product,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return PopupMenuButton(
+      itemBuilder: (context) {
+        return [
+          const PopupMenuItem<int>(
+            value: 0,
+            child: Text("Edit"),
+          )
+        ];
+      },
+      onSelected: (value) {
+        if (value == 0) {
+          showModalBottomSheet<void>(
+            context: context,
+            isScrollControlled: true,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0),
+            ),
+            builder: (BuildContext context) {
+              return ProductUpdateSheet(product: product);
+            },
+          );
+        }
+      },
     );
   }
 }

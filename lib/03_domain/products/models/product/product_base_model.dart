@@ -20,6 +20,7 @@ class ProductBaseModel with _$ProductBaseModel {
 class ProductData with _$ProductData {
   factory ProductData({
     @JsonKey(name: 'PurchaseDetails') PurchaseDetails? purchaseDetails,
+    @JsonKey(name: 'ProductCategory') ProductCategory? productCategory,
     @JsonKey(name: 'SalesDetails') SalesDetails? salesDetails,
     String? uuid,
     @JsonKey(name: 'ProductImage') String? productImage,
@@ -46,6 +47,18 @@ class PurchaseDetails with _$PurchaseDetails {
 
   factory PurchaseDetails.fromJson(Map<String, dynamic> json) =>
       _$PurchaseDetailsFromJson(json);
+}
+
+@freezed
+class ProductCategory with _$ProductCategory {
+  factory ProductCategory({
+    String? uuid,
+    @JsonKey(name: 'category_name') String? categoryName,
+    @JsonKey(name: 'category_image') String? categorImage,
+  }) = _ProductCategory;
+
+  factory ProductCategory.fromJson(Map<String, dynamic> json) =>
+      _$ProductCategoryFromJson(json);
 }
 
 @freezed
