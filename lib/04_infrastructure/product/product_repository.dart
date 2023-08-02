@@ -31,4 +31,25 @@ class ProductRepository implements IProductRepo {
       return Right(ProductBaseModel.fromJson(data.data));
     });
   }
+
+  @override
+  Future<Either<MainFailure, ProductBaseModel>> getAllProduct({
+    int? page,
+    String? searchKey,
+  }) async {
+    var url = ApiEndPoints.productListEndPoint;
+    url = '$url?page=${page ?? 1}&limit=10';
+    if (searchKey != null) {
+      url = "$url&keyword=$searchKey";
+    }
+    final response = await getIt<DioServices>().request(
+      url: url,
+      method: 'GET',
+      authenticated: true,
+    );
+
+    return response.fold((l) => Left(l), (data) {
+      return Right(ProductBaseModel.fromJson(data.data));
+    });
+  }
 }

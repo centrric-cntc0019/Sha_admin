@@ -8,5 +8,9 @@ class ProductEvent with _$ProductEvent {
     String? searchKey,
     required String categoryId,
   }) = _GetProductListByCategory;
+  const factory ProductEvent.getAllProductList({
+    int? pageNo,
+    String? searchKey,
+  }) = _GetAllProductList;
   const factory ProductEvent.searchBarVisibility() = _SearchBarVisibility;
 }

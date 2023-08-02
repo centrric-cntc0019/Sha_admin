@@ -19,6 +19,7 @@ mixin _$ProductState {
   String? get categoryId => throw _privateConstructorUsedError;
   ApiResponse<dynamic> get result => throw _privateConstructorUsedError;
   dynamic get searchEnabled => throw _privateConstructorUsedError;
+  ApiResponse<dynamic> get allProducts => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProductStateCopyWith<ProductState> get copyWith =>
@@ -32,9 +33,13 @@ abstract class $ProductStateCopyWith<$Res> {
       _$ProductStateCopyWithImpl<$Res, ProductState>;
   @useResult
   $Res call(
-      {String? categoryId, ApiResponse<dynamic> result, dynamic searchEnabled});
+      {String? categoryId,
+      ApiResponse<dynamic> result,
+      dynamic searchEnabled,
+      ApiResponse<dynamic> allProducts});
 
   $ApiResponseCopyWith<dynamic, $Res> get result;
+  $ApiResponseCopyWith<dynamic, $Res> get allProducts;
 }
 
 /// @nodoc
@@ -53,6 +58,7 @@ class _$ProductStateCopyWithImpl<$Res, $Val extends ProductState>
     Object? categoryId = freezed,
     Object? result = null,
     Object? searchEnabled = freezed,
+    Object? allProducts = null,
   }) {
     return _then(_value.copyWith(
       categoryId: freezed == categoryId
@@ -67,6 +73,10 @@ class _$ProductStateCopyWithImpl<$Res, $Val extends ProductState>
           ? _value.searchEnabled
           : searchEnabled // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      allProducts: null == allProducts
+          ? _value.allProducts
+          : allProducts // ignore: cast_nullable_to_non_nullable
+              as ApiResponse<dynamic>,
     ) as $Val);
   }
 
@@ -75,6 +85,14 @@ class _$ProductStateCopyWithImpl<$Res, $Val extends ProductState>
   $ApiResponseCopyWith<dynamic, $Res> get result {
     return $ApiResponseCopyWith<dynamic, $Res>(_value.result, (value) {
       return _then(_value.copyWith(result: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ApiResponseCopyWith<dynamic, $Res> get allProducts {
+    return $ApiResponseCopyWith<dynamic, $Res>(_value.allProducts, (value) {
+      return _then(_value.copyWith(allProducts: value) as $Val);
     });
   }
 }
@@ -88,10 +106,15 @@ abstract class _$$_InitialCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? categoryId, ApiResponse<dynamic> result, dynamic searchEnabled});
+      {String? categoryId,
+      ApiResponse<dynamic> result,
+      dynamic searchEnabled,
+      ApiResponse<dynamic> allProducts});
 
   @override
   $ApiResponseCopyWith<dynamic, $Res> get result;
+  @override
+  $ApiResponseCopyWith<dynamic, $Res> get allProducts;
 }
 
 /// @nodoc
@@ -107,6 +130,7 @@ class __$$_InitialCopyWithImpl<$Res>
     Object? categoryId = freezed,
     Object? result = null,
     Object? searchEnabled = freezed,
+    Object? allProducts = null,
   }) {
     return _then(_$_Initial(
       categoryId: freezed == categoryId
@@ -119,6 +143,10 @@ class __$$_InitialCopyWithImpl<$Res>
               as ApiResponse<dynamic>,
       searchEnabled:
           freezed == searchEnabled ? _value.searchEnabled! : searchEnabled,
+      allProducts: null == allProducts
+          ? _value.allProducts
+          : allProducts // ignore: cast_nullable_to_non_nullable
+              as ApiResponse<dynamic>,
     ));
   }
 }
@@ -127,7 +155,10 @@ class __$$_InitialCopyWithImpl<$Res>
 
 class _$_Initial implements _Initial {
   const _$_Initial(
-      {this.categoryId, required this.result, this.searchEnabled = false});
+      {this.categoryId,
+      required this.result,
+      this.searchEnabled = false,
+      required this.allProducts});
 
   @override
   final String? categoryId;
@@ -136,10 +167,12 @@ class _$_Initial implements _Initial {
   @override
   @JsonKey()
   final dynamic searchEnabled;
+  @override
+  final ApiResponse<dynamic> allProducts;
 
   @override
   String toString() {
-    return 'ProductState(categoryId: $categoryId, result: $result, searchEnabled: $searchEnabled)';
+    return 'ProductState(categoryId: $categoryId, result: $result, searchEnabled: $searchEnabled, allProducts: $allProducts)';
   }
 
   @override
@@ -151,12 +184,14 @@ class _$_Initial implements _Initial {
                 other.categoryId == categoryId) &&
             (identical(other.result, result) || other.result == result) &&
             const DeepCollectionEquality()
-                .equals(other.searchEnabled, searchEnabled));
+                .equals(other.searchEnabled, searchEnabled) &&
+            (identical(other.allProducts, allProducts) ||
+                other.allProducts == allProducts));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, categoryId, result,
-      const DeepCollectionEquality().hash(searchEnabled));
+      const DeepCollectionEquality().hash(searchEnabled), allProducts);
 
   @JsonKey(ignore: true)
   @override
@@ -169,7 +204,8 @@ abstract class _Initial implements ProductState {
   const factory _Initial(
       {final String? categoryId,
       required final ApiResponse<dynamic> result,
-      final dynamic searchEnabled}) = _$_Initial;
+      final dynamic searchEnabled,
+      required final ApiResponse<dynamic> allProducts}) = _$_Initial;
 
   @override
   String? get categoryId;
@@ -177,6 +213,8 @@ abstract class _Initial implements ProductState {
   ApiResponse<dynamic> get result;
   @override
   dynamic get searchEnabled;
+  @override
+  ApiResponse<dynamic> get allProducts;
   @override
   @JsonKey(ignore: true)
   _$$_InitialCopyWith<_$_Initial> get copyWith =>
@@ -190,6 +228,7 @@ mixin _$ProductEvent {
     required TResult Function() init,
     required TResult Function(int? pageNo, String? searchKey, String categoryId)
         getProductListByCategory,
+    required TResult Function(int? pageNo, String? searchKey) getAllProductList,
     required TResult Function() searchBarVisibility,
   }) =>
       throw _privateConstructorUsedError;
@@ -198,6 +237,7 @@ mixin _$ProductEvent {
     TResult? Function()? init,
     TResult? Function(int? pageNo, String? searchKey, String categoryId)?
         getProductListByCategory,
+    TResult? Function(int? pageNo, String? searchKey)? getAllProductList,
     TResult? Function()? searchBarVisibility,
   }) =>
       throw _privateConstructorUsedError;
@@ -206,6 +246,7 @@ mixin _$ProductEvent {
     TResult Function()? init,
     TResult Function(int? pageNo, String? searchKey, String categoryId)?
         getProductListByCategory,
+    TResult Function(int? pageNo, String? searchKey)? getAllProductList,
     TResult Function()? searchBarVisibility,
     required TResult orElse(),
   }) =>
@@ -215,6 +256,7 @@ mixin _$ProductEvent {
     required TResult Function(_Init value) init,
     required TResult Function(_GetProductListByCategory value)
         getProductListByCategory,
+    required TResult Function(_GetAllProductList value) getAllProductList,
     required TResult Function(_SearchBarVisibility value) searchBarVisibility,
   }) =>
       throw _privateConstructorUsedError;
@@ -223,6 +265,7 @@ mixin _$ProductEvent {
     TResult? Function(_Init value)? init,
     TResult? Function(_GetProductListByCategory value)?
         getProductListByCategory,
+    TResult? Function(_GetAllProductList value)? getAllProductList,
     TResult? Function(_SearchBarVisibility value)? searchBarVisibility,
   }) =>
       throw _privateConstructorUsedError;
@@ -230,6 +273,7 @@ mixin _$ProductEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Init value)? init,
     TResult Function(_GetProductListByCategory value)? getProductListByCategory,
+    TResult Function(_GetAllProductList value)? getAllProductList,
     TResult Function(_SearchBarVisibility value)? searchBarVisibility,
     required TResult orElse(),
   }) =>
@@ -293,6 +337,7 @@ class _$_Init implements _Init {
     required TResult Function() init,
     required TResult Function(int? pageNo, String? searchKey, String categoryId)
         getProductListByCategory,
+    required TResult Function(int? pageNo, String? searchKey) getAllProductList,
     required TResult Function() searchBarVisibility,
   }) {
     return init();
@@ -304,6 +349,7 @@ class _$_Init implements _Init {
     TResult? Function()? init,
     TResult? Function(int? pageNo, String? searchKey, String categoryId)?
         getProductListByCategory,
+    TResult? Function(int? pageNo, String? searchKey)? getAllProductList,
     TResult? Function()? searchBarVisibility,
   }) {
     return init?.call();
@@ -315,6 +361,7 @@ class _$_Init implements _Init {
     TResult Function()? init,
     TResult Function(int? pageNo, String? searchKey, String categoryId)?
         getProductListByCategory,
+    TResult Function(int? pageNo, String? searchKey)? getAllProductList,
     TResult Function()? searchBarVisibility,
     required TResult orElse(),
   }) {
@@ -330,6 +377,7 @@ class _$_Init implements _Init {
     required TResult Function(_Init value) init,
     required TResult Function(_GetProductListByCategory value)
         getProductListByCategory,
+    required TResult Function(_GetAllProductList value) getAllProductList,
     required TResult Function(_SearchBarVisibility value) searchBarVisibility,
   }) {
     return init(this);
@@ -341,6 +389,7 @@ class _$_Init implements _Init {
     TResult? Function(_Init value)? init,
     TResult? Function(_GetProductListByCategory value)?
         getProductListByCategory,
+    TResult? Function(_GetAllProductList value)? getAllProductList,
     TResult? Function(_SearchBarVisibility value)? searchBarVisibility,
   }) {
     return init?.call(this);
@@ -351,6 +400,7 @@ class _$_Init implements _Init {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Init value)? init,
     TResult Function(_GetProductListByCategory value)? getProductListByCategory,
+    TResult Function(_GetAllProductList value)? getAllProductList,
     TResult Function(_SearchBarVisibility value)? searchBarVisibility,
     required TResult orElse(),
   }) {
@@ -453,6 +503,7 @@ class _$_GetProductListByCategory implements _GetProductListByCategory {
     required TResult Function() init,
     required TResult Function(int? pageNo, String? searchKey, String categoryId)
         getProductListByCategory,
+    required TResult Function(int? pageNo, String? searchKey) getAllProductList,
     required TResult Function() searchBarVisibility,
   }) {
     return getProductListByCategory(pageNo, searchKey, categoryId);
@@ -464,6 +515,7 @@ class _$_GetProductListByCategory implements _GetProductListByCategory {
     TResult? Function()? init,
     TResult? Function(int? pageNo, String? searchKey, String categoryId)?
         getProductListByCategory,
+    TResult? Function(int? pageNo, String? searchKey)? getAllProductList,
     TResult? Function()? searchBarVisibility,
   }) {
     return getProductListByCategory?.call(pageNo, searchKey, categoryId);
@@ -475,6 +527,7 @@ class _$_GetProductListByCategory implements _GetProductListByCategory {
     TResult Function()? init,
     TResult Function(int? pageNo, String? searchKey, String categoryId)?
         getProductListByCategory,
+    TResult Function(int? pageNo, String? searchKey)? getAllProductList,
     TResult Function()? searchBarVisibility,
     required TResult orElse(),
   }) {
@@ -490,6 +543,7 @@ class _$_GetProductListByCategory implements _GetProductListByCategory {
     required TResult Function(_Init value) init,
     required TResult Function(_GetProductListByCategory value)
         getProductListByCategory,
+    required TResult Function(_GetAllProductList value) getAllProductList,
     required TResult Function(_SearchBarVisibility value) searchBarVisibility,
   }) {
     return getProductListByCategory(this);
@@ -501,6 +555,7 @@ class _$_GetProductListByCategory implements _GetProductListByCategory {
     TResult? Function(_Init value)? init,
     TResult? Function(_GetProductListByCategory value)?
         getProductListByCategory,
+    TResult? Function(_GetAllProductList value)? getAllProductList,
     TResult? Function(_SearchBarVisibility value)? searchBarVisibility,
   }) {
     return getProductListByCategory?.call(this);
@@ -511,6 +566,7 @@ class _$_GetProductListByCategory implements _GetProductListByCategory {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Init value)? init,
     TResult Function(_GetProductListByCategory value)? getProductListByCategory,
+    TResult Function(_GetAllProductList value)? getAllProductList,
     TResult Function(_SearchBarVisibility value)? searchBarVisibility,
     required TResult orElse(),
   }) {
@@ -533,6 +589,168 @@ abstract class _GetProductListByCategory implements ProductEvent {
   @JsonKey(ignore: true)
   _$$_GetProductListByCategoryCopyWith<_$_GetProductListByCategory>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_GetAllProductListCopyWith<$Res> {
+  factory _$$_GetAllProductListCopyWith(_$_GetAllProductList value,
+          $Res Function(_$_GetAllProductList) then) =
+      __$$_GetAllProductListCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int? pageNo, String? searchKey});
+}
+
+/// @nodoc
+class __$$_GetAllProductListCopyWithImpl<$Res>
+    extends _$ProductEventCopyWithImpl<$Res, _$_GetAllProductList>
+    implements _$$_GetAllProductListCopyWith<$Res> {
+  __$$_GetAllProductListCopyWithImpl(
+      _$_GetAllProductList _value, $Res Function(_$_GetAllProductList) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? pageNo = freezed,
+    Object? searchKey = freezed,
+  }) {
+    return _then(_$_GetAllProductList(
+      pageNo: freezed == pageNo
+          ? _value.pageNo
+          : pageNo // ignore: cast_nullable_to_non_nullable
+              as int?,
+      searchKey: freezed == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_GetAllProductList implements _GetAllProductList {
+  const _$_GetAllProductList({this.pageNo, this.searchKey});
+
+  @override
+  final int? pageNo;
+  @override
+  final String? searchKey;
+
+  @override
+  String toString() {
+    return 'ProductEvent.getAllProductList(pageNo: $pageNo, searchKey: $searchKey)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_GetAllProductList &&
+            (identical(other.pageNo, pageNo) || other.pageNo == pageNo) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, pageNo, searchKey);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GetAllProductListCopyWith<_$_GetAllProductList> get copyWith =>
+      __$$_GetAllProductListCopyWithImpl<_$_GetAllProductList>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function(int? pageNo, String? searchKey, String categoryId)
+        getProductListByCategory,
+    required TResult Function(int? pageNo, String? searchKey) getAllProductList,
+    required TResult Function() searchBarVisibility,
+  }) {
+    return getAllProductList(pageNo, searchKey);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function(int? pageNo, String? searchKey, String categoryId)?
+        getProductListByCategory,
+    TResult? Function(int? pageNo, String? searchKey)? getAllProductList,
+    TResult? Function()? searchBarVisibility,
+  }) {
+    return getAllProductList?.call(pageNo, searchKey);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(int? pageNo, String? searchKey, String categoryId)?
+        getProductListByCategory,
+    TResult Function(int? pageNo, String? searchKey)? getAllProductList,
+    TResult Function()? searchBarVisibility,
+    required TResult orElse(),
+  }) {
+    if (getAllProductList != null) {
+      return getAllProductList(pageNo, searchKey);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
+    required TResult Function(_GetProductListByCategory value)
+        getProductListByCategory,
+    required TResult Function(_GetAllProductList value) getAllProductList,
+    required TResult Function(_SearchBarVisibility value) searchBarVisibility,
+  }) {
+    return getAllProductList(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Init value)? init,
+    TResult? Function(_GetProductListByCategory value)?
+        getProductListByCategory,
+    TResult? Function(_GetAllProductList value)? getAllProductList,
+    TResult? Function(_SearchBarVisibility value)? searchBarVisibility,
+  }) {
+    return getAllProductList?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_GetProductListByCategory value)? getProductListByCategory,
+    TResult Function(_GetAllProductList value)? getAllProductList,
+    TResult Function(_SearchBarVisibility value)? searchBarVisibility,
+    required TResult orElse(),
+  }) {
+    if (getAllProductList != null) {
+      return getAllProductList(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetAllProductList implements ProductEvent {
+  const factory _GetAllProductList(
+      {final int? pageNo, final String? searchKey}) = _$_GetAllProductList;
+
+  int? get pageNo;
+  String? get searchKey;
+  @JsonKey(ignore: true)
+  _$$_GetAllProductListCopyWith<_$_GetAllProductList> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -576,6 +794,7 @@ class _$_SearchBarVisibility implements _SearchBarVisibility {
     required TResult Function() init,
     required TResult Function(int? pageNo, String? searchKey, String categoryId)
         getProductListByCategory,
+    required TResult Function(int? pageNo, String? searchKey) getAllProductList,
     required TResult Function() searchBarVisibility,
   }) {
     return searchBarVisibility();
@@ -587,6 +806,7 @@ class _$_SearchBarVisibility implements _SearchBarVisibility {
     TResult? Function()? init,
     TResult? Function(int? pageNo, String? searchKey, String categoryId)?
         getProductListByCategory,
+    TResult? Function(int? pageNo, String? searchKey)? getAllProductList,
     TResult? Function()? searchBarVisibility,
   }) {
     return searchBarVisibility?.call();
@@ -598,6 +818,7 @@ class _$_SearchBarVisibility implements _SearchBarVisibility {
     TResult Function()? init,
     TResult Function(int? pageNo, String? searchKey, String categoryId)?
         getProductListByCategory,
+    TResult Function(int? pageNo, String? searchKey)? getAllProductList,
     TResult Function()? searchBarVisibility,
     required TResult orElse(),
   }) {
@@ -613,6 +834,7 @@ class _$_SearchBarVisibility implements _SearchBarVisibility {
     required TResult Function(_Init value) init,
     required TResult Function(_GetProductListByCategory value)
         getProductListByCategory,
+    required TResult Function(_GetAllProductList value) getAllProductList,
     required TResult Function(_SearchBarVisibility value) searchBarVisibility,
   }) {
     return searchBarVisibility(this);
@@ -624,6 +846,7 @@ class _$_SearchBarVisibility implements _SearchBarVisibility {
     TResult? Function(_Init value)? init,
     TResult? Function(_GetProductListByCategory value)?
         getProductListByCategory,
+    TResult? Function(_GetAllProductList value)? getAllProductList,
     TResult? Function(_SearchBarVisibility value)? searchBarVisibility,
   }) {
     return searchBarVisibility?.call(this);
@@ -634,6 +857,7 @@ class _$_SearchBarVisibility implements _SearchBarVisibility {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Init value)? init,
     TResult Function(_GetProductListByCategory value)? getProductListByCategory,
+    TResult Function(_GetAllProductList value)? getAllProductList,
     TResult Function(_SearchBarVisibility value)? searchBarVisibility,
     required TResult orElse(),
   }) {

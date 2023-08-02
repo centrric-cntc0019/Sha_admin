@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../home/home_screen.dart';
 import '../../05_core/utils/themes.dart';
+import '../product/all_products_screen.dart';
 import '../../02_application/product/product_bloc.dart';
 import '../../02_application/category/category_bloc.dart';
 
@@ -24,7 +25,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _list = <Widget>[
     const HomeScreen(),
-    Container(),
+    const AllProductsScreen()
   ];
 
   @override

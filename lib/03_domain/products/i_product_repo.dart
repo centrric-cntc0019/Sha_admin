@@ -9,4 +9,6 @@ abstract class IProductRepo {
     String? searchKey,
     required String categoryId,
   });
+  Future<Either<MainFailure, ProductBaseModel>> getAllProduct(
+      {int? page, String? searchKey});
 }

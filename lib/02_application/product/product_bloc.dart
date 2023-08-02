@@ -17,6 +17,7 @@ part 'product_bloc.freezed.dart';
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
   final IProductRepo iProductRepo;
   late ScrollController productScrollCtr;
+  late ScrollController allProductScrollCtr;
   ProductBloc(this.iProductRepo) : super(ProductState.initial()) {
     void productByCategoryPagination() {
       productScrollCtr = ScrollController();
@@ -46,9 +47,36 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       );
     }
 
+    void allProductsPagination() {
+      allProductScrollCtr = ScrollController();
+      allProductScrollCtr.addListener(
+        () {
+          if (allProductScrollCtr.position.pixels >=
+              allProductScrollCtr.position.maxScrollExtent) {
+            ProductBaseModel? baseModel =
+                state.allProducts.data as ProductBaseModel?;
+            List<ProductData>? list = baseModel?.productList?.toList();
+            if (list != null &&
+                baseModel?.pagination?.totalRecords != null &&
+                list.length < baseModel!.pagination!.totalRecords! &&
+                state.allProducts.pagination == true &&
+                !(state.allProducts.paginationLoading)) {
+              int pageNo = baseModel.pagination!.page!;
+
+              pageNo++;
+              log("Pagination started $pageNo ${baseModel.pagination!.totalRecords!}");
+              add(ProductEvent.getAllProductList(pageNo: pageNo));
+            }
+          }
+        },
+      );
+    }
+
     //  Do initial tasks here
     on<_Init>((event, emit) {
+      allProductsPagination();
       productByCategoryPagination();
+      add(const ProductEvent.getAllProductList());
     });
 
     // Get product list under category
@@ -84,6 +112,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
               loading: false,
               pagination: false,
               searchLoading: false,
+              paginationLoading: false,
             ),
           ));
         }, (result) {
@@ -120,6 +149,90 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
             emit(state.copyWith(
               categoryId: event.categoryId,
               result: state.result.copyWith(
+                error: null,
+                data: result,
+                loading: false,
+                searchLoading: false,
+                paginationLoading: false,
+                pagination: (result.productList != null &&
+                        result.pagination?.totalRecords != null &&
+                        result.productList!.length <
+                            result.pagination!.totalRecords!)
+                    ? true
+                    : false,
+              ),
+            ));
+          }
+        });
+      },
+    );
+
+    // Get product list under category
+    on<_GetAllProductList>(
+      (event, emit) async {
+        // When pagination works
+        if (event.pageNo != null && event.pageNo != 1) {
+          emit(state.copyWith(
+              allProducts: state.allProducts.copyWith(pagination: true)));
+        }
+        // State on search product
+        else if (event.searchKey != null) {
+          emit(state.copyWith(
+            allProducts: state.allProducts.copyWith(searchLoading: true),
+          ));
+        }
+        // Get products
+        else {
+          emit(state.copyWith(
+            allProducts: state.allProducts.copyWith(loading: true),
+          ));
+        }
+        final dataOrFailure = await iProductRepo.getAllProduct(
+          page: event.pageNo,
+          searchKey: event.searchKey,
+        );
+        dataOrFailure.fold((l) {
+          emit(state.copyWith(
+            allProducts: state.allProducts.copyWith(
+              error: l,
+              loading: false,
+              pagination: false,
+              searchLoading: false,
+              paginationLoading: false,
+            ),
+          ));
+        }, (result) {
+          // Pagination data
+          if (event.pageNo != null) {
+            // Get data from state and add new data to list
+            ProductBaseModel? baseModel =
+                state.allProducts.data as ProductBaseModel?;
+            List<ProductData> list = baseModel?.productList?.toList() ?? [];
+            list.addAll(result.productList ?? []);
+            baseModel = baseModel?.copyWith(
+              productList: list,
+              pagination: result.pagination,
+            );
+            emit(state.copyWith(
+              allProducts: state.allProducts.copyWith(
+                error: null,
+                loading: false,
+                data: baseModel,
+                searchLoading: false,
+                paginationLoading: false,
+                pagination: (baseModel?.productList != null &&
+                        result.pagination?.totalRecords != null &&
+                        baseModel!.productList!.length <
+                            result.pagination!.totalRecords!)
+                    ? true
+                    : false,
+              ),
+            ));
+          }
+          // For the first response
+          else {
+            emit(state.copyWith(
+              allProducts: state.allProducts.copyWith(
                 error: null,
                 data: result,
                 loading: false,

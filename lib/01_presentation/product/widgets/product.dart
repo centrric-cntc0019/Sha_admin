@@ -10,13 +10,28 @@ enum IncDecType { fromprodList, fromCart }
 
 class ProductItem extends StatelessWidget {
   final int index;
-  const ProductItem({super.key, required this.index});
+  final bool fromAllProduct;
+  const ProductItem({
+    super.key,
+    required this.index,
+    this.fromAllProduct = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final data =
-        context.read<ProductBloc>().state.result.data.productList?[index];
+    final data;
+    if (fromAllProduct) {
+      data = context
+          .read<ProductBloc>()
+          .state
+          .allProducts
+          .data
+          .productList?[index];
+    } else {
+      data = context.read<ProductBloc>().state.result.data.productList?[index];
+    }
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: Row(

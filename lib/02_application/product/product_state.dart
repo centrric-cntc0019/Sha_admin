@@ -6,10 +6,12 @@ class ProductState with _$ProductState {
     String? categoryId,
     required ApiResponse result,
     @Default(false) searchEnabled,
+    required ApiResponse allProducts,
   }) = _Initial;
   factory ProductState.initial() => ProductState(
         categoryId: null,
         searchEnabled: false,
         result: ApiResponse(),
+        allProducts: ApiResponse(),
       );
 }
