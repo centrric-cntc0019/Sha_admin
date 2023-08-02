@@ -74,9 +74,9 @@ class DioServices {
           '******************************* $method *******************************');
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        if (response.data['error'] != null) {
-          return const Left(MainFailure.clientFailure());
-        }
+        // if (response.data['error'] != null) {
+        //   return const Left(MainFailure.clientFailure());
+        // }
         return Right(response);
       } else {
         try {

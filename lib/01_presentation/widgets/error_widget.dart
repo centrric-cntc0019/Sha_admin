@@ -20,13 +20,13 @@ class CustomErrorWidget extends StatelessWidget {
         children: [
           sized0hx05,
           if (mainFailure == const MainFailure.clientFailure()) ...{
-            const ErrorText(error: "client failure")
+            const ErrorText(error: "Something went wrong")
           } else if (mainFailure == const MainFailure.networkFailure()) ...{
-            const ErrorText(error: "network failure")
+            const ErrorText(error: "please check internet connection")
           } else if (mainFailure == const MainFailure.serverFailure()) ...{
             const ErrorText(error: "server failure")
           } else ...{
-            const ErrorText(error: "timeout"),
+            const ErrorText(error: "Something went wrong"),
           },
           sized0hx10,
           WAButton(
