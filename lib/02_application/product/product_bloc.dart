@@ -124,5 +124,9 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         });
       },
     );
+
+    on<_SearchBarVisibility>((event, emit) {
+      emit(state.copyWith(searchEnabled: !state.searchEnabled));
+    });
   }
 }
