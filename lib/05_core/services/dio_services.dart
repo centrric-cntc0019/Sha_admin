@@ -31,7 +31,7 @@ class DioServices {
   Future<Either<MainFailure, Response>> request(
       {required String url,
       required String method,
-      Map? data,
+      dynamic data,
       bool? authenticated = false}) async {
     try {
       if (authenticated == true) {
@@ -74,13 +74,16 @@ class DioServices {
           '******************************* $method *******************************');
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        // if (response.data['error'] != null) {
-        //   return const Left(MainFailure.clientFailure());
-        // }
         return Right(response);
       } else {
         try {
-          failureToast("${response.data["app_data"]}");
+          var appData = response.data["app_data"];
+          var detail = response.data["detail"];
+          if (appData != null) {
+            failureToast("$appData");
+          } else if (detail != null) {
+            failureToast("$detail");
+          }
         } catch (e) {
           log(
             e.toString(),
@@ -99,6 +102,11 @@ class DioServices {
       if (e.type == DioExceptionType.connectionTimeout) {
         debugPrint('cDioErrorType.connectionTimeout::');
         return const Left(MainFailure.timeout());
+      }
+
+      if (e.type == DioExceptionType.badResponse) {
+        debugPrint('cDioErrorType.BadResponse::');
+        return const Left(MainFailure.clientFailure());
       }
 
       // if (e.type == DioErrorType.receiveTimeout) {
