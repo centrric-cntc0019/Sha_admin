@@ -25,7 +25,16 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final searchCtr = TextEditingController();
+  final addCatCtr = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
   @override
+  void dispose() {
+    searchCtr.dispose();
+    addCatCtr.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -188,7 +197,9 @@ class _HomeScreenState extends State<HomeScreen> {
             builder: (BuildContext context) {
               return CategoryAddOrEditWidget(
                 title: "Add Category",
-                ctr: TextEditingController(),
+                ctr: addCatCtr,
+                formKey: _formKey,
+                onTap: () {},
               );
             },
           );

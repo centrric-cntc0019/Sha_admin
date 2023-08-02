@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$CategoryState {
   ApiResponse<dynamic> get result => throw _privateConstructorUsedError;
+  ImagePickerModel? get categoryImage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CategoryStateCopyWith<CategoryState> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $CategoryStateCopyWith<$Res> {
           CategoryState value, $Res Function(CategoryState) then) =
       _$CategoryStateCopyWithImpl<$Res, CategoryState>;
   @useResult
-  $Res call({ApiResponse<dynamic> result});
+  $Res call({ApiResponse<dynamic> result, ImagePickerModel? categoryImage});
 
   $ApiResponseCopyWith<dynamic, $Res> get result;
 }
@@ -48,12 +49,17 @@ class _$CategoryStateCopyWithImpl<$Res, $Val extends CategoryState>
   @override
   $Res call({
     Object? result = null,
+    Object? categoryImage = freezed,
   }) {
     return _then(_value.copyWith(
       result: null == result
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
               as ApiResponse<dynamic>,
+      categoryImage: freezed == categoryImage
+          ? _value.categoryImage
+          : categoryImage // ignore: cast_nullable_to_non_nullable
+              as ImagePickerModel?,
     ) as $Val);
   }
 
@@ -74,7 +80,7 @@ abstract class _$$_InitialCopyWith<$Res>
       __$$_InitialCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({ApiResponse<dynamic> result});
+  $Res call({ApiResponse<dynamic> result, ImagePickerModel? categoryImage});
 
   @override
   $ApiResponseCopyWith<dynamic, $Res> get result;
@@ -91,12 +97,17 @@ class __$$_InitialCopyWithImpl<$Res>
   @override
   $Res call({
     Object? result = null,
+    Object? categoryImage = freezed,
   }) {
     return _then(_$_Initial(
       result: null == result
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
               as ApiResponse<dynamic>,
+      categoryImage: freezed == categoryImage
+          ? _value.categoryImage
+          : categoryImage // ignore: cast_nullable_to_non_nullable
+              as ImagePickerModel?,
     ));
   }
 }
@@ -104,14 +115,16 @@ class __$$_InitialCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Initial implements _Initial {
-  const _$_Initial({required this.result});
+  const _$_Initial({required this.result, this.categoryImage});
 
   @override
   final ApiResponse<dynamic> result;
+  @override
+  final ImagePickerModel? categoryImage;
 
   @override
   String toString() {
-    return 'CategoryState(result: $result)';
+    return 'CategoryState(result: $result, categoryImage: $categoryImage)';
   }
 
   @override
@@ -119,11 +132,13 @@ class _$_Initial implements _Initial {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Initial &&
-            (identical(other.result, result) || other.result == result));
+            (identical(other.result, result) || other.result == result) &&
+            (identical(other.categoryImage, categoryImage) ||
+                other.categoryImage == categoryImage));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, result);
+  int get hashCode => Object.hash(runtimeType, result, categoryImage);
 
   @JsonKey(ignore: true)
   @override
@@ -133,11 +148,14 @@ class _$_Initial implements _Initial {
 }
 
 abstract class _Initial implements CategoryState {
-  const factory _Initial({required final ApiResponse<dynamic> result}) =
-      _$_Initial;
+  const factory _Initial(
+      {required final ApiResponse<dynamic> result,
+      final ImagePickerModel? categoryImage}) = _$_Initial;
 
   @override
   ApiResponse<dynamic> get result;
+  @override
+  ImagePickerModel? get categoryImage;
   @override
   @JsonKey(ignore: true)
   _$$_InitialCopyWith<_$_Initial> get copyWith =>
@@ -151,6 +169,7 @@ mixin _$CategoryEvent {
     required TResult Function() initialEvent,
     required TResult Function() reset,
     required TResult Function() getCategory,
+    required TResult Function(ImagePickerModel image) pickCategoryImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -158,6 +177,7 @@ mixin _$CategoryEvent {
     TResult? Function()? initialEvent,
     TResult? Function()? reset,
     TResult? Function()? getCategory,
+    TResult? Function(ImagePickerModel image)? pickCategoryImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -165,6 +185,7 @@ mixin _$CategoryEvent {
     TResult Function()? initialEvent,
     TResult Function()? reset,
     TResult Function()? getCategory,
+    TResult Function(ImagePickerModel image)? pickCategoryImage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -173,6 +194,7 @@ mixin _$CategoryEvent {
     required TResult Function(_InitialEvent value) initialEvent,
     required TResult Function(_Reset value) reset,
     required TResult Function(_GetCategory value) getCategory,
+    required TResult Function(_PickCategoryImage value) pickCategoryImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -180,6 +202,7 @@ mixin _$CategoryEvent {
     TResult? Function(_InitialEvent value)? initialEvent,
     TResult? Function(_Reset value)? reset,
     TResult? Function(_GetCategory value)? getCategory,
+    TResult? Function(_PickCategoryImage value)? pickCategoryImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -187,6 +210,7 @@ mixin _$CategoryEvent {
     TResult Function(_InitialEvent value)? initialEvent,
     TResult Function(_Reset value)? reset,
     TResult Function(_GetCategory value)? getCategory,
+    TResult Function(_PickCategoryImage value)? pickCategoryImage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -251,6 +275,7 @@ class _$_InitialEvent implements _InitialEvent {
     required TResult Function() initialEvent,
     required TResult Function() reset,
     required TResult Function() getCategory,
+    required TResult Function(ImagePickerModel image) pickCategoryImage,
   }) {
     return initialEvent();
   }
@@ -261,6 +286,7 @@ class _$_InitialEvent implements _InitialEvent {
     TResult? Function()? initialEvent,
     TResult? Function()? reset,
     TResult? Function()? getCategory,
+    TResult? Function(ImagePickerModel image)? pickCategoryImage,
   }) {
     return initialEvent?.call();
   }
@@ -271,6 +297,7 @@ class _$_InitialEvent implements _InitialEvent {
     TResult Function()? initialEvent,
     TResult Function()? reset,
     TResult Function()? getCategory,
+    TResult Function(ImagePickerModel image)? pickCategoryImage,
     required TResult orElse(),
   }) {
     if (initialEvent != null) {
@@ -285,6 +312,7 @@ class _$_InitialEvent implements _InitialEvent {
     required TResult Function(_InitialEvent value) initialEvent,
     required TResult Function(_Reset value) reset,
     required TResult Function(_GetCategory value) getCategory,
+    required TResult Function(_PickCategoryImage value) pickCategoryImage,
   }) {
     return initialEvent(this);
   }
@@ -295,6 +323,7 @@ class _$_InitialEvent implements _InitialEvent {
     TResult? Function(_InitialEvent value)? initialEvent,
     TResult? Function(_Reset value)? reset,
     TResult? Function(_GetCategory value)? getCategory,
+    TResult? Function(_PickCategoryImage value)? pickCategoryImage,
   }) {
     return initialEvent?.call(this);
   }
@@ -305,6 +334,7 @@ class _$_InitialEvent implements _InitialEvent {
     TResult Function(_InitialEvent value)? initialEvent,
     TResult Function(_Reset value)? reset,
     TResult Function(_GetCategory value)? getCategory,
+    TResult Function(_PickCategoryImage value)? pickCategoryImage,
     required TResult orElse(),
   }) {
     if (initialEvent != null) {
@@ -357,6 +387,7 @@ class _$_Reset implements _Reset {
     required TResult Function() initialEvent,
     required TResult Function() reset,
     required TResult Function() getCategory,
+    required TResult Function(ImagePickerModel image) pickCategoryImage,
   }) {
     return reset();
   }
@@ -367,6 +398,7 @@ class _$_Reset implements _Reset {
     TResult? Function()? initialEvent,
     TResult? Function()? reset,
     TResult? Function()? getCategory,
+    TResult? Function(ImagePickerModel image)? pickCategoryImage,
   }) {
     return reset?.call();
   }
@@ -377,6 +409,7 @@ class _$_Reset implements _Reset {
     TResult Function()? initialEvent,
     TResult Function()? reset,
     TResult Function()? getCategory,
+    TResult Function(ImagePickerModel image)? pickCategoryImage,
     required TResult orElse(),
   }) {
     if (reset != null) {
@@ -391,6 +424,7 @@ class _$_Reset implements _Reset {
     required TResult Function(_InitialEvent value) initialEvent,
     required TResult Function(_Reset value) reset,
     required TResult Function(_GetCategory value) getCategory,
+    required TResult Function(_PickCategoryImage value) pickCategoryImage,
   }) {
     return reset(this);
   }
@@ -401,6 +435,7 @@ class _$_Reset implements _Reset {
     TResult? Function(_InitialEvent value)? initialEvent,
     TResult? Function(_Reset value)? reset,
     TResult? Function(_GetCategory value)? getCategory,
+    TResult? Function(_PickCategoryImage value)? pickCategoryImage,
   }) {
     return reset?.call(this);
   }
@@ -411,6 +446,7 @@ class _$_Reset implements _Reset {
     TResult Function(_InitialEvent value)? initialEvent,
     TResult Function(_Reset value)? reset,
     TResult Function(_GetCategory value)? getCategory,
+    TResult Function(_PickCategoryImage value)? pickCategoryImage,
     required TResult orElse(),
   }) {
     if (reset != null) {
@@ -465,6 +501,7 @@ class _$_GetCategory implements _GetCategory {
     required TResult Function() initialEvent,
     required TResult Function() reset,
     required TResult Function() getCategory,
+    required TResult Function(ImagePickerModel image) pickCategoryImage,
   }) {
     return getCategory();
   }
@@ -475,6 +512,7 @@ class _$_GetCategory implements _GetCategory {
     TResult? Function()? initialEvent,
     TResult? Function()? reset,
     TResult? Function()? getCategory,
+    TResult? Function(ImagePickerModel image)? pickCategoryImage,
   }) {
     return getCategory?.call();
   }
@@ -485,6 +523,7 @@ class _$_GetCategory implements _GetCategory {
     TResult Function()? initialEvent,
     TResult Function()? reset,
     TResult Function()? getCategory,
+    TResult Function(ImagePickerModel image)? pickCategoryImage,
     required TResult orElse(),
   }) {
     if (getCategory != null) {
@@ -499,6 +538,7 @@ class _$_GetCategory implements _GetCategory {
     required TResult Function(_InitialEvent value) initialEvent,
     required TResult Function(_Reset value) reset,
     required TResult Function(_GetCategory value) getCategory,
+    required TResult Function(_PickCategoryImage value) pickCategoryImage,
   }) {
     return getCategory(this);
   }
@@ -509,6 +549,7 @@ class _$_GetCategory implements _GetCategory {
     TResult? Function(_InitialEvent value)? initialEvent,
     TResult? Function(_Reset value)? reset,
     TResult? Function(_GetCategory value)? getCategory,
+    TResult? Function(_PickCategoryImage value)? pickCategoryImage,
   }) {
     return getCategory?.call(this);
   }
@@ -519,6 +560,7 @@ class _$_GetCategory implements _GetCategory {
     TResult Function(_InitialEvent value)? initialEvent,
     TResult Function(_Reset value)? reset,
     TResult Function(_GetCategory value)? getCategory,
+    TResult Function(_PickCategoryImage value)? pickCategoryImage,
     required TResult orElse(),
   }) {
     if (getCategory != null) {
@@ -530,4 +572,151 @@ class _$_GetCategory implements _GetCategory {
 
 abstract class _GetCategory implements CategoryEvent {
   const factory _GetCategory() = _$_GetCategory;
+}
+
+/// @nodoc
+abstract class _$$_PickCategoryImageCopyWith<$Res> {
+  factory _$$_PickCategoryImageCopyWith(_$_PickCategoryImage value,
+          $Res Function(_$_PickCategoryImage) then) =
+      __$$_PickCategoryImageCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ImagePickerModel image});
+}
+
+/// @nodoc
+class __$$_PickCategoryImageCopyWithImpl<$Res>
+    extends _$CategoryEventCopyWithImpl<$Res, _$_PickCategoryImage>
+    implements _$$_PickCategoryImageCopyWith<$Res> {
+  __$$_PickCategoryImageCopyWithImpl(
+      _$_PickCategoryImage _value, $Res Function(_$_PickCategoryImage) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? image = null,
+  }) {
+    return _then(_$_PickCategoryImage(
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as ImagePickerModel,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_PickCategoryImage implements _PickCategoryImage {
+  const _$_PickCategoryImage({required this.image});
+
+  @override
+  final ImagePickerModel image;
+
+  @override
+  String toString() {
+    return 'CategoryEvent.pickCategoryImage(image: $image)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_PickCategoryImage &&
+            (identical(other.image, image) || other.image == image));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, image);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_PickCategoryImageCopyWith<_$_PickCategoryImage> get copyWith =>
+      __$$_PickCategoryImageCopyWithImpl<_$_PickCategoryImage>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialEvent,
+    required TResult Function() reset,
+    required TResult Function() getCategory,
+    required TResult Function(ImagePickerModel image) pickCategoryImage,
+  }) {
+    return pickCategoryImage(image);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialEvent,
+    TResult? Function()? reset,
+    TResult? Function()? getCategory,
+    TResult? Function(ImagePickerModel image)? pickCategoryImage,
+  }) {
+    return pickCategoryImage?.call(image);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialEvent,
+    TResult Function()? reset,
+    TResult Function()? getCategory,
+    TResult Function(ImagePickerModel image)? pickCategoryImage,
+    required TResult orElse(),
+  }) {
+    if (pickCategoryImage != null) {
+      return pickCategoryImage(image);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_InitialEvent value) initialEvent,
+    required TResult Function(_Reset value) reset,
+    required TResult Function(_GetCategory value) getCategory,
+    required TResult Function(_PickCategoryImage value) pickCategoryImage,
+  }) {
+    return pickCategoryImage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InitialEvent value)? initialEvent,
+    TResult? Function(_Reset value)? reset,
+    TResult? Function(_GetCategory value)? getCategory,
+    TResult? Function(_PickCategoryImage value)? pickCategoryImage,
+  }) {
+    return pickCategoryImage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InitialEvent value)? initialEvent,
+    TResult Function(_Reset value)? reset,
+    TResult Function(_GetCategory value)? getCategory,
+    TResult Function(_PickCategoryImage value)? pickCategoryImage,
+    required TResult orElse(),
+  }) {
+    if (pickCategoryImage != null) {
+      return pickCategoryImage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _PickCategoryImage implements CategoryEvent {
+  const factory _PickCategoryImage({required final ImagePickerModel image}) =
+      _$_PickCategoryImage;
+
+  ImagePickerModel get image;
+  @JsonKey(ignore: true)
+  _$$_PickCategoryImageCopyWith<_$_PickCategoryImage> get copyWith =>
+      throw _privateConstructorUsedError;
 }

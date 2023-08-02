@@ -6,4 +6,6 @@ class CategoryEvent with _$CategoryEvent {
 
   const factory CategoryEvent.reset() = _Reset;
   const factory CategoryEvent.getCategory() = _GetCategory;
+  const factory CategoryEvent.pickCategoryImage(
+      {required ImagePickerModel image}) = _PickCategoryImage;
 }

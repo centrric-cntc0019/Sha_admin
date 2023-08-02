@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../05_core/models/apiresponse.dart';
+import '../../05_core/services/image_picker.dart';
 import '../../03_domain/category/i_category_repo.dart';
 
 part 'category_state.dart';
@@ -42,5 +43,8 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
         );
       },
     );
+    on<_PickCategoryImage>((event, emit) {
+      emit(state.copyWith(categoryImage:event.image));
+    });
   }
 }
