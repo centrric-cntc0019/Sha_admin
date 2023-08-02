@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sha_admin/03_domain/category/models/category_list/category_base_model.dart';
+import 'package:sha_admin/03_domain/category/models/category_list/category_model.dart';
 
 import '../../03_domain/di/injection.dart';
 import '../../05_core/services/image_picker.dart';
@@ -30,7 +31,7 @@ class CategoryRepository implements ICategoryRepo {
   }
 
   @override
-  Future<Either<MainFailure, CategoryBaseModel>> addCategoryApi(
+  Future<Either<MainFailure, CategoryModel>> addCategoryApi(
       {required ImagePickerModel image, required String categoryName}) async {
     String url = ApiEndPoints.addCategoryEndPoint;
 
@@ -48,7 +49,7 @@ class CategoryRepository implements ICategoryRepo {
 
     return response.fold(
       (l) => Left(l),
-      (data) => Right(CategoryBaseModel()),
+      (data) => Right(CategoryModel.fromJson(data.data['data'])),
     );
   }
 }
