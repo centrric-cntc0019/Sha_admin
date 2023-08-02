@@ -31,7 +31,7 @@ class DioServices {
   Future<Either<MainFailure, Response>> request(
       {required String url,
       required String method,
-      Map? data,
+      dynamic data,
       bool? authenticated = false}) async {
     try {
       if (authenticated == true) {

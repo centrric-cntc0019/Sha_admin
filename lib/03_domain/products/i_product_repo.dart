@@ -1,7 +1,8 @@
 import 'package:dartz/dartz.dart';
 
-import '../../05_core/failure/main_failure.dart';
 import 'models/product/product_base_model.dart';
+import '../../05_core/failure/main_failure.dart';
+import '../../05_core/services/image_picker.dart';
 
 abstract class IProductRepo {
   Future<Either<MainFailure, ProductBaseModel>> getProductByCategory({
@@ -11,4 +12,9 @@ abstract class IProductRepo {
   });
   Future<Either<MainFailure, ProductBaseModel>> getAllProduct(
       {int? page, String? searchKey});
+  Future<Either<MainFailure, ProductData>> editProduct({
+    String? categoryUuid,
+    required String productUuid,
+    ImagePickerModel? productImage,
+  });
 }
