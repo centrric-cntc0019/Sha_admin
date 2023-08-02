@@ -1,19 +1,12 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sha_admin/02_application/product/product_bloc.dart';
-import 'package:sha_admin/03_domain/category/models/category_list/category_base_model.dart';
+import 'package:sha_admin/01_presentation/product/widgets/product_update_sheet.dart';
 
-import '../../../03_domain/di/injection.dart';
-import '../../../05_core/services/image_picker.dart';
 import '../../widgets/wa_text.dart';
-import '../../widgets/wa_button.dart';
 import '../../../05_core/utils/constant.dart';
-import '../../../02_application/category/category_bloc.dart';
 import '../../../03_domain/products/models/product/product_base_model.dart';
-import '../../../03_domain/category/models/category_list/category_model.dart';
 
 enum IncDecType { fromprodList, fromCart }
 
@@ -164,168 +157,6 @@ class ProductEditBtn extends StatelessWidget {
           );
         }
       },
-    );
-  }
-}
-
-class ProductUpdateSheet extends StatefulWidget {
-  const ProductUpdateSheet({
-    super.key,
-    required this.product,
-  });
-
-  final ProductData product;
-
-  @override
-  State<ProductUpdateSheet> createState() => _ProductUpdateSheetState();
-}
-
-class _ProductUpdateSheetState extends State<ProductUpdateSheet> {
-  CategoryModel? selectedCategory;
-  late CategoryBloc bloc;
-  late ProductBloc productBloc;
-
-  List<CategoryModel>? categoryList;
-  @override
-  void initState() {
-    bloc = context.read<CategoryBloc>();
-    productBloc = context.read<ProductBloc>();
-    CategoryBaseModel? categoryBaseModel =
-        bloc.state.result.data as CategoryBaseModel?;
-    categoryList = categoryBaseModel?.data ?? [];
-    int? index = categoryList?.indexWhere(
-        (element) => element.id == widget.product.productCategory?.uuid);
-    if (index != null && index != -1) {
-      selectedCategory = categoryList![index];
-    }
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(15.0),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          WAText(
-            fontSize: 20.sp,
-            text: "${widget.product.name}",
-            fontWeight: FontWeight.w700,
-          ),
-          sized0hx10,
-          Align(
-            alignment: Alignment.center,
-            child: BlocBuilder<ProductBloc, ProductState>(
-              buildWhen: (previous, current) =>
-                  previous.productImage != current.productImage,
-              builder: (context, state) {
-                return InkWell(
-                  onTap: () async {
-                    ImagePickerModel? image =
-                        await getIt<ImagePickerService>().imagePicker(context);
-                    if (image != null) {
-                      productBloc
-                          .add(ProductEvent.pickProductImage(image: image));
-                    }
-                  },
-                  child: PickImageWidget(
-                    productImage: state.productImage?.imagePath,
-                    netWorkImage: widget.product.productImageThumb ??
-                        widget.product.productImage,
-                  ),
-                );
-              },
-            ),
-          ),
-          sized0hx20,
-          WAText(
-            fontSize: 20.sp,
-            text: "Select Category",
-            fontWeight: FontWeight.w500,
-          ),
-          sized0hx10,
-          DropdownButton<CategoryModel>(
-            isExpanded: true,
-            hint: const Text("Select Category"),
-            value: selectedCategory,
-            items: categoryList?.map((CategoryModel value) {
-              return DropdownMenuItem<CategoryModel>(
-                value: value,
-                child: Text(value.categoryName ?? ""),
-              );
-            }).toList(),
-            onChanged: (cat) {
-              selectedCategory = cat;
-              setState(() {});
-            },
-          ),
-          sized0hx40,
-          BlocBuilder<ProductBloc, ProductState>(
-            buildWhen: (previous, current) =>
-                previous.editProductRes.loading !=
-                current.editProductRes.loading,
-            builder: (context, state) {
-              return WAButton(
-                onPressed: () {},
-                buttonText: "Update",
-                loading: state.editProductRes.loading,
-              );
-            },
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class PickImageWidget extends StatelessWidget {
-  final String? productImage, netWorkImage;
-  const PickImageWidget({
-    super.key,
-    this.productImage,
-    this.netWorkImage,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      clipBehavior: Clip.none,
-      children: [
-        Container(
-          width: 80.w,
-          height: 70.h,
-          clipBehavior: Clip.hardEdge,
-          decoration: BoxDecoration(
-            color: Colors.grey.shade300,
-            borderRadius: BorderRadius.circular(30.0),
-          ),
-          child: productImage != null
-              ? Image.file(
-                  File(productImage!),
-                  fit: BoxFit.cover,
-                )
-              : netWorkImage != null
-                  ? Image.network(
-                      netWorkImage!,
-                      fit: BoxFit.cover,
-                    )
-                  : const Icon(
-                      Icons.add,
-                      size: 30.0,
-                    ),
-        ),
-        if (productImage != null || netWorkImage != null)
-          Positioned(
-            bottom: -10,
-            right: -10,
-            child: CircleAvatar(
-              backgroundColor: Theme.of(context).colorScheme.secondary,
-              child: const Icon(Icons.add),
-            ),
-          ),
-      ],
     );
   }
 }
