@@ -8,6 +8,7 @@ import 'package:sha_admin/05_core/utils/themes.dart';
 
 import '../../../02_application/category/category_bloc.dart';
 import '../../../05_core/services/image_picker.dart';
+import '../../widgets/toast.dart';
 import '../../widgets/wa_text.dart';
 import '../../widgets/wa_button.dart';
 import '../../widgets/wa_text_field.dart';
@@ -83,7 +84,7 @@ class CategoryAddOrEditWidget extends StatelessWidget {
                                     fit: BoxFit.cover,
                                   )
                                 : const Icon(
-                                    Icons.add,
+                                    Icons.image_outlined,
                                     size: 30.0,
                                   ),
                           ),
@@ -122,11 +123,17 @@ class CategoryAddOrEditWidget extends StatelessWidget {
                 return WAButton(
                   loading: state.resultAddCategory.loading,
                   onPressed: () {
-                    if (formKey.currentState?.validate() ?? false) {
-                      onTap();
+                    if (state.categoryImage != null) {
+                      if (formKey.currentState?.validate() ?? false) {
+                        onTap();
+                      }
+                    } else {
+                      failureToast('Please add image');
                     }
                   },
-                  buttonText: "Add",
+                  buttonText: state.resultAddCategory.error != null
+                      ? 'Try again'
+                      : "Add",
                 );
               },
             ),

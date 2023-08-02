@@ -8,5 +8,9 @@ class CategoryEvent with _$CategoryEvent {
   const factory CategoryEvent.getCategory() = _GetCategory;
   const factory CategoryEvent.pickCategoryImage(
       {required ImagePickerModel image}) = _PickCategoryImage;
-  const factory CategoryEvent.addCategory() = _AddCategory;
+  const factory CategoryEvent.addCategory(
+      {ImagePickerModel? image,
+      String? categoryName,
+      required BuildContext context}) = _AddCategory;
+  const factory CategoryEvent.addCategoryReset() = _AddCategoryReset;
 }

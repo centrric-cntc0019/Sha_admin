@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sha_admin/01_presentation/home/widgets/category_shimmer.dart';
 import 'package:sha_admin/01_presentation/home/widgets/category_add_or_edit_widget.dart';
+import 'package:sha_admin/05_core/utils/custom_print.dart';
 
 import '../widgets/wa_text.dart';
 import '../widgets/wa_carousel.dart';
@@ -23,13 +24,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final searchCtr = TextEditingController();
-  final addCatCtr = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
     searchCtr.dispose();
-    addCatCtr.dispose();
     super.dispose();
   }
 
@@ -195,16 +194,20 @@ class _HomeScreenState extends State<HomeScreen> {
             builder: (BuildContext context) {
               return CategoryAddOrEditWidget(
                 title: "Add Category",
-                ctr: addCatCtr,
+                ctr: context.read<CategoryBloc>().state.addCatCtr,
                 formKey: _formKey,
                 onTap: () {
-                  context
-                      .read<CategoryBloc>()
-                      .add(const CategoryEvent.addCategory());
+                  var bloc = context.read<CategoryBloc>();
+                  bloc.add(CategoryEvent.addCategory(
+                      context: context,
+                      categoryName: bloc.state.addCatCtr.text,
+                      image: bloc.state.categoryImage));
                 },
               );
             },
-          );
+          ).whenComplete(() => context
+              .read<CategoryBloc>()
+              .add(const CategoryEvent.addCategoryReset()));
         },
         child: const Icon(Icons.add),
       ),

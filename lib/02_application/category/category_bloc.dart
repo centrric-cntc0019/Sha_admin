@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:sha_admin/01_presentation/widgets/toast.dart';
 
 import '../../05_core/models/apiresponse.dart';
 import '../../05_core/services/image_picker.dart';
@@ -47,14 +49,40 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       emit(state.copyWith(categoryImage: event.image));
     });
 
+    // add category api state management
     on<_AddCategory>((event, emit) async {
       emit(state.copyWith(
           resultAddCategory: state.resultAddCategory.copyWith(loading: true)));
 
-      await Future.delayed(const Duration(seconds: 5));
+      if (event.image != null && event.categoryName != null) {
+        final dataOrFailure = await _iCategoryRepo.addCategoryApi(
+            image: event.image!, categoryName: event.categoryName!);
+
+        dataOrFailure.fold(
+            (l) => emit(
+                  state.copyWith(
+                    resultAddCategory: state.resultAddCategory
+                        .copyWith(loading: false, error: l),
+                  ),
+                ), (r) {
+          emit(state.copyWith(resultAddCategory: ApiResponse()));
+
+          // need to drop down pop up
+          Navigator.pop(event.context);
+        });
+      } else {
+        failureToast('Something went wrong');
+      }
 
       emit(state.copyWith(
           resultAddCategory: state.resultAddCategory.copyWith(loading: false)));
+    });
+
+    on<_AddCategoryReset>((event, emit) {
+      emit(state.copyWith(
+          resultAddCategory: ApiResponse(),
+          addCatCtr: TextEditingController(),
+          categoryImage: null));
     });
   }
 }
