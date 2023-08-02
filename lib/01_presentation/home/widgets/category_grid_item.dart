@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -30,20 +31,20 @@ class CategoryGridItem extends StatelessWidget {
           children: [
             Expanded(
               child: Container(
-                margin: const EdgeInsets.all(3.0),
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: const BorderRadiusDirectional.vertical(
-                    top: Radius.circular(100.0),
-                    bottom: Radius.circular(30.0),
+                  margin: const EdgeInsets.all(3.0),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: const BorderRadiusDirectional.vertical(
+                      top: Radius.circular(100.0),
+                      bottom: Radius.circular(30.0),
+                    ),
                   ),
-                ),
-                clipBehavior: Clip.hardEdge,
-                child: Image.network(
-                  image,
-                  fit: BoxFit.cover,
-                ),
-              ),
+                  clipBehavior: Clip.antiAlias,
+                  child: CachedNetworkImage(
+                    imageUrl: image,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  )),
             ),
             SizedBox(height: 1.h),
             WAText(

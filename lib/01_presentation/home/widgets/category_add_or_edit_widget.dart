@@ -14,12 +14,15 @@ import '../../widgets/wa_button.dart';
 import '../../widgets/wa_text_field.dart';
 import '../../../05_core/utils/constant.dart';
 
+enum EnumCategoryAddEdit { add, edit }
+
 class CategoryAddOrEditWidget extends StatelessWidget {
   final String title;
   final bool addCategory;
   final Function() onTap;
   final TextEditingController ctr;
   final GlobalKey<FormState> formKey;
+  final EnumCategoryAddEdit categoryEnum;
   const CategoryAddOrEditWidget({
     super.key,
     required this.ctr,
@@ -27,6 +30,7 @@ class CategoryAddOrEditWidget extends StatelessWidget {
     required this.onTap,
     required this.formKey,
     this.addCategory = true,
+    required this.categoryEnum,
   });
 
   @override

@@ -4,4 +4,5 @@ class ApiEndPoints {
   static const categoryListEndPoint = 'api/v1/item/categories/';
   static const productListEndPoint = 'api/v1/items/';
   static const addCategoryEndPoint = 'api/v1/item/categories/add/';
+  static const editCategoryEndPont = '/api/v1/item/categories/';
 }

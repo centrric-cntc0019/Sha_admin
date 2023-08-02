@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sha_admin/01_presentation/home/widgets/category_add_or_edit_widget.dart';
+import 'package:sha_admin/02_application/category/category_bloc.dart';
 import 'package:sha_admin/02_application/product/product_bloc.dart';
 import 'package:sha_admin/01_presentation/product/widgets/product.dart';
 import 'package:sha_admin/01_presentation/product/widgets/product_search_icon.dart';
@@ -44,6 +46,8 @@ class _ProductListScreenState extends State<ProductListScreen> {
     super.dispose();
   }
 
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +59,38 @@ class _ProductListScreenState extends State<ProductListScreen> {
         ),
         actions: [
           const ProductSearchIcon(),
-          sized0wx20,
+          IconButton(
+            onPressed: () {
+              showModalBottomSheet<void>(
+                context: context,
+                isScrollControlled: true,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                builder: (BuildContext context) {
+                  return CategoryAddOrEditWidget(
+                    categoryEnum: EnumCategoryAddEdit.edit,
+                    title: "Add Category",
+                    ctr: context.read<CategoryBloc>().state.addCatCtr,
+                    formKey: _formKey,
+                    onTap: () {
+                      var bloc = context.read<CategoryBloc>();
+                      bloc.add(CategoryEvent.addCategory(
+                          context: context,
+                          categoryName: bloc.state.addCatCtr.text,
+                          image: bloc.state.categoryImage));
+                    },
+                  );
+                },
+              ).whenComplete(() => context
+                  .read<CategoryBloc>()
+                  .add(const CategoryEvent.addCategoryReset()));
+            },
+            icon: const Icon(
+              Icons.edit_note,
+              color: Colors.white,
+            ),
+          ),
         ],
       ),
       body: BlocBuilder<ProductBloc, ProductState>(

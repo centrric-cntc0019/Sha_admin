@@ -120,6 +120,7 @@ class _ProductUpdateSheetState extends State<ProductUpdateSheet> {
               );
             },
           ),
+          sized0hx20,
         ],
       ),
     );

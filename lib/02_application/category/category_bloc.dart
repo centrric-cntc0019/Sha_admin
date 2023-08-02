@@ -89,6 +89,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
           resultAddCategory: state.resultAddCategory.copyWith(loading: false)));
     });
 
+    // reset after pop up dispose
     on<_AddCategoryReset>((event, emit) {
       emit(state.copyWith(
           resultAddCategory: ApiResponse(),

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -34,29 +35,30 @@ class ProductItem extends StatelessWidget {
       data = context.read<ProductBloc>().state.result.data.productList?[index];
     }
 
-    return Container(
+    return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            height: 75.h,
-            width: (size.width * .25),
+            // height: 75.h,
+            // width: (size.width * .25),
             decoration: BoxDecoration(
                 color: Colors.white, borderRadius: BorderRadius.circular(10)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Center(
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.network(
-                      data?.productImageThumb ?? data?.productImage ?? "",
-                      height: 100,
-                      width: 100,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                      borderRadius: BorderRadius.circular(10),
+                      child: CachedNetworkImage(
+                        imageUrl:
+                            data?.productImageThumb ?? data?.productImage ?? "",
+                        height: 100,
+                        width: 100,
+                        fit: BoxFit.cover,
+                      )),
                 )
               ],
             ),

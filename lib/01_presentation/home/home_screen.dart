@@ -193,6 +193,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             builder: (BuildContext context) {
               return CategoryAddOrEditWidget(
+                categoryEnum: EnumCategoryAddEdit.edit,
                 title: "Add Category",
                 ctr: context.read<CategoryBloc>().state.addCatCtr,
                 formKey: _formKey,
