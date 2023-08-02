@@ -8,6 +8,7 @@ import 'package:sha_admin/03_domain/products/i_product_repo.dart';
 
 import '../../05_core/models/apiresponse.dart';
 import '../../03_domain/products/models/product/product_base_model.dart';
+import '../../05_core/services/image_picker.dart';
 
 part 'product_state.dart';
 part 'product_event.dart';
@@ -253,6 +254,11 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
     on<_SearchBarVisibility>((event, emit) {
       emit(state.copyWith(searchEnabled: !state.searchEnabled));
+    });
+
+    // picker image from gallery
+    on<_PickProductImage>((event, emit) {
+      emit(state.copyWith(productImage: event.image));
     });
   }
 }
