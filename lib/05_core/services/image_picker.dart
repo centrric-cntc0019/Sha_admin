@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
-
-final ImagePicker _picker = ImagePicker();
+import 'package:injectable/injectable.dart';
 
 class ImagePickerModel {
   Uint8List? imageUint8List;
@@ -22,19 +21,26 @@ class ImagePickerModel {
       this.imageUUID});
 }
 
-Future<ImagePickerModel?> imagePicker(BuildContext context) async {
-  XFile? imageFile =
-      await _picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
+@LazySingleton()
+class ImagePickerService {
+  ImagePicker picker = ImagePicker();
 
-  // CroppedFile? croppedFile = await imageCropper(imageFile, context);
+  Future<ImagePickerModel?> imagePicker(BuildContext context) async {
+    XFile? imageFile = await picker.pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 50,
+      maxHeight: 1080,
+      maxWidth: 1080,
+    );
 
-  var imageBytes = await imageFile?.readAsBytes();
+    var imageBytes = await imageFile?.readAsBytes();
 
-  return imageFile != null
-      ? ImagePickerModel(
-          imageUint8List: imageBytes,
-          imagePath: imageFile.path,
-          imageFileName: imageFile.name,
-        )
-      : null;
+    return imageFile != null
+        ? ImagePickerModel(
+            imageUint8List: imageBytes,
+            imagePath: imageFile.path,
+            imageFileName: imageFile.name,
+          )
+        : null;
+  }
 }

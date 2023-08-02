@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:injectable/injectable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -44,7 +42,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       },
     );
     on<_PickCategoryImage>((event, emit) {
-      emit(state.copyWith(categoryImage:event.image));
+      emit(state.copyWith(categoryImage: event.image));
     });
   }
 }

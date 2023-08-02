@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sha_admin/03_domain/di/injection.dart';
 
 import '../../../02_application/category/category_bloc.dart';
 import '../../../05_core/services/image_picker.dart';
@@ -56,7 +57,9 @@ class CategoryAddOrEditWidget extends StatelessWidget {
                     alignment: Alignment.center,
                     child: InkWell(
                       onTap: () async {
-                        ImagePickerModel? image = await imagePicker(context);
+                        ImagePickerModel? image =
+                            await getIt<ImagePickerService>()
+                                .imagePicker(context);
                         if (image != null) {
                           bloc.add(
                               CategoryEvent.pickCategoryImage(image: image));

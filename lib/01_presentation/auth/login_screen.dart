@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../widgets/toast.dart';
 import '../widgets/wa_text.dart';
 import '../widgets/wa_button.dart';
 import '../widgets/wa_text_field.dart';
