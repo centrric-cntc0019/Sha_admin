@@ -15,7 +15,7 @@ import '01_presentation/auth/login_screen.dart';
 import '02_application/product/product_bloc.dart';
 import '02_application/category/category_bloc.dart';
 
-//   V E R S I O N = 3.10.5
+//   F L U T T E R  S D K = 3.10.5
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();

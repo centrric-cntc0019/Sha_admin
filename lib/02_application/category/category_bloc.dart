@@ -88,7 +88,6 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
           if (state.result.data != null) {
             CategoryBaseModel baseData = state.result.data;
             List<CategoryModel>? dataList = baseData.data?.toList();
-
             // category add
             if (event.enumCategoryAddEdit == EnumCategoryAddEdit.add) {
               dataList?.insert(0, r);
@@ -100,8 +99,6 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
               if (index != null && index != -1) {
                 dataList![index] = r;
               }
-              // data?.categoryName = r.categoryName;
-              // data?.image = r.image;
             }
 
             emit(state.copyWith(
