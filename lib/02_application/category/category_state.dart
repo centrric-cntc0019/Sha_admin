@@ -5,13 +5,13 @@ class CategoryState with _$CategoryState {
   const factory CategoryState({
     required TextEditingController addCatCtr,
     required ApiResponse result,
-    required ApiResponse resultAddCategory,
+    required ApiResponse resultAddEditCategory,
     ImagePickerModel? categoryImage,
   }) = _Initial;
   factory CategoryState.initial() => CategoryState(
         addCatCtr: TextEditingController(),
         categoryImage: null,
-        resultAddCategory: ApiResponse(),
+        resultAddEditCategory: ApiResponse(),
         result: ApiResponse(),
       );
 }

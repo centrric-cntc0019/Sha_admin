@@ -70,15 +70,17 @@ class _ProductListScreenState extends State<ProductListScreen> {
                 builder: (BuildContext context) {
                   return CategoryAddOrEditWidget(
                     categoryEnum: EnumCategoryAddEdit.edit,
-                    title: "Add Category",
                     ctr: context.read<CategoryBloc>().state.addCatCtr,
                     formKey: _formKey,
                     onTap: () {
                       var bloc = context.read<CategoryBloc>();
-                      bloc.add(CategoryEvent.addCategory(
-                          context: context,
-                          categoryName: bloc.state.addCatCtr.text,
-                          image: bloc.state.categoryImage));
+                      bloc.add(CategoryEvent.addEditCategory(
+                        categoryUUID: widget.headText['category_uuid'],
+                        enumCategoryAddEdit: EnumCategoryAddEdit.edit,
+                        context: context,
+                        categoryName: bloc.state.addCatCtr.text,
+                        image: bloc.state.categoryImage,
+                      ));
                     },
                   );
                 },

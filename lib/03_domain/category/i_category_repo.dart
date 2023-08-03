@@ -10,4 +10,10 @@ abstract class ICategoryRepo {
 
   Future<Either<MainFailure, CategoryModel>> addCategoryApi(
       {required ImagePickerModel image, required String categoryName});
+
+  Future<Either<MainFailure, CategoryModel>> editCategoryApi({
+    required ImagePickerModel image,
+    required String categoryName,
+    required String categoryUUID,
+  });
 }

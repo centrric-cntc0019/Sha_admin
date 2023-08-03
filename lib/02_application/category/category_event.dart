@@ -8,9 +8,11 @@ class CategoryEvent with _$CategoryEvent {
   const factory CategoryEvent.getCategory() = _GetCategory;
   const factory CategoryEvent.pickCategoryImage(
       {required ImagePickerModel image}) = _PickCategoryImage;
-  const factory CategoryEvent.addCategory(
+  const factory CategoryEvent.addEditCategory(
       {ImagePickerModel? image,
       String? categoryName,
-      required BuildContext context}) = _AddCategory;
+      String? categoryUUID,
+      required EnumCategoryAddEdit enumCategoryAddEdit,
+      required BuildContext context}) = _AddEditCategory;
   const factory CategoryEvent.addCategoryReset() = _AddCategoryReset;
 }

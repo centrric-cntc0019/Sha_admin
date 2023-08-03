@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CategoryState {
   TextEditingController get addCatCtr => throw _privateConstructorUsedError;
   ApiResponse<dynamic> get result => throw _privateConstructorUsedError;
-  ApiResponse<dynamic> get resultAddCategory =>
+  ApiResponse<dynamic> get resultAddEditCategory =>
       throw _privateConstructorUsedError;
   ImagePickerModel? get categoryImage => throw _privateConstructorUsedError;
 
@@ -36,11 +36,11 @@ abstract class $CategoryStateCopyWith<$Res> {
   $Res call(
       {TextEditingController addCatCtr,
       ApiResponse<dynamic> result,
-      ApiResponse<dynamic> resultAddCategory,
+      ApiResponse<dynamic> resultAddEditCategory,
       ImagePickerModel? categoryImage});
 
   $ApiResponseCopyWith<dynamic, $Res> get result;
-  $ApiResponseCopyWith<dynamic, $Res> get resultAddCategory;
+  $ApiResponseCopyWith<dynamic, $Res> get resultAddEditCategory;
 }
 
 /// @nodoc
@@ -58,7 +58,7 @@ class _$CategoryStateCopyWithImpl<$Res, $Val extends CategoryState>
   $Res call({
     Object? addCatCtr = null,
     Object? result = null,
-    Object? resultAddCategory = null,
+    Object? resultAddEditCategory = null,
     Object? categoryImage = freezed,
   }) {
     return _then(_value.copyWith(
@@ -70,9 +70,9 @@ class _$CategoryStateCopyWithImpl<$Res, $Val extends CategoryState>
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
               as ApiResponse<dynamic>,
-      resultAddCategory: null == resultAddCategory
-          ? _value.resultAddCategory
-          : resultAddCategory // ignore: cast_nullable_to_non_nullable
+      resultAddEditCategory: null == resultAddEditCategory
+          ? _value.resultAddEditCategory
+          : resultAddEditCategory // ignore: cast_nullable_to_non_nullable
               as ApiResponse<dynamic>,
       categoryImage: freezed == categoryImage
           ? _value.categoryImage
@@ -91,10 +91,10 @@ class _$CategoryStateCopyWithImpl<$Res, $Val extends CategoryState>
 
   @override
   @pragma('vm:prefer-inline')
-  $ApiResponseCopyWith<dynamic, $Res> get resultAddCategory {
-    return $ApiResponseCopyWith<dynamic, $Res>(_value.resultAddCategory,
+  $ApiResponseCopyWith<dynamic, $Res> get resultAddEditCategory {
+    return $ApiResponseCopyWith<dynamic, $Res>(_value.resultAddEditCategory,
         (value) {
-      return _then(_value.copyWith(resultAddCategory: value) as $Val);
+      return _then(_value.copyWith(resultAddEditCategory: value) as $Val);
     });
   }
 }
@@ -110,13 +110,13 @@ abstract class _$$_InitialCopyWith<$Res>
   $Res call(
       {TextEditingController addCatCtr,
       ApiResponse<dynamic> result,
-      ApiResponse<dynamic> resultAddCategory,
+      ApiResponse<dynamic> resultAddEditCategory,
       ImagePickerModel? categoryImage});
 
   @override
   $ApiResponseCopyWith<dynamic, $Res> get result;
   @override
-  $ApiResponseCopyWith<dynamic, $Res> get resultAddCategory;
+  $ApiResponseCopyWith<dynamic, $Res> get resultAddEditCategory;
 }
 
 /// @nodoc
@@ -131,7 +131,7 @@ class __$$_InitialCopyWithImpl<$Res>
   $Res call({
     Object? addCatCtr = null,
     Object? result = null,
-    Object? resultAddCategory = null,
+    Object? resultAddEditCategory = null,
     Object? categoryImage = freezed,
   }) {
     return _then(_$_Initial(
@@ -143,9 +143,9 @@ class __$$_InitialCopyWithImpl<$Res>
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
               as ApiResponse<dynamic>,
-      resultAddCategory: null == resultAddCategory
-          ? _value.resultAddCategory
-          : resultAddCategory // ignore: cast_nullable_to_non_nullable
+      resultAddEditCategory: null == resultAddEditCategory
+          ? _value.resultAddEditCategory
+          : resultAddEditCategory // ignore: cast_nullable_to_non_nullable
               as ApiResponse<dynamic>,
       categoryImage: freezed == categoryImage
           ? _value.categoryImage
@@ -161,7 +161,7 @@ class _$_Initial implements _Initial {
   const _$_Initial(
       {required this.addCatCtr,
       required this.result,
-      required this.resultAddCategory,
+      required this.resultAddEditCategory,
       this.categoryImage});
 
   @override
@@ -169,13 +169,13 @@ class _$_Initial implements _Initial {
   @override
   final ApiResponse<dynamic> result;
   @override
-  final ApiResponse<dynamic> resultAddCategory;
+  final ApiResponse<dynamic> resultAddEditCategory;
   @override
   final ImagePickerModel? categoryImage;
 
   @override
   String toString() {
-    return 'CategoryState(addCatCtr: $addCatCtr, result: $result, resultAddCategory: $resultAddCategory, categoryImage: $categoryImage)';
+    return 'CategoryState(addCatCtr: $addCatCtr, result: $result, resultAddEditCategory: $resultAddEditCategory, categoryImage: $categoryImage)';
   }
 
   @override
@@ -186,15 +186,15 @@ class _$_Initial implements _Initial {
             (identical(other.addCatCtr, addCatCtr) ||
                 other.addCatCtr == addCatCtr) &&
             (identical(other.result, result) || other.result == result) &&
-            (identical(other.resultAddCategory, resultAddCategory) ||
-                other.resultAddCategory == resultAddCategory) &&
+            (identical(other.resultAddEditCategory, resultAddEditCategory) ||
+                other.resultAddEditCategory == resultAddEditCategory) &&
             (identical(other.categoryImage, categoryImage) ||
                 other.categoryImage == categoryImage));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, addCatCtr, result, resultAddCategory, categoryImage);
+      runtimeType, addCatCtr, result, resultAddEditCategory, categoryImage);
 
   @JsonKey(ignore: true)
   @override
@@ -207,7 +207,7 @@ abstract class _Initial implements CategoryState {
   const factory _Initial(
       {required final TextEditingController addCatCtr,
       required final ApiResponse<dynamic> result,
-      required final ApiResponse<dynamic> resultAddCategory,
+      required final ApiResponse<dynamic> resultAddEditCategory,
       final ImagePickerModel? categoryImage}) = _$_Initial;
 
   @override
@@ -215,7 +215,7 @@ abstract class _Initial implements CategoryState {
   @override
   ApiResponse<dynamic> get result;
   @override
-  ApiResponse<dynamic> get resultAddCategory;
+  ApiResponse<dynamic> get resultAddEditCategory;
   @override
   ImagePickerModel? get categoryImage;
   @override
@@ -233,8 +233,12 @@ mixin _$CategoryEvent {
     required TResult Function() getCategory,
     required TResult Function(ImagePickerModel image) pickCategoryImage,
     required TResult Function(
-            ImagePickerModel? image, String? categoryName, BuildContext context)
-        addCategory,
+            ImagePickerModel? image,
+            String? categoryName,
+            String? categoryUUID,
+            EnumCategoryAddEdit enumCategoryAddEdit,
+            BuildContext context)
+        addEditCategory,
     required TResult Function() addCategoryReset,
   }) =>
       throw _privateConstructorUsedError;
@@ -244,9 +248,13 @@ mixin _$CategoryEvent {
     TResult? Function()? reset,
     TResult? Function()? getCategory,
     TResult? Function(ImagePickerModel image)? pickCategoryImage,
-    TResult? Function(ImagePickerModel? image, String? categoryName,
+    TResult? Function(
+            ImagePickerModel? image,
+            String? categoryName,
+            String? categoryUUID,
+            EnumCategoryAddEdit enumCategoryAddEdit,
             BuildContext context)?
-        addCategory,
+        addEditCategory,
     TResult? Function()? addCategoryReset,
   }) =>
       throw _privateConstructorUsedError;
@@ -256,9 +264,13 @@ mixin _$CategoryEvent {
     TResult Function()? reset,
     TResult Function()? getCategory,
     TResult Function(ImagePickerModel image)? pickCategoryImage,
-    TResult Function(ImagePickerModel? image, String? categoryName,
+    TResult Function(
+            ImagePickerModel? image,
+            String? categoryName,
+            String? categoryUUID,
+            EnumCategoryAddEdit enumCategoryAddEdit,
             BuildContext context)?
-        addCategory,
+        addEditCategory,
     TResult Function()? addCategoryReset,
     required TResult orElse(),
   }) =>
@@ -269,7 +281,7 @@ mixin _$CategoryEvent {
     required TResult Function(_Reset value) reset,
     required TResult Function(_GetCategory value) getCategory,
     required TResult Function(_PickCategoryImage value) pickCategoryImage,
-    required TResult Function(_AddCategory value) addCategory,
+    required TResult Function(_AddEditCategory value) addEditCategory,
     required TResult Function(_AddCategoryReset value) addCategoryReset,
   }) =>
       throw _privateConstructorUsedError;
@@ -279,7 +291,7 @@ mixin _$CategoryEvent {
     TResult? Function(_Reset value)? reset,
     TResult? Function(_GetCategory value)? getCategory,
     TResult? Function(_PickCategoryImage value)? pickCategoryImage,
-    TResult? Function(_AddCategory value)? addCategory,
+    TResult? Function(_AddEditCategory value)? addEditCategory,
     TResult? Function(_AddCategoryReset value)? addCategoryReset,
   }) =>
       throw _privateConstructorUsedError;
@@ -289,7 +301,7 @@ mixin _$CategoryEvent {
     TResult Function(_Reset value)? reset,
     TResult Function(_GetCategory value)? getCategory,
     TResult Function(_PickCategoryImage value)? pickCategoryImage,
-    TResult Function(_AddCategory value)? addCategory,
+    TResult Function(_AddEditCategory value)? addEditCategory,
     TResult Function(_AddCategoryReset value)? addCategoryReset,
     required TResult orElse(),
   }) =>
@@ -357,8 +369,12 @@ class _$_InitialEvent implements _InitialEvent {
     required TResult Function() getCategory,
     required TResult Function(ImagePickerModel image) pickCategoryImage,
     required TResult Function(
-            ImagePickerModel? image, String? categoryName, BuildContext context)
-        addCategory,
+            ImagePickerModel? image,
+            String? categoryName,
+            String? categoryUUID,
+            EnumCategoryAddEdit enumCategoryAddEdit,
+            BuildContext context)
+        addEditCategory,
     required TResult Function() addCategoryReset,
   }) {
     return initialEvent();
@@ -371,9 +387,13 @@ class _$_InitialEvent implements _InitialEvent {
     TResult? Function()? reset,
     TResult? Function()? getCategory,
     TResult? Function(ImagePickerModel image)? pickCategoryImage,
-    TResult? Function(ImagePickerModel? image, String? categoryName,
+    TResult? Function(
+            ImagePickerModel? image,
+            String? categoryName,
+            String? categoryUUID,
+            EnumCategoryAddEdit enumCategoryAddEdit,
             BuildContext context)?
-        addCategory,
+        addEditCategory,
     TResult? Function()? addCategoryReset,
   }) {
     return initialEvent?.call();
@@ -386,9 +406,13 @@ class _$_InitialEvent implements _InitialEvent {
     TResult Function()? reset,
     TResult Function()? getCategory,
     TResult Function(ImagePickerModel image)? pickCategoryImage,
-    TResult Function(ImagePickerModel? image, String? categoryName,
+    TResult Function(
+            ImagePickerModel? image,
+            String? categoryName,
+            String? categoryUUID,
+            EnumCategoryAddEdit enumCategoryAddEdit,
             BuildContext context)?
-        addCategory,
+        addEditCategory,
     TResult Function()? addCategoryReset,
     required TResult orElse(),
   }) {
@@ -405,7 +429,7 @@ class _$_InitialEvent implements _InitialEvent {
     required TResult Function(_Reset value) reset,
     required TResult Function(_GetCategory value) getCategory,
     required TResult Function(_PickCategoryImage value) pickCategoryImage,
-    required TResult Function(_AddCategory value) addCategory,
+    required TResult Function(_AddEditCategory value) addEditCategory,
     required TResult Function(_AddCategoryReset value) addCategoryReset,
   }) {
     return initialEvent(this);
@@ -418,7 +442,7 @@ class _$_InitialEvent implements _InitialEvent {
     TResult? Function(_Reset value)? reset,
     TResult? Function(_GetCategory value)? getCategory,
     TResult? Function(_PickCategoryImage value)? pickCategoryImage,
-    TResult? Function(_AddCategory value)? addCategory,
+    TResult? Function(_AddEditCategory value)? addEditCategory,
     TResult? Function(_AddCategoryReset value)? addCategoryReset,
   }) {
     return initialEvent?.call(this);
@@ -431,7 +455,7 @@ class _$_InitialEvent implements _InitialEvent {
     TResult Function(_Reset value)? reset,
     TResult Function(_GetCategory value)? getCategory,
     TResult Function(_PickCategoryImage value)? pickCategoryImage,
-    TResult Function(_AddCategory value)? addCategory,
+    TResult Function(_AddEditCategory value)? addEditCategory,
     TResult Function(_AddCategoryReset value)? addCategoryReset,
     required TResult orElse(),
   }) {
@@ -487,8 +511,12 @@ class _$_Reset implements _Reset {
     required TResult Function() getCategory,
     required TResult Function(ImagePickerModel image) pickCategoryImage,
     required TResult Function(
-            ImagePickerModel? image, String? categoryName, BuildContext context)
-        addCategory,
+            ImagePickerModel? image,
+            String? categoryName,
+            String? categoryUUID,
+            EnumCategoryAddEdit enumCategoryAddEdit,
+            BuildContext context)
+        addEditCategory,
     required TResult Function() addCategoryReset,
   }) {
     return reset();
@@ -501,9 +529,13 @@ class _$_Reset implements _Reset {
     TResult? Function()? reset,
     TResult? Function()? getCategory,
     TResult? Function(ImagePickerModel image)? pickCategoryImage,
-    TResult? Function(ImagePickerModel? image, String? categoryName,
+    TResult? Function(
+            ImagePickerModel? image,
+            String? categoryName,
+            String? categoryUUID,
+            EnumCategoryAddEdit enumCategoryAddEdit,
             BuildContext context)?
-        addCategory,
+        addEditCategory,
     TResult? Function()? addCategoryReset,
   }) {
     return reset?.call();
@@ -516,9 +548,13 @@ class _$_Reset implements _Reset {
     TResult Function()? reset,
     TResult Function()? getCategory,
     TResult Function(ImagePickerModel image)? pickCategoryImage,
-    TResult Function(ImagePickerModel? image, String? categoryName,
+    TResult Function(
+            ImagePickerModel? image,
+            String? categoryName,
+            String? categoryUUID,
+            EnumCategoryAddEdit enumCategoryAddEdit,
             BuildContext context)?
-        addCategory,
+        addEditCategory,
     TResult Function()? addCategoryReset,
     required TResult orElse(),
   }) {
@@ -535,7 +571,7 @@ class _$_Reset implements _Reset {
     required TResult Function(_Reset value) reset,
     required TResult Function(_GetCategory value) getCategory,
     required TResult Function(_PickCategoryImage value) pickCategoryImage,
-    required TResult Function(_AddCategory value) addCategory,
+    required TResult Function(_AddEditCategory value) addEditCategory,
     required TResult Function(_AddCategoryReset value) addCategoryReset,
   }) {
     return reset(this);
@@ -548,7 +584,7 @@ class _$_Reset implements _Reset {
     TResult? Function(_Reset value)? reset,
     TResult? Function(_GetCategory value)? getCategory,
     TResult? Function(_PickCategoryImage value)? pickCategoryImage,
-    TResult? Function(_AddCategory value)? addCategory,
+    TResult? Function(_AddEditCategory value)? addEditCategory,
     TResult? Function(_AddCategoryReset value)? addCategoryReset,
   }) {
     return reset?.call(this);
@@ -561,7 +597,7 @@ class _$_Reset implements _Reset {
     TResult Function(_Reset value)? reset,
     TResult Function(_GetCategory value)? getCategory,
     TResult Function(_PickCategoryImage value)? pickCategoryImage,
-    TResult Function(_AddCategory value)? addCategory,
+    TResult Function(_AddEditCategory value)? addEditCategory,
     TResult Function(_AddCategoryReset value)? addCategoryReset,
     required TResult orElse(),
   }) {
@@ -619,8 +655,12 @@ class _$_GetCategory implements _GetCategory {
     required TResult Function() getCategory,
     required TResult Function(ImagePickerModel image) pickCategoryImage,
     required TResult Function(
-            ImagePickerModel? image, String? categoryName, BuildContext context)
-        addCategory,
+            ImagePickerModel? image,
+            String? categoryName,
+            String? categoryUUID,
+            EnumCategoryAddEdit enumCategoryAddEdit,
+            BuildContext context)
+        addEditCategory,
     required TResult Function() addCategoryReset,
   }) {
     return getCategory();
@@ -633,9 +673,13 @@ class _$_GetCategory implements _GetCategory {
     TResult? Function()? reset,
     TResult? Function()? getCategory,
     TResult? Function(ImagePickerModel image)? pickCategoryImage,
-    TResult? Function(ImagePickerModel? image, String? categoryName,
+    TResult? Function(
+            ImagePickerModel? image,
+            String? categoryName,
+            String? categoryUUID,
+            EnumCategoryAddEdit enumCategoryAddEdit,
             BuildContext context)?
-        addCategory,
+        addEditCategory,
     TResult? Function()? addCategoryReset,
   }) {
     return getCategory?.call();
@@ -648,9 +692,13 @@ class _$_GetCategory implements _GetCategory {
     TResult Function()? reset,
     TResult Function()? getCategory,
     TResult Function(ImagePickerModel image)? pickCategoryImage,
-    TResult Function(ImagePickerModel? image, String? categoryName,
+    TResult Function(
+            ImagePickerModel? image,
+            String? categoryName,
+            String? categoryUUID,
+            EnumCategoryAddEdit enumCategoryAddEdit,
             BuildContext context)?
-        addCategory,
+        addEditCategory,
     TResult Function()? addCategoryReset,
     required TResult orElse(),
   }) {
@@ -667,7 +715,7 @@ class _$_GetCategory implements _GetCategory {
     required TResult Function(_Reset value) reset,
     required TResult Function(_GetCategory value) getCategory,
     required TResult Function(_PickCategoryImage value) pickCategoryImage,
-    required TResult Function(_AddCategory value) addCategory,
+    required TResult Function(_AddEditCategory value) addEditCategory,
     required TResult Function(_AddCategoryReset value) addCategoryReset,
   }) {
     return getCategory(this);
@@ -680,7 +728,7 @@ class _$_GetCategory implements _GetCategory {
     TResult? Function(_Reset value)? reset,
     TResult? Function(_GetCategory value)? getCategory,
     TResult? Function(_PickCategoryImage value)? pickCategoryImage,
-    TResult? Function(_AddCategory value)? addCategory,
+    TResult? Function(_AddEditCategory value)? addEditCategory,
     TResult? Function(_AddCategoryReset value)? addCategoryReset,
   }) {
     return getCategory?.call(this);
@@ -693,7 +741,7 @@ class _$_GetCategory implements _GetCategory {
     TResult Function(_Reset value)? reset,
     TResult Function(_GetCategory value)? getCategory,
     TResult Function(_PickCategoryImage value)? pickCategoryImage,
-    TResult Function(_AddCategory value)? addCategory,
+    TResult Function(_AddEditCategory value)? addEditCategory,
     TResult Function(_AddCategoryReset value)? addCategoryReset,
     required TResult orElse(),
   }) {
@@ -778,8 +826,12 @@ class _$_PickCategoryImage implements _PickCategoryImage {
     required TResult Function() getCategory,
     required TResult Function(ImagePickerModel image) pickCategoryImage,
     required TResult Function(
-            ImagePickerModel? image, String? categoryName, BuildContext context)
-        addCategory,
+            ImagePickerModel? image,
+            String? categoryName,
+            String? categoryUUID,
+            EnumCategoryAddEdit enumCategoryAddEdit,
+            BuildContext context)
+        addEditCategory,
     required TResult Function() addCategoryReset,
   }) {
     return pickCategoryImage(image);
@@ -792,9 +844,13 @@ class _$_PickCategoryImage implements _PickCategoryImage {
     TResult? Function()? reset,
     TResult? Function()? getCategory,
     TResult? Function(ImagePickerModel image)? pickCategoryImage,
-    TResult? Function(ImagePickerModel? image, String? categoryName,
+    TResult? Function(
+            ImagePickerModel? image,
+            String? categoryName,
+            String? categoryUUID,
+            EnumCategoryAddEdit enumCategoryAddEdit,
             BuildContext context)?
-        addCategory,
+        addEditCategory,
     TResult? Function()? addCategoryReset,
   }) {
     return pickCategoryImage?.call(image);
@@ -807,9 +863,13 @@ class _$_PickCategoryImage implements _PickCategoryImage {
     TResult Function()? reset,
     TResult Function()? getCategory,
     TResult Function(ImagePickerModel image)? pickCategoryImage,
-    TResult Function(ImagePickerModel? image, String? categoryName,
+    TResult Function(
+            ImagePickerModel? image,
+            String? categoryName,
+            String? categoryUUID,
+            EnumCategoryAddEdit enumCategoryAddEdit,
             BuildContext context)?
-        addCategory,
+        addEditCategory,
     TResult Function()? addCategoryReset,
     required TResult orElse(),
   }) {
@@ -826,7 +886,7 @@ class _$_PickCategoryImage implements _PickCategoryImage {
     required TResult Function(_Reset value) reset,
     required TResult Function(_GetCategory value) getCategory,
     required TResult Function(_PickCategoryImage value) pickCategoryImage,
-    required TResult Function(_AddCategory value) addCategory,
+    required TResult Function(_AddEditCategory value) addEditCategory,
     required TResult Function(_AddCategoryReset value) addCategoryReset,
   }) {
     return pickCategoryImage(this);
@@ -839,7 +899,7 @@ class _$_PickCategoryImage implements _PickCategoryImage {
     TResult? Function(_Reset value)? reset,
     TResult? Function(_GetCategory value)? getCategory,
     TResult? Function(_PickCategoryImage value)? pickCategoryImage,
-    TResult? Function(_AddCategory value)? addCategory,
+    TResult? Function(_AddEditCategory value)? addEditCategory,
     TResult? Function(_AddCategoryReset value)? addCategoryReset,
   }) {
     return pickCategoryImage?.call(this);
@@ -852,7 +912,7 @@ class _$_PickCategoryImage implements _PickCategoryImage {
     TResult Function(_Reset value)? reset,
     TResult Function(_GetCategory value)? getCategory,
     TResult Function(_PickCategoryImage value)? pickCategoryImage,
-    TResult Function(_AddCategory value)? addCategory,
+    TResult Function(_AddEditCategory value)? addEditCategory,
     TResult Function(_AddCategoryReset value)? addCategoryReset,
     required TResult orElse(),
   }) {
@@ -874,21 +934,25 @@ abstract class _PickCategoryImage implements CategoryEvent {
 }
 
 /// @nodoc
-abstract class _$$_AddCategoryCopyWith<$Res> {
-  factory _$$_AddCategoryCopyWith(
-          _$_AddCategory value, $Res Function(_$_AddCategory) then) =
-      __$$_AddCategoryCopyWithImpl<$Res>;
+abstract class _$$_AddEditCategoryCopyWith<$Res> {
+  factory _$$_AddEditCategoryCopyWith(
+          _$_AddEditCategory value, $Res Function(_$_AddEditCategory) then) =
+      __$$_AddEditCategoryCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {ImagePickerModel? image, String? categoryName, BuildContext context});
+      {ImagePickerModel? image,
+      String? categoryName,
+      String? categoryUUID,
+      EnumCategoryAddEdit enumCategoryAddEdit,
+      BuildContext context});
 }
 
 /// @nodoc
-class __$$_AddCategoryCopyWithImpl<$Res>
-    extends _$CategoryEventCopyWithImpl<$Res, _$_AddCategory>
-    implements _$$_AddCategoryCopyWith<$Res> {
-  __$$_AddCategoryCopyWithImpl(
-      _$_AddCategory _value, $Res Function(_$_AddCategory) _then)
+class __$$_AddEditCategoryCopyWithImpl<$Res>
+    extends _$CategoryEventCopyWithImpl<$Res, _$_AddEditCategory>
+    implements _$$_AddEditCategoryCopyWith<$Res> {
+  __$$_AddEditCategoryCopyWithImpl(
+      _$_AddEditCategory _value, $Res Function(_$_AddEditCategory) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -896,9 +960,11 @@ class __$$_AddCategoryCopyWithImpl<$Res>
   $Res call({
     Object? image = freezed,
     Object? categoryName = freezed,
+    Object? categoryUUID = freezed,
+    Object? enumCategoryAddEdit = null,
     Object? context = null,
   }) {
-    return _then(_$_AddCategory(
+    return _then(_$_AddEditCategory(
       image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -907,6 +973,14 @@ class __$$_AddCategoryCopyWithImpl<$Res>
           ? _value.categoryName
           : categoryName // ignore: cast_nullable_to_non_nullable
               as String?,
+      categoryUUID: freezed == categoryUUID
+          ? _value.categoryUUID
+          : categoryUUID // ignore: cast_nullable_to_non_nullable
+              as String?,
+      enumCategoryAddEdit: null == enumCategoryAddEdit
+          ? _value.enumCategoryAddEdit
+          : enumCategoryAddEdit // ignore: cast_nullable_to_non_nullable
+              as EnumCategoryAddEdit,
       context: null == context
           ? _value.context
           : context // ignore: cast_nullable_to_non_nullable
@@ -917,40 +991,54 @@ class __$$_AddCategoryCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AddCategory implements _AddCategory {
-  const _$_AddCategory({this.image, this.categoryName, required this.context});
+class _$_AddEditCategory implements _AddEditCategory {
+  const _$_AddEditCategory(
+      {this.image,
+      this.categoryName,
+      this.categoryUUID,
+      required this.enumCategoryAddEdit,
+      required this.context});
 
   @override
   final ImagePickerModel? image;
   @override
   final String? categoryName;
   @override
+  final String? categoryUUID;
+  @override
+  final EnumCategoryAddEdit enumCategoryAddEdit;
+  @override
   final BuildContext context;
 
   @override
   String toString() {
-    return 'CategoryEvent.addCategory(image: $image, categoryName: $categoryName, context: $context)';
+    return 'CategoryEvent.addEditCategory(image: $image, categoryName: $categoryName, categoryUUID: $categoryUUID, enumCategoryAddEdit: $enumCategoryAddEdit, context: $context)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AddCategory &&
+            other is _$_AddEditCategory &&
             (identical(other.image, image) || other.image == image) &&
             (identical(other.categoryName, categoryName) ||
                 other.categoryName == categoryName) &&
+            (identical(other.categoryUUID, categoryUUID) ||
+                other.categoryUUID == categoryUUID) &&
+            (identical(other.enumCategoryAddEdit, enumCategoryAddEdit) ||
+                other.enumCategoryAddEdit == enumCategoryAddEdit) &&
             (identical(other.context, context) || other.context == context));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, image, categoryName, context);
+  int get hashCode => Object.hash(runtimeType, image, categoryName,
+      categoryUUID, enumCategoryAddEdit, context);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AddCategoryCopyWith<_$_AddCategory> get copyWith =>
-      __$$_AddCategoryCopyWithImpl<_$_AddCategory>(this, _$identity);
+  _$$_AddEditCategoryCopyWith<_$_AddEditCategory> get copyWith =>
+      __$$_AddEditCategoryCopyWithImpl<_$_AddEditCategory>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -960,11 +1048,16 @@ class _$_AddCategory implements _AddCategory {
     required TResult Function() getCategory,
     required TResult Function(ImagePickerModel image) pickCategoryImage,
     required TResult Function(
-            ImagePickerModel? image, String? categoryName, BuildContext context)
-        addCategory,
+            ImagePickerModel? image,
+            String? categoryName,
+            String? categoryUUID,
+            EnumCategoryAddEdit enumCategoryAddEdit,
+            BuildContext context)
+        addEditCategory,
     required TResult Function() addCategoryReset,
   }) {
-    return addCategory(image, categoryName, context);
+    return addEditCategory(
+        image, categoryName, categoryUUID, enumCategoryAddEdit, context);
   }
 
   @override
@@ -974,12 +1067,17 @@ class _$_AddCategory implements _AddCategory {
     TResult? Function()? reset,
     TResult? Function()? getCategory,
     TResult? Function(ImagePickerModel image)? pickCategoryImage,
-    TResult? Function(ImagePickerModel? image, String? categoryName,
+    TResult? Function(
+            ImagePickerModel? image,
+            String? categoryName,
+            String? categoryUUID,
+            EnumCategoryAddEdit enumCategoryAddEdit,
             BuildContext context)?
-        addCategory,
+        addEditCategory,
     TResult? Function()? addCategoryReset,
   }) {
-    return addCategory?.call(image, categoryName, context);
+    return addEditCategory?.call(
+        image, categoryName, categoryUUID, enumCategoryAddEdit, context);
   }
 
   @override
@@ -989,14 +1087,19 @@ class _$_AddCategory implements _AddCategory {
     TResult Function()? reset,
     TResult Function()? getCategory,
     TResult Function(ImagePickerModel image)? pickCategoryImage,
-    TResult Function(ImagePickerModel? image, String? categoryName,
+    TResult Function(
+            ImagePickerModel? image,
+            String? categoryName,
+            String? categoryUUID,
+            EnumCategoryAddEdit enumCategoryAddEdit,
             BuildContext context)?
-        addCategory,
+        addEditCategory,
     TResult Function()? addCategoryReset,
     required TResult orElse(),
   }) {
-    if (addCategory != null) {
-      return addCategory(image, categoryName, context);
+    if (addEditCategory != null) {
+      return addEditCategory(
+          image, categoryName, categoryUUID, enumCategoryAddEdit, context);
     }
     return orElse();
   }
@@ -1008,10 +1111,10 @@ class _$_AddCategory implements _AddCategory {
     required TResult Function(_Reset value) reset,
     required TResult Function(_GetCategory value) getCategory,
     required TResult Function(_PickCategoryImage value) pickCategoryImage,
-    required TResult Function(_AddCategory value) addCategory,
+    required TResult Function(_AddEditCategory value) addEditCategory,
     required TResult Function(_AddCategoryReset value) addCategoryReset,
   }) {
-    return addCategory(this);
+    return addEditCategory(this);
   }
 
   @override
@@ -1021,10 +1124,10 @@ class _$_AddCategory implements _AddCategory {
     TResult? Function(_Reset value)? reset,
     TResult? Function(_GetCategory value)? getCategory,
     TResult? Function(_PickCategoryImage value)? pickCategoryImage,
-    TResult? Function(_AddCategory value)? addCategory,
+    TResult? Function(_AddEditCategory value)? addEditCategory,
     TResult? Function(_AddCategoryReset value)? addCategoryReset,
   }) {
-    return addCategory?.call(this);
+    return addEditCategory?.call(this);
   }
 
   @override
@@ -1034,28 +1137,32 @@ class _$_AddCategory implements _AddCategory {
     TResult Function(_Reset value)? reset,
     TResult Function(_GetCategory value)? getCategory,
     TResult Function(_PickCategoryImage value)? pickCategoryImage,
-    TResult Function(_AddCategory value)? addCategory,
+    TResult Function(_AddEditCategory value)? addEditCategory,
     TResult Function(_AddCategoryReset value)? addCategoryReset,
     required TResult orElse(),
   }) {
-    if (addCategory != null) {
-      return addCategory(this);
+    if (addEditCategory != null) {
+      return addEditCategory(this);
     }
     return orElse();
   }
 }
 
-abstract class _AddCategory implements CategoryEvent {
-  const factory _AddCategory(
+abstract class _AddEditCategory implements CategoryEvent {
+  const factory _AddEditCategory(
       {final ImagePickerModel? image,
       final String? categoryName,
-      required final BuildContext context}) = _$_AddCategory;
+      final String? categoryUUID,
+      required final EnumCategoryAddEdit enumCategoryAddEdit,
+      required final BuildContext context}) = _$_AddEditCategory;
 
   ImagePickerModel? get image;
   String? get categoryName;
+  String? get categoryUUID;
+  EnumCategoryAddEdit get enumCategoryAddEdit;
   BuildContext get context;
   @JsonKey(ignore: true)
-  _$$_AddCategoryCopyWith<_$_AddCategory> get copyWith =>
+  _$$_AddEditCategoryCopyWith<_$_AddEditCategory> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1102,8 +1209,12 @@ class _$_AddCategoryReset implements _AddCategoryReset {
     required TResult Function() getCategory,
     required TResult Function(ImagePickerModel image) pickCategoryImage,
     required TResult Function(
-            ImagePickerModel? image, String? categoryName, BuildContext context)
-        addCategory,
+            ImagePickerModel? image,
+            String? categoryName,
+            String? categoryUUID,
+            EnumCategoryAddEdit enumCategoryAddEdit,
+            BuildContext context)
+        addEditCategory,
     required TResult Function() addCategoryReset,
   }) {
     return addCategoryReset();
@@ -1116,9 +1227,13 @@ class _$_AddCategoryReset implements _AddCategoryReset {
     TResult? Function()? reset,
     TResult? Function()? getCategory,
     TResult? Function(ImagePickerModel image)? pickCategoryImage,
-    TResult? Function(ImagePickerModel? image, String? categoryName,
+    TResult? Function(
+            ImagePickerModel? image,
+            String? categoryName,
+            String? categoryUUID,
+            EnumCategoryAddEdit enumCategoryAddEdit,
             BuildContext context)?
-        addCategory,
+        addEditCategory,
     TResult? Function()? addCategoryReset,
   }) {
     return addCategoryReset?.call();
@@ -1131,9 +1246,13 @@ class _$_AddCategoryReset implements _AddCategoryReset {
     TResult Function()? reset,
     TResult Function()? getCategory,
     TResult Function(ImagePickerModel image)? pickCategoryImage,
-    TResult Function(ImagePickerModel? image, String? categoryName,
+    TResult Function(
+            ImagePickerModel? image,
+            String? categoryName,
+            String? categoryUUID,
+            EnumCategoryAddEdit enumCategoryAddEdit,
             BuildContext context)?
-        addCategory,
+        addEditCategory,
     TResult Function()? addCategoryReset,
     required TResult orElse(),
   }) {
@@ -1150,7 +1269,7 @@ class _$_AddCategoryReset implements _AddCategoryReset {
     required TResult Function(_Reset value) reset,
     required TResult Function(_GetCategory value) getCategory,
     required TResult Function(_PickCategoryImage value) pickCategoryImage,
-    required TResult Function(_AddCategory value) addCategory,
+    required TResult Function(_AddEditCategory value) addEditCategory,
     required TResult Function(_AddCategoryReset value) addCategoryReset,
   }) {
     return addCategoryReset(this);
@@ -1163,7 +1282,7 @@ class _$_AddCategoryReset implements _AddCategoryReset {
     TResult? Function(_Reset value)? reset,
     TResult? Function(_GetCategory value)? getCategory,
     TResult? Function(_PickCategoryImage value)? pickCategoryImage,
-    TResult? Function(_AddCategory value)? addCategory,
+    TResult? Function(_AddEditCategory value)? addEditCategory,
     TResult? Function(_AddCategoryReset value)? addCategoryReset,
   }) {
     return addCategoryReset?.call(this);
@@ -1176,7 +1295,7 @@ class _$_AddCategoryReset implements _AddCategoryReset {
     TResult Function(_Reset value)? reset,
     TResult Function(_GetCategory value)? getCategory,
     TResult Function(_PickCategoryImage value)? pickCategoryImage,
-    TResult Function(_AddCategory value)? addCategory,
+    TResult Function(_AddEditCategory value)? addEditCategory,
     TResult Function(_AddCategoryReset value)? addCategoryReset,
     required TResult orElse(),
   }) {

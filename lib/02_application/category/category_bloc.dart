@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:sha_admin/01_presentation/home/widgets/category_add_or_edit_widget.dart';
 import 'package:sha_admin/01_presentation/widgets/toast.dart';
 import 'package:sha_admin/03_domain/category/models/category_list/category_base_model.dart';
 import 'package:sha_admin/03_domain/category/models/category_list/category_model.dart';
@@ -52,27 +53,57 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     });
 
     // add category api state management
-    on<_AddCategory>((event, emit) async {
+    on<_AddEditCategory>((event, emit) async {
       emit(state.copyWith(
-          resultAddCategory: state.resultAddCategory.copyWith(loading: true)));
+          resultAddEditCategory:
+              state.resultAddEditCategory.copyWith(loading: true)));
 
       if (event.image != null && event.categoryName != null) {
-        final dataOrFailure = await _iCategoryRepo.addCategoryApi(
-            image: event.image!, categoryName: event.categoryName!);
+        dynamic dataOrFailure;
+
+        if (event.enumCategoryAddEdit == EnumCategoryAddEdit.add) {
+          dataOrFailure = await _iCategoryRepo.addCategoryApi(
+              image: event.image!, categoryName: event.categoryName!);
+        } else {
+          if (event.categoryUUID != null) {
+            dataOrFailure = await _iCategoryRepo.editCategoryApi(
+                categoryUUID: event.categoryUUID!,
+                image: event.image!,
+                categoryName: event.categoryName!);
+          } else {
+            failureToast('Something went wrong');
+          }
+        }
 
         dataOrFailure.fold(
             (l) => emit(
                   state.copyWith(
-                    resultAddCategory: state.resultAddCategory
+                    resultAddEditCategory: state.resultAddEditCategory
                         .copyWith(loading: false, error: l),
                   ),
                 ), (r) {
-          emit(state.copyWith(resultAddCategory: ApiResponse()));
+          emit(state.copyWith(resultAddEditCategory: ApiResponse()));
+
+          // insert value into the list
           if (state.result.data != null) {
             CategoryBaseModel baseData = state.result.data;
             List<CategoryModel>? dataList = baseData.data?.toList();
 
-            dataList?.insert(0, r);
+            // category add
+            if (event.enumCategoryAddEdit == EnumCategoryAddEdit.add) {
+              dataList?.insert(0, r);
+            } else {
+              // category edit
+              int? index =
+                  dataList?.indexWhere((element) => element.id == r.id);
+
+              if (index != null && index != -1) {
+                dataList![index] = r;
+              }
+              // data?.categoryName = r.categoryName;
+              // data?.image = r.image;
+            }
+
             emit(state.copyWith(
                 result: state.result
                     .copyWith(data: baseData.copyWith(data: dataList))));
@@ -86,13 +117,14 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       }
 
       emit(state.copyWith(
-          resultAddCategory: state.resultAddCategory.copyWith(loading: false)));
+          resultAddEditCategory:
+              state.resultAddEditCategory.copyWith(loading: false)));
     });
 
     // reset after pop up dispose
     on<_AddCategoryReset>((event, emit) {
       emit(state.copyWith(
-          resultAddCategory: ApiResponse(),
+          resultAddEditCategory: ApiResponse(),
           addCatCtr: TextEditingController(),
           categoryImage: null));
     });
