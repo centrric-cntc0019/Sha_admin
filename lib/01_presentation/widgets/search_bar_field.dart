@@ -5,12 +5,14 @@ class SearchBarField extends StatelessWidget {
   final Function clearField;
   final TextEditingController ctr;
   final Function(String) onChanged;
+  final FocusNode? focusNode;
   const SearchBarField({
     super.key,
     this.hint,
     required this.ctr,
     required this.onChanged,
     required this.clearField,
+    this.focusNode,
   });
 
   @override
@@ -22,6 +24,7 @@ class SearchBarField extends StatelessWidget {
         onChanged: onChanged,
         textAlign: TextAlign.center,
         keyboardType: TextInputType.text,
+        focusNode: focusNode,
         decoration: InputDecoration(
             hintText: hint ?? 'Enter a product name',
             hintStyle: const TextStyle(fontSize: 16),

@@ -30,6 +30,7 @@ class ProductListScreen extends StatefulWidget {
 }
 
 class _ProductListScreenState extends State<ProductListScreen> {
+  FocusNode focusNode = FocusNode();
   Timer? _debounce;
   late TextEditingController searchCtr;
 
@@ -61,7 +62,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                 .text //widget.headText['category_name'],
             ),
         actions: [
-          const ProductSearchIcon(),
+          ProductSearchIcon(focusNode: focusNode),
           IconButton(
             onPressed: () {
               showModalBottomSheet<void>(
@@ -132,6 +133,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                                   SliverToBoxAdapter(
                                     child: SearchBarField(
                                       ctr: searchCtr,
+                                      focusNode: focusNode,
                                       clearField: () {
                                         if (searchCtr.text.isNotEmpty) {
                                           context.read<ProductBloc>().add(

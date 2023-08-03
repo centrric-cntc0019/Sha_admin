@@ -29,6 +29,7 @@ class AllProductsScreen extends StatefulWidget {
 class _AllProductsScreenState extends State<AllProductsScreen> {
   Timer? _debounce;
   late TextEditingController searchCtr;
+  FocusNode focusNode = FocusNode();
 
   @override
   void initState() {
@@ -53,7 +54,7 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
           text: "Products",
         ),
         actions: [
-          const ProductSearchIcon(),
+          ProductSearchIcon(focusNode: focusNode),
           sized0wx20,
         ],
       ),
@@ -91,6 +92,7 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                                   SliverToBoxAdapter(
                                     child: SearchBarField(
                                       ctr: searchCtr,
+                                      focusNode: focusNode,
                                       clearField: () {
                                         if (searchCtr.text.isNotEmpty) {
                                           context.read<ProductBloc>().add(
