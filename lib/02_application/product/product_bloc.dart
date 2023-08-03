@@ -310,8 +310,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
                 pagination:
                     baseModel.pagination?.copyWith(totalRecords: list.length),
               );
-              log("${event.fromAllProduct} ${list.length}",
-                  name: "event.fromAllProduct");
             } else {
               list[index] = res;
             }
