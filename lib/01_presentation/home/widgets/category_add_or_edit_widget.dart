@@ -17,7 +17,6 @@ import '../../../05_core/utils/constant.dart';
 enum EnumCategoryAddEdit { add, edit }
 
 class CategoryAddOrEditWidget extends StatelessWidget {
-  final String title;
   final bool addCategory;
   final Function() onTap;
   final TextEditingController ctr;
@@ -26,7 +25,6 @@ class CategoryAddOrEditWidget extends StatelessWidget {
   const CategoryAddOrEditWidget({
     super.key,
     required this.ctr,
-    required this.title,
     required this.onTap,
     required this.formKey,
     this.addCategory = true,
@@ -49,7 +47,9 @@ class CategoryAddOrEditWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             WAText(
-              text: title,
+              text: categoryEnum == EnumCategoryAddEdit.add
+                  ? 'Add Category'
+                  : 'Edit Category',
               fontSize: 19.sp,
               fontWeight: FontWeight.w500,
             ),
@@ -113,7 +113,9 @@ class CategoryAddOrEditWidget extends StatelessWidget {
               ctr: ctr,
               horizontalContentPadding: 20.0,
               borderColor: cDarkGrey,
-              hintText: "Enter category name",
+              hintText: categoryEnum == EnumCategoryAddEdit.add
+                  ? 'Enter category name'
+                  : 'Edit category name',
               validator: (value) {
                 if (value?.isEmpty ?? true) {
                   return "Please enter category name";
@@ -125,7 +127,7 @@ class CategoryAddOrEditWidget extends StatelessWidget {
             BlocBuilder<CategoryBloc, CategoryState>(
               builder: (context, state) {
                 return WAButton(
-                  loading: state.resultAddCategory.loading,
+                  loading: state.resultAddEditCategory.loading,
                   onPressed: () {
                     if (state.categoryImage != null) {
                       if (formKey.currentState?.validate() ?? false) {
@@ -135,7 +137,7 @@ class CategoryAddOrEditWidget extends StatelessWidget {
                       failureToast('Please add image');
                     }
                   },
-                  buttonText: state.resultAddCategory.error != null
+                  buttonText: state.resultAddEditCategory.error != null
                       ? 'Try again'
                       : "Add",
                 );

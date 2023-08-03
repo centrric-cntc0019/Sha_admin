@@ -52,4 +52,33 @@ class CategoryRepository implements ICategoryRepo {
       (data) => Right(CategoryModel.fromJson(data.data['data'])),
     );
   }
+
+  @override
+  Future<Either<MainFailure, CategoryModel>> editCategoryApi({
+    required ImagePickerModel image,
+    required String categoryName,
+    required String categoryUUID,
+  }) async {
+    String url = ApiEndPoints.editCategoryEndPont;
+
+    var data = {
+      "category_name": categoryName,
+      "category_image": await dio.MultipartFile.fromFile(
+        image.imagePath!,
+        filename: image.imageFileName,
+      )
+    };
+
+    dio.FormData formData = dio.FormData.fromMap(data);
+    final response = await getIt<DioServices>().request(
+        url: '$url/$categoryUUID/',
+        method: 'PUT',
+        data: formData,
+        authenticated: true);
+
+    return response.fold(
+      (l) => Left(l),
+      (data) => Right(CategoryModel.fromJson(data.data['data'])),
+    );
+  }
 }

@@ -162,7 +162,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         'category_name':
                                                             baseModel
                                                                 ?.data?[index]
-                                                                .categoryName
+                                                                .categoryName,
+                                                        'category_uuid':
+                                                            baseModel
+                                                                ?.data?[index]
+                                                                .id
                                                       },
                                                     );
                                                   },
@@ -194,12 +198,12 @@ class _HomeScreenState extends State<HomeScreen> {
             builder: (BuildContext context) {
               return CategoryAddOrEditWidget(
                 categoryEnum: EnumCategoryAddEdit.edit,
-                title: "Add Category",
                 ctr: context.read<CategoryBloc>().state.addCatCtr,
                 formKey: _formKey,
                 onTap: () {
                   var bloc = context.read<CategoryBloc>();
-                  bloc.add(CategoryEvent.addCategory(
+                  bloc.add(CategoryEvent.addEditCategory(
+                      enumCategoryAddEdit: EnumCategoryAddEdit.add,
                       context: context,
                       categoryName: bloc.state.addCatCtr.text,
                       image: bloc.state.categoryImage));
