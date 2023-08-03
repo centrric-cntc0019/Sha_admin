@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sha_admin/01_presentation/product/widgets/picker_image_widget.dart';
 
+import '../../widgets/toast.dart';
 import '../../widgets/wa_text.dart';
 import '../../widgets/wa_button.dart';
 import '../../../05_core/utils/constant.dart';
@@ -18,9 +19,11 @@ class ProductUpdateSheet extends StatefulWidget {
   const ProductUpdateSheet({
     super.key,
     required this.product,
+    required this.fromAllProduct,
   });
 
   final ProductData product;
+  final bool fromAllProduct;
 
   @override
   State<ProductUpdateSheet> createState() => _ProductUpdateSheetState();
@@ -36,6 +39,7 @@ class _ProductUpdateSheetState extends State<ProductUpdateSheet> {
   void initState() {
     bloc = context.read<CategoryBloc>();
     productBloc = context.read<ProductBloc>();
+    productBloc.add(const ProductEvent.pickProductImage());
     CategoryBaseModel? categoryBaseModel =
         bloc.state.result.data as CategoryBaseModel?;
     categoryList = categoryBaseModel?.data ?? [];
@@ -110,15 +114,20 @@ class _ProductUpdateSheetState extends State<ProductUpdateSheet> {
           sized0hx40,
           WAButton(
             onPressed: () {
-              if (selectedCategory != null ||
+              if ((selectedCategory != null &&
+                      widget.product.productCategory?.uuid !=
+                          selectedCategory?.id) ||
                   productBloc.state.productImage != null) {
                 productBloc.add(
                   ProductEvent.editProduct(
                     context: context,
                     productUuid: widget.product.uuid!,
                     categoryUuid: selectedCategory?.id,
+                    fromAllProduct: widget.fromAllProduct,
                   ),
                 );
+              }else{
+                failureToast("No changes");
               }
             },
             buttonText: "Update",

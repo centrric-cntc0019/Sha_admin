@@ -1,7 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:sha_admin/02_application/product/product_bloc.dart';
 import 'package:sha_admin/01_presentation/product/widgets/product_update_sheet.dart';
 
@@ -22,7 +22,6 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final data;
     if (fromAllProduct) {
       data = context
@@ -79,7 +78,10 @@ class ProductItem extends StatelessWidget {
                           fontSize: 16.sp,
                         ),
                       ),
-                      ProductEditBtn(product: data),
+                      ProductEditBtn(
+                        product: data,
+                        fromAllProduct: fromAllProduct,
+                      ),
                     ],
                   ),
                   sized0hx05,
@@ -129,9 +131,11 @@ class ProductItem extends StatelessWidget {
 
 class ProductEditBtn extends StatelessWidget {
   final ProductData product;
+  final bool fromAllProduct;
   const ProductEditBtn({
     super.key,
     required this.product,
+    required this.fromAllProduct,
   });
 
   @override
@@ -145,7 +149,10 @@ class ProductEditBtn extends StatelessWidget {
             borderRadius: BorderRadius.circular(15.0),
           ),
           builder: (BuildContext context) {
-            return ProductUpdateSheet(product: product);
+            return ProductUpdateSheet(
+              product: product,
+              fromAllProduct: fromAllProduct,
+            );
           },
         );
       },

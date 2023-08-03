@@ -67,7 +67,7 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
           List<ProductData>? productList = baseModel?.productList?.toList();
 
           return state.allProducts.loading
-              ? const ProductListShimmer()
+              ? const ProductListShimmer(fromAllProduct: true)
               : Stack(
                   children: [
                     Row(
@@ -136,6 +136,14 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                                               ? CustomErrorWidget(
                                                   mainFailure:
                                                       state.allProducts.error,
+                                                  onTap: () {
+                                                    context
+                                                        .read<ProductBloc>()
+                                                        .add(
+                                                          const ProductEvent
+                                                              .getAllProductList(),
+                                                        );
+                                                  },
                                                 )
                                               : productList == null ||
                                                       productList.isEmpty

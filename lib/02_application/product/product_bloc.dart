@@ -6,10 +6,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sha_admin/03_domain/products/i_product_repo.dart';
 
-import '../../01_presentation/widgets/toast.dart';
 import '../../05_core/models/apiresponse.dart';
-import '../../03_domain/products/models/product/product_base_model.dart';
 import '../../05_core/services/image_picker.dart';
+import '../../01_presentation/widgets/toast.dart';
+import '../../03_domain/products/models/product/product_base_model.dart';
 
 part 'product_state.dart';
 part 'product_event.dart';
@@ -278,23 +278,57 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         ));
         failureToast("Something went wrong");
       }, (res) {
-        // Update the list item
-        ProductBaseModel? baseModel =
-            state.allProducts.data as ProductBaseModel?;
-        List<ProductData>? list = baseModel?.productList?.toList();
-        baseModel = baseModel?.copyWith(productList: list);
-        int? index = list?.indexWhere((element) => element.uuid == res.uuid);
-        if (index != null && index != -1) {
-          list![index] = res;
+        if (event.fromAllProduct) {
+          // Update the list item all products
+          ProductBaseModel? baseModel =
+              state.allProducts.data as ProductBaseModel?;
+          List<ProductData>? list = baseModel?.productList?.toList();
+
+          int? index = list?.indexWhere((element) => element.uuid == res.uuid);
+          if (index != null && index != -1) {
+            list![index] = res;
+          }
+          baseModel = baseModel?.copyWith(productList: list);
+          emit(state.copyWith(
+            productImage: null,
+            allProducts: state.allProducts.copyWith(data: baseModel),
+            editProductRes: state.editProductRes.copyWith(loading: false),
+          ));
+        } else {
+          // Update the list item products under category
+          ProductBaseModel? baseModel = state.result.data as ProductBaseModel?;
+          List<ProductData>? list = baseModel?.productList?.toList();
+
+          int? index = list?.indexWhere((element) => element.uuid == res.uuid);
+
+          if (index != null && index != -1) {
+            if (list![index].productCategory?.uuid !=
+                res.productCategory?.uuid) {
+              list.removeAt(index);
+
+              baseModel = baseModel?.copyWith(
+                pagination:
+                    baseModel.pagination?.copyWith(totalRecords: list.length),
+              );
+            } else {
+              list[index] = res;
+            }
+          }
+          baseModel = baseModel?.copyWith(productList: list);
+          emit(state.copyWith(
+            productImage: null,
+            result: state.result.copyWith(data: baseModel),
+            editProductRes: state.editProductRes.copyWith(loading: false),
+          ));
         }
-        emit(state.copyWith(
-          productImage: null,
-          allProducts: state.allProducts.copyWith(data: baseModel),
-          editProductRes: state.editProductRes.copyWith(loading: false),
-        ));
         Navigator.pop(event.context);
         successToast("Product updated");
       });
+    });
+
+    // Reset Bloc
+    on<_Reset>((event, emit) {
+      emit(ProductState.initial());
     });
   }
 }
