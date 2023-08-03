@@ -53,7 +53,7 @@ class _WAButtonState extends State<WAButton> {
     return Opacity(
       opacity: widget.ignore ? 0.3 : 1,
       child: InkWell(
-        onTap: widget.ignore
+        onTap: (widget.ignore || widget.loading ==true)
             ? () {}
             : () => {
                   widget.onPressed(),

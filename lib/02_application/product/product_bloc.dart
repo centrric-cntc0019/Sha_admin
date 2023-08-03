@@ -278,20 +278,51 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         ));
         failureToast("Something went wrong");
       }, (res) {
-        // Update the list item
-        ProductBaseModel? baseModel =
-            state.allProducts.data as ProductBaseModel?;
-        List<ProductData>? list = baseModel?.productList?.toList();
-        baseModel = baseModel?.copyWith(productList: list);
-        int? index = list?.indexWhere((element) => element.uuid == res.uuid);
-        if (index != null && index != -1) {
-          list![index] = res;
+        if (event.fromAllProduct) {
+          // Update the list item all products
+          ProductBaseModel? baseModel =
+              state.allProducts.data as ProductBaseModel?;
+          List<ProductData>? list = baseModel?.productList?.toList();
+
+          int? index = list?.indexWhere((element) => element.uuid == res.uuid);
+          if (index != null && index != -1) {
+            list![index] = res;
+          }
+          baseModel = baseModel?.copyWith(productList: list);
+          emit(state.copyWith(
+            productImage: null,
+            allProducts: state.allProducts.copyWith(data: baseModel),
+            editProductRes: state.editProductRes.copyWith(loading: false),
+          ));
+        } else {
+          // Update the list item products under category
+          ProductBaseModel? baseModel = state.result.data as ProductBaseModel?;
+          List<ProductData>? list = baseModel?.productList?.toList();
+
+          int? index = list?.indexWhere((element) => element.uuid == res.uuid);
+
+          if (index != null && index != -1) {
+            if (list![index].productCategory?.uuid !=
+                res.productCategory?.uuid) {
+              list.removeAt(index);
+
+              baseModel = baseModel?.copyWith(
+                pagination:
+                    baseModel.pagination?.copyWith(totalRecords: list.length),
+              );
+              log("${event.fromAllProduct} ${list.length}",
+                  name: "event.fromAllProduct");
+            } else {
+              list[index] = res;
+            }
+          }
+          baseModel = baseModel?.copyWith(productList: list);
+          emit(state.copyWith(
+            productImage: null,
+            result: state.result.copyWith(data: baseModel),
+            editProductRes: state.editProductRes.copyWith(loading: false),
+          ));
         }
-        emit(state.copyWith(
-          productImage: null,
-          allProducts: state.allProducts.copyWith(data: baseModel),
-          editProductRes: state.editProductRes.copyWith(loading: false),
-        ));
         Navigator.pop(event.context);
         successToast("Product updated");
       });
