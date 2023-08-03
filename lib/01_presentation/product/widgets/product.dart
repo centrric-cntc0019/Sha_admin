@@ -1,7 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:sha_admin/02_application/product/product_bloc.dart';
 import 'package:sha_admin/01_presentation/product/widgets/product_update_sheet.dart';
 
@@ -79,7 +79,7 @@ class ProductItem extends StatelessWidget {
                           fontSize: 16.sp,
                         ),
                       ),
-                      ProductEditBtn(product: data),
+                      if (fromAllProduct) ProductEditBtn(product: data),
                     ],
                   ),
                   sized0hx05,
