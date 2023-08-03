@@ -36,6 +36,7 @@ class _ProductUpdateSheetState extends State<ProductUpdateSheet> {
   void initState() {
     bloc = context.read<CategoryBloc>();
     productBloc = context.read<ProductBloc>();
+    productBloc.add(const ProductEvent.pickProductImage());
     CategoryBaseModel? categoryBaseModel =
         bloc.state.result.data as CategoryBaseModel?;
     categoryList = categoryBaseModel?.data ?? [];

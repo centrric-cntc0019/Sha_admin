@@ -6,10 +6,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sha_admin/03_domain/products/i_product_repo.dart';
 
-import '../../01_presentation/widgets/toast.dart';
 import '../../05_core/models/apiresponse.dart';
-import '../../03_domain/products/models/product/product_base_model.dart';
 import '../../05_core/services/image_picker.dart';
+import '../../01_presentation/widgets/toast.dart';
+import '../../03_domain/products/models/product/product_base_model.dart';
 
 part 'product_state.dart';
 part 'product_event.dart';
@@ -295,6 +295,11 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         Navigator.pop(event.context);
         successToast("Product updated");
       });
+    });
+
+    // Reset Bloc
+    on<_Reset>((event, emit) {
+      emit(ProductState.initial());
     });
   }
 }
