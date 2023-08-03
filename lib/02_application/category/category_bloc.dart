@@ -125,5 +125,10 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
           addCatCtr: TextEditingController(),
           categoryImage: null));
     });
+
+    // Reset Bloc
+    on<_Reset>((event, emit) async {
+      emit(CategoryState.initial());
+    });
   }
 }

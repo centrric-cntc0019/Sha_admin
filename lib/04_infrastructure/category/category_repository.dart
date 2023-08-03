@@ -63,10 +63,11 @@ class CategoryRepository implements ICategoryRepo {
 
     var data = {
       "category_name": categoryName,
-      "category_image": await dio.MultipartFile.fromFile(
-        image.imagePath!,
-        filename: image.imageFileName,
-      )
+      if (image.imagePath != null)
+        "category_image": await dio.MultipartFile.fromFile(
+          image.imagePath!,
+          filename: image.imageFileName,
+        )
     };
 
     dio.FormData formData = dio.FormData.fromMap(data);

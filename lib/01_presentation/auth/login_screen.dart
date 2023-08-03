@@ -136,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                           fontSize: 16,
                           textColor: cWhite,
-                          buttonText: "Continue",
+                          buttonText: "Login",
                           loading: state.isLoading,
                           fontWeight: FontWeight.w600,
                         );

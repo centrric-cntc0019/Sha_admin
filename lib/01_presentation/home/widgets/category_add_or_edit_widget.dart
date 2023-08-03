@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -82,15 +83,21 @@ class CategoryAddOrEditWidget extends StatelessWidget {
                               color: Colors.grey.shade300,
                               borderRadius: BorderRadius.circular(30.0),
                             ),
-                            child: state.categoryImage != null
+                            child: state.categoryImage?.imagePath != null
                                 ? Image.file(
                                     File(state.categoryImage!.imagePath!),
                                     fit: BoxFit.cover,
                                   )
-                                : const Icon(
-                                    Icons.image_outlined,
-                                    size: 30.0,
-                                  ),
+                                : state.categoryImage?.imageUrl != null
+                                    ? CachedNetworkImage(
+                                        imageUrl:
+                                            state.categoryImage!.imageUrl!,
+                                        fit: BoxFit.cover,
+                                      )
+                                    : const Icon(
+                                        Icons.image_outlined,
+                                        size: 30.0,
+                                      ),
                           ),
                           Positioned(
                             bottom: -10,

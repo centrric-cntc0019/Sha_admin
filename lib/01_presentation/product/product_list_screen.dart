@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 import 'package:sha_admin/01_presentation/home/widgets/category_add_or_edit_widget.dart';
 import 'package:sha_admin/02_application/category/category_bloc.dart';
 import 'package:sha_admin/02_application/product/product_bloc.dart';
@@ -84,9 +85,10 @@ class _ProductListScreenState extends State<ProductListScreen> {
                     },
                   );
                 },
-              ).whenComplete(() => context
-                  .read<CategoryBloc>()
-                  .add(const CategoryEvent.addCategoryReset()));
+              );
+              // .whenComplete(() => context
+              //     .read<CategoryBloc>()
+              //     .add(const CategoryEvent.addCategoryReset()));
             },
             icon: const Icon(
               Icons.edit_note,
@@ -184,16 +186,18 @@ class _ProductListScreenState extends State<ProductListScreen> {
                                                 )
                                               : productList == null ||
                                                       productList.isEmpty
-                                                  ? Padding(
-                                                      padding: EdgeInsets.only(
-                                                          top: 80.h),
-                                                      child: const WAText(
-                                                        text:
-                                                            "No products found",
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                      ),
-                                                    )
+                                                  ? Lottie.asset(
+                                                      'assets/lotties/empty_data.json')
+                                                  // Padding(
+                                                  //     padding: EdgeInsets.only(
+                                                  //         top: 80.h),
+                                                  //     child: const WAText(
+                                                  //       text:
+                                                  //           "No products found",
+                                                  //       textAlign:
+                                                  //           TextAlign.center,
+                                                  //     ),
+                                                  //   )
                                                   : ListView.separated(
                                                       shrinkWrap: true,
                                                       physics:
