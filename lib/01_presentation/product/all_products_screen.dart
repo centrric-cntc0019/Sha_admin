@@ -66,7 +66,7 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
           List<ProductData>? productList = baseModel?.productList?.toList();
 
           return state.allProducts.loading
-              ? const ProductListShimmer()
+              ? const ProductListShimmer(fromAllProduct: true)
               : Stack(
                   children: [
                     Row(

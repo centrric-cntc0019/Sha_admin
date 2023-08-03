@@ -17,6 +17,7 @@ class ProductEvent with _$ProductEvent {
   const factory ProductEvent.editProduct({
     String? categoryUuid,
     required String productUuid,
+    required bool fromAllProduct,
     required BuildContext context,
   }) = _EditProduct;
   const factory ProductEvent.pickProductImage({ImagePickerModel? image}) =

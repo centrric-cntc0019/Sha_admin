@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sha_admin/01_presentation/home/widgets/category_add_or_edit_widget.dart';
 import 'package:sha_admin/02_application/category/category_bloc.dart';
 import 'package:sha_admin/02_application/product/product_bloc.dart';
 import 'package:sha_admin/01_presentation/product/widgets/product.dart';
@@ -12,12 +11,12 @@ import 'package:sha_admin/01_presentation/product/widgets/product_search_icon.da
 import 'package:sha_admin/01_presentation/product/widgets/product_list_heading.dart';
 import 'package:sha_admin/01_presentation/product/widgets/product_list_shimmer.dart';
 import 'package:sha_admin/01_presentation/product/widgets/product_list_carousel.dart';
+import 'package:sha_admin/01_presentation/home/widgets/category_add_or_edit_widget.dart';
 
 import '../widgets/wa_text.dart';
 import '../widgets/error_widget.dart';
 import '../../05_core/utils/themes.dart';
 import '../widgets/search_bar_field.dart';
-import '../../05_core/utils/constant.dart';
 import '../widgets/pagination_loading_tile.dart';
 import '../../03_domain/products/models/product/product_base_model.dart';
 

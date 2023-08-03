@@ -22,7 +22,7 @@ class ProductListShimmer extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (fromAllProduct) const ProductListCarousel(),
+          if (!fromAllProduct) const ProductListCarousel(),
           sized0hx10,
           const ShimmerTextWidget(),
           sized0hx10,
