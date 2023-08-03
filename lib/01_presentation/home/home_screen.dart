@@ -7,6 +7,7 @@ import 'package:lottie/lottie.dart';
 import 'package:sha_admin/01_presentation/home/widgets/category_shimmer.dart';
 import 'package:sha_admin/01_presentation/home/widgets/category_add_or_edit_widget.dart';
 import 'package:sha_admin/01_presentation/widgets/wa_button.dart';
+import 'package:sha_admin/02_application/auth/auth_bloc.dart';
 import 'package:sha_admin/05_core/services/image_picker.dart';
 import 'package:sha_admin/05_core/utils/themes.dart';
 
@@ -69,7 +70,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: RefreshIndicator(
         onRefresh: () async {
+          Future block = context.read<CategoryBloc>().stream.first;
           context.read<CategoryBloc>().add(const CategoryEvent.getCategory());
+          await block;
         },
         child: CustomScrollView(
           // controller: _scrollController,
@@ -122,31 +125,47 @@ class LogoutDialogueWidget extends StatelessWidget {
                 padding: const EdgeInsets.all(0.0),
                 child: Row(
                   children: [
-                    Expanded(
-                      flex: 2,
-                      child: WAButton(
-                        buttonText: 'Yes, log out',
-                        buttonColor: cPrimaryColor,
-                        textColor: cWhite,
-                        onPressed: () {},
-                      ),
-                    ),
+                    yesLogout(context),
                     sized0wx10,
-                    Expanded(
-                      child: WAButton(
-                        textColor: cPrimaryColor,
-                        fontWeight: FontWeight.bold,
-                        buttonColor: Colors.white,
-                        buttonText: 'Cancel',
-                        onPressed: () => Navigator.pop(context),
-                      ),
-                    ),
+                    cancel(context),
                   ],
                 ),
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Expanded cancel(BuildContext context) {
+    return Expanded(
+      child: WAButton(
+        textColor: cPrimaryColor,
+        fontWeight: FontWeight.bold,
+        buttonColor: Colors.white,
+        buttonText: 'Cancel',
+        onPressed: () => Navigator.pop(context),
+      ),
+    );
+  }
+
+  Expanded yesLogout(BuildContext context) {
+    return Expanded(
+      flex: 2,
+      child: WAButton(
+        buttonText: 'Yes, log out',
+        buttonColor: cPrimaryColor,
+        textColor: cWhite,
+        onPressed: () {
+          context.read<AuthBloc>().add(const AuthEvent.logout());
+          context.read<AuthBloc>().add(const AuthEvent.reset());
+          context.read<ProductBloc>().add(const ProductEvent.reset());
+          context.read<AuthBloc>().add(const AuthEvent.reset());
+
+          Navigator.pushNamedAndRemoveUntil(
+              context, RouteNames.loginPage, (route) => false);
+        },
       ),
     );
   }

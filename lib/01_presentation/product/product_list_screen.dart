@@ -53,10 +53,13 @@ class _ProductListScreenState extends State<ProductListScreen> {
     return Scaffold(
       backgroundColor: cWhite,
       appBar: AppBar(
-        // centerTitle: true,
         title: WAText(
-          text: widget.headText['category_name'],
-        ),
+            text: context
+                .watch<CategoryBloc>()
+                .state
+                .addCatCtr
+                .text //widget.headText['category_name'],
+            ),
         actions: [
           const ProductSearchIcon(),
           IconButton(
