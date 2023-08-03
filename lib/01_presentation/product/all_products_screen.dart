@@ -135,6 +135,14 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                                               ? CustomErrorWidget(
                                                   mainFailure:
                                                       state.allProducts.error,
+                                                  onTap: () {
+                                                    context
+                                                        .read<ProductBloc>()
+                                                        .add(
+                                                          const ProductEvent
+                                                              .getAllProductList(),
+                                                        );
+                                                  },
                                                 )
                                               : productList == null ||
                                                       productList.isEmpty

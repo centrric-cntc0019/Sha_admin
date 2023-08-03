@@ -1,3 +1,4 @@
+import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sha_admin/01_presentation/widgets/wa_text.dart';
@@ -13,29 +14,46 @@ class CustomErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          sized0hx05,
-          if (mainFailure == const MainFailure.clientFailure()) ...{
-            const ErrorText(error: "Something went wrong")
-          } else if (mainFailure == const MainFailure.networkFailure()) ...{
-            const ErrorText(error: "please check internet connection")
-          } else if (mainFailure == const MainFailure.serverFailure()) ...{
-            const ErrorText(error: "server failure")
-          } else ...{
-            const ErrorText(error: "Something went wrong"),
-          },
-          sized0hx10,
-          WAButton(
-            width: 200.w,
-            buttonText: "Retry",
-            onPressed: onTap ?? () {},
-          ),
-          sized0hx40,
-        ],
+    return SizedBox(
+      width: double.infinity,
+      child: Card(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            sized0hx05,
+            if (mainFailure == const MainFailure.clientFailure()) ...{
+              const ErrorText(error: "Something went wrong")
+            } else if (mainFailure == const MainFailure.networkFailure()) ...{
+              const ErrorText(error: "network failure")
+            } else if (mainFailure == const MainFailure.serverFailure()) ...{
+              const ErrorText(error: "Server failure")
+            } else ...{
+              const ErrorText(error: "Timeout"),
+            },
+            sized0hx10,
+            SizedBox(
+              height: 60.h,
+              width: 80.w,
+              child: Lottie.asset(
+                "assets/lotties/error.json",
+                fit: BoxFit.contain,
+              ),
+            ),
+            sized0hx10,
+            WAText(
+              fontSize: 12.sp,
+              text: "Refresh the screen",
+            ),
+            sized0hx10,
+            WAButton(
+              width: 200.w,
+              buttonText: "Retry",
+              onPressed: onTap ?? () {},
+            ),
+            sized0hx40,
+          ],
+        ),
       ),
     );
   }
