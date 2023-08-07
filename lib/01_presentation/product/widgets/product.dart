@@ -76,6 +76,7 @@ class ProductItem extends StatelessWidget {
                           text: data?.name ?? "",
                           fontWeight: FontWeight.w500,
                           fontSize: 16.sp,
+                          maxLine: 2,
                         ),
                       ),
                       ProductEditBtn(
