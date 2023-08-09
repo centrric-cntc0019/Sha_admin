@@ -39,10 +39,13 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: 270.h,
                 width: MediaQuery.of(context).size.height,
-                child: Icon(
-                  Icons.shopify_rounded,
-                  size: 85.0,
-                  color: Theme.of(context).primaryColor,
+                child: Center(
+                  child: Image.asset(
+                    "assets/shopco-logo-splash.png",
+                    height: 110.h,
+                    width: 110.w,
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
               const Expanded(child: ColoredBox(color: Colors.grey))
