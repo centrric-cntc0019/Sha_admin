@@ -86,7 +86,8 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       (event, emit) async {
         // When pagination works
         if (event.pageNo != null && event.pageNo != 1) {
-          emit(state.copyWith(result: state.result.copyWith(pagination: true)));
+          emit(state.copyWith(
+              result: state.result.copyWith(paginationLoading: true)));
         }
         // State on search product
         else if (event.searchKey != null) {
