@@ -22,6 +22,7 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: prefer_typing_uninitialized_variables
     final data;
     if (fromAllProduct) {
       data = context

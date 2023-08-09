@@ -4,5 +4,5 @@ class RouteNames {
   static const String loginPage = '/login';
   static const String signupScreen = '/signup';
   static const String editProfile = '/edit_profile';
-  static const String productListScreen = '/product_list';
+  static const String productListScreen = 'product_list';
 }

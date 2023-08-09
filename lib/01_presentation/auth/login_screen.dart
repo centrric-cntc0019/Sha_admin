@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import '../widgets/wa_text.dart';
 import '../widgets/wa_button.dart';
@@ -48,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ],
           ),
           Positioned(
-            top: 220.h,
+            top: MediaQuery.viewInsetsOf(context).bottom == 0 ? 220.h : 100.h,
             left: 23.w,
             child: Container(
               decoration: const BoxDecoration(color: Colors.white, boxShadow: [
@@ -112,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       listener: (context, state) {
                         if (state.isAuthenticated == true) {
-                          Navigator.pushNamed(context, RouteNames.homePage);
+                          context.go(RouteNames.homePage);
                         }
                       },
                       builder: (context, state) {

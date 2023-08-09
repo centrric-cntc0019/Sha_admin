@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sha_admin/01_presentation/home/widgets/category_shimmer.dart';
 import 'package:sha_admin/01_presentation/home/widgets/category_add_or_edit_widget.dart';
@@ -163,8 +164,7 @@ class LogoutDialogueWidget extends StatelessWidget {
           context.read<ProductBloc>().add(const ProductEvent.reset());
           context.read<AuthBloc>().add(const AuthEvent.reset());
 
-          Navigator.pushNamedAndRemoveUntil(
-              context, RouteNames.loginPage, (route) => false);
+          context.pushReplacement(RouteNames.loginPage);
         },
       ),
     );
@@ -307,9 +307,9 @@ class CategoryGridListWidget extends StatelessWidget {
                                               .addCatCtr
                                               .text = data?.categoryName ?? '';
 
-                                          Navigator.of(context).pushNamed(
-                                            RouteNames.productListScreen,
-                                            arguments: {
+                                          context.goNamed(
+                                            'product_list',
+                                            extra: {
                                               'category_name': baseModel
                                                   ?.data?[index].categoryName,
                                               'category_uuid':
