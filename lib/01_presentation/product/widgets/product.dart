@@ -45,22 +45,18 @@ class ProductItem extends StatelessWidget {
             // width: (size.width * .25),
             decoration: BoxDecoration(
                 color: Colors.white, borderRadius: BorderRadius.circular(10)),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Center(
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: CachedNetworkImage(
-                        imageUrl:
-                            data?.productImageThumb ?? data?.productImage ?? "",
-                        height: 100,
-                        width: 100,
-                        fit: BoxFit.cover,
-                      )),
-                )
-              ],
+            child: Container(
+              clipBehavior: Clip.hardEdge,
+              decoration: BoxDecoration(
+                color: Colors.grey.shade100,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: CachedNetworkImage(
+                imageUrl: data?.productImageThumb ?? data?.productImage ?? "",
+                width: 100,
+                height: 100,
+                fit: BoxFit.contain,
+              ),
             ),
           ),
           Expanded(
