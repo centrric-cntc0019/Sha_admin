@@ -108,15 +108,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           current.isAuthenticated;
                     },
                     listener: (context, state) {
-                      // if (state.isAuthenticated == true) {
-                      //   context.go(RouteNames.homePage);
-                      // }
-
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const MainScreen(),
-                        ),
-                      );
+                      if (state.isAuthenticated == true) {
+                        context.go(RouteNames.homePage);
+                      }
                     },
                     builder: (context, state) {
                       return WAButton(

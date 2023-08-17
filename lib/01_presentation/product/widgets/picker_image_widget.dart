@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class PickImageWidget extends StatelessWidget {
   final String? productImage, netWorkImage;
@@ -25,10 +26,15 @@ class PickImageWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(30.0),
           ),
           child: productImage != null
-              ? Image.file(
-                  File(productImage!),
-                  fit: BoxFit.cover,
-                )
+              ? (kIsWeb)
+                  ? Image.network(
+                      productImage!,
+                      fit: BoxFit.cover,
+                    )
+                  : Image.file(
+                      File(productImage!),
+                      fit: BoxFit.cover,
+                    )
               : netWorkImage != null
                   ? Image.network(
                       netWorkImage!,

@@ -14,6 +14,7 @@ import '../../widgets/wa_text.dart';
 import '../../widgets/wa_button.dart';
 import '../../widgets/wa_text_field.dart';
 import '../../../05_core/utils/constant.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 enum EnumCategoryAddEdit { add, edit }
 
@@ -76,18 +77,23 @@ class CategoryAddOrEditWidget extends StatelessWidget {
                         clipBehavior: Clip.none,
                         children: [
                           Container(
-                            width: 80.w,
-                            height: 70.h,
+                            width: 100,
+                            height: 100,
                             clipBehavior: Clip.hardEdge,
                             decoration: BoxDecoration(
                               color: Colors.grey.shade300,
                               borderRadius: BorderRadius.circular(30.0),
                             ),
                             child: state.categoryImage?.imagePath != null
-                                ? Image.file(
-                                    File(state.categoryImage!.imagePath!),
-                                    fit: BoxFit.cover,
-                                  )
+                                ? (kIsWeb)
+                                    ? Image.network(
+                                        state.categoryImage!.imagePath!,
+                                        fit: BoxFit.cover,
+                                      )
+                                    : Image.file(
+                                        File(state.categoryImage!.imagePath!),
+                                        fit: BoxFit.cover,
+                                      )
                                 : state.categoryImage?.imageUrl != null
                                     ? CachedNetworkImage(
                                         imageUrl:
