@@ -267,10 +267,11 @@ class CategoryGridListWidget extends StatelessWidget {
                                     physics: const ScrollPhysics(),
                                     itemCount: baseModel?.data?.length ?? 0,
                                     gridDelegate:
-                                        const SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 3,
-                                      // crossAxisSpacing: 4.0,
-                                      // mainAxisSpacing: 4.0
+                                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                                      maxCrossAxisExtent: 150,
+                                      // crossAxisCount: 3,
+                                      crossAxisSpacing: 4.0,
+                                      mainAxisSpacing: 4.0,
                                     ),
                                     itemBuilder:
                                         (BuildContext context, int index) {
