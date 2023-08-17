@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../05_core/utils/constant.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class CategoryShimmer extends StatelessWidget {
   const CategoryShimmer({super.key});
@@ -13,10 +14,14 @@ class CategoryShimmer extends StatelessWidget {
     return SizedBox(
       height: size.height * .3,
       child: GridView.builder(
-        itemCount: 6,
+        itemCount: kIsWeb ? 10 : 6,
         padding: EdgeInsets.zero,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3, crossAxisSpacing: 6.0, mainAxisSpacing: 6.0),
+        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 150,
+          // crossAxisCount: 3,
+          crossAxisSpacing: 4.0,
+          mainAxisSpacing: 4.0,
+        ),
         itemBuilder: (context, index) {
           return Shimmer.fromColors(
             baseColor: Colors.grey.shade300,
