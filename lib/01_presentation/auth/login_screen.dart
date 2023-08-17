@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sha_admin/01_presentation/main/main_screen.dart';
 
 import '../widgets/wa_text.dart';
 import '../widgets/wa_button.dart';
@@ -115,9 +116,15 @@ class _LoginScreenState extends State<LoginScreen> {
                             current.isAuthenticated;
                       },
                       listener: (context, state) {
-                        if (state.isAuthenticated == true) {
-                          context.go(RouteNames.homePage);
-                        }
+                        // if (state.isAuthenticated == true) {
+                        //   context.go(RouteNames.homePage);
+                        // }
+
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const MainScreen(),
+                          ),
+                        );
                       },
                       builder: (context, state) {
                         return WAButton(
