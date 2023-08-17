@@ -53,7 +53,7 @@ class _WAButtonState extends State<WAButton> {
     return Opacity(
       opacity: widget.ignore ? 0.3 : 1,
       child: InkWell(
-        onTap: (widget.ignore || widget.loading ==true)
+        onTap: (widget.ignore || widget.loading == true)
             ? () {}
             : () => {
                   widget.onPressed(),
@@ -76,11 +76,11 @@ class _WAButtonState extends State<WAButton> {
         child: AnimatedContainer(
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 150),
-          height: widget.height,
+          height: widget.height ?? 45,
           curve: Curves.easeInOut,
-          padding: EdgeInsets.symmetric(
-              horizontal: widget.padding ?? 10.h,
-              vertical: widget.padding ?? 10.w),
+          // padding: EdgeInsets.symmetric(
+          //     horizontal: widget.padding ?? 10.h,
+          //     vertical: widget.padding ?? 10.w),
           width: widget.width,
           decoration: BoxDecoration(
             color: _pressed

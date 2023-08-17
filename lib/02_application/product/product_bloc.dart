@@ -198,7 +198,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         dataOrFailure.fold((l) {
           emit(state.copyWith(
             allProducts: state.allProducts.copyWith(
-              error: l,
+              error: ((event.pageNo ?? 0) > 1) ? null : l,
               loading: false,
               pagination: false,
               searchLoading: false,

@@ -9,6 +9,7 @@ import '../../03_domain/di/injection.dart';
 import '../../05_core/utils/api_endpoints.dart';
 import '../../05_core/services/dio_services.dart';
 import '../../03_domain/products/i_product_repo.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 @LazySingleton(as: IProductRepo)
 class ProductRepository implements IProductRepo {
@@ -66,10 +67,15 @@ class ProductRepository implements IProductRepo {
     var data = {
       if (categoryUuid != null) "category_uuid": categoryUuid,
       if (productImage != null)
-        "product_image": await dio.MultipartFile.fromFile(
-          productImage.imagePath!,
-          filename: productImage.imageFileName,
-        )
+        "product_image": kIsWeb
+            ? await dio.MultipartFile.fromBytes(
+                productImage.imageUint8List!,
+                filename: productImage.imageFileName,
+              )
+            : await dio.MultipartFile.fromFile(
+                productImage.imagePath!,
+                filename: productImage.imageFileName,
+              )
     };
 
     dio.FormData formData = dio.FormData.fromMap(data);
